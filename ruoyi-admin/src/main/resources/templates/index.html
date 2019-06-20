@@ -160,9 +160,16 @@
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-				    <li><a title="视频教程" href="http://doc.ruoyi.vip/#/standard/spjc" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
-                    <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
+				 <!--   <li><a title="视频教程" href="http://doc.ruoyi.vip/#/standard/spjc" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
+                    <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>-->
 	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+
+					<li class="dropdown hidden-xs">
+						<a class="right-sidebar-toggle" aria-expanded="false" onclick="navSelectDeptTree()">
+							<i class="fa fa-tasks"></i> 选择项目
+						</a>
+					</li>
+
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{/profile/avatar/} + ${user.avatar}" class="user-image">
@@ -205,6 +212,7 @@
         <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
                     
         <div class="row mainContent" id="content-main">
+
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="/system/main"
                     th:src="@{/system/main}" frameborder="0" seamless></iframe>
         </div>
@@ -213,6 +221,9 @@
         </div>
     </div>
     <!--右侧部分结束-->
+
+
+
 </div>
 <!-- 全局js -->
 <script th:src="@{/js/jquery.min.js}"></script>
@@ -224,6 +235,7 @@
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script th:src="@{/ruoyi/js/ry-ui.js?v=3.4.0}"></script>
 <script th:src="@{/ruoyi/index.js}"></script>
+<script th:src="@{/ruoyi/index.js}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
 <script th:inline="javascript"> 
 var ctx = [[@{/}]];
@@ -232,6 +244,30 @@ function resetPwd() {
     var url = ctx + 'system/user/profile/resetPwd';
     $.modal.open("重置密码", url, '800', '500');
 }
+
+
+
+/*导航栏选择部门树*/
+function navSelectDeptTree() {
+	var deptId = $.common.isEmpty($("#treeId").val()) ? "100" : $("#treeId").val();
+	var url = ctx + "system/dept/selectDeptTree/" + deptId;
+	var options = {
+		title: '选择项目',
+		width: "450",
+		url: url,
+		callBack: navSelectDeptTreeDoSubmit
+	};
+	$.modal.openOptions(options);
+}
+
+function navSelectDeptTreeDoSubmit(index, layero){
+	var tree = layero.find("iframe")[0].contentWindow.$._tree;
+	var body = layer.getChildFrame('body', index);
+	$("#treeId").val(body.find('#treeId').val());
+	$("#treeName").val(body.find('#treeName').val());
+	layer.close(index);
+}
+
 </script>
 </body>
 </html>

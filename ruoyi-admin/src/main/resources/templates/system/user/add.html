@@ -41,9 +41,9 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>邮箱：</label>
+                        <label class="col-sm-4 control-label"><span style="color: red; "></span>邮箱：</label>
                         <div class="col-sm-8">
-                            <input name="email" class="form-control email" type="text" maxlength="50" placeholder="请输入邮箱" required>
+                            <input name="email" class="form-control email" type="text" maxlength="50" placeholder="请输入邮箱" >
                         </div>
                     </div>
                 </div>
@@ -240,12 +240,12 @@
 		
 		function doSubmit(index, layero){
 			var tree = layero.find("iframe")[0].contentWindow.$._tree;
-			if ($.tree.notAllowParents(tree)) {
+			// if ($.tree.notAllowParents(tree)) {
 				var body = layer.getChildFrame('body', index);
     			$("#treeId").val(body.find('#treeId').val());
     			$("#treeName").val(body.find('#treeName').val());
     			layer.close(index);
-			}
+			// }
 		}
     </script>
 </body>

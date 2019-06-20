@@ -87,6 +87,7 @@ public class SysUser extends BaseEntity
     /** 岗位组 */
     private Long[] postIds;
 
+
     public Long getUserId()
     {
         return userId;
@@ -106,6 +107,10 @@ public class SysUser extends BaseEntity
     {
         return userId != null && 1L == userId;
     }
+
+
+
+
 
     public Long getDeptId()
     {

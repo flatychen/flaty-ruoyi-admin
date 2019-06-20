@@ -62,10 +62,19 @@
 		        updateUrl: prefix + "/edit/{id}",
 		        removeUrl: prefix + "/remove/{id}",
 		        modalName: "部门",
-		        columns: [{
-                    field: 'selectItem', 
-                    radio: true
-                 },
+
+
+
+		        columns: [
+					{
+						field: 'selectItem',
+						checkbox: true
+					},
+
+		        	// 	{
+                 //    field: 'selectItem',
+                 //    radio: true
+                 // },
                  {
 		            field: 'deptName',
 		            title: '部门名称',
