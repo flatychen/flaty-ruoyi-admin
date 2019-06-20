@@ -236,7 +236,7 @@
 <script th:src="@{/ruoyi/js/ry-ui.js?v=3.4.0}"></script>
 <script th:src="@{/ruoyi/index.js}"></script>
 <script th:src="@{/ruoyi/index.js}"></script>
-<script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script th:src="@{/ajax/libs/cookie/jquery.cookie-1.4.1.min.js}"></script>
 <script th:inline="javascript"> 
 var ctx = [[@{/}]];
 /*用户管理-重置密码*/
@@ -261,6 +261,7 @@ function navSelectDeptTree() {
 }
 
 function navSelectDeptTreeDoSubmit(index, layero){
+	console.log($.cookie('JSESSIONID'));
 	var tree = layero.find("iframe")[0].contentWindow.$._tree;
 	var body = layer.getChildFrame('body', index);
 	$("#treeId").val(body.find('#treeId').val());
