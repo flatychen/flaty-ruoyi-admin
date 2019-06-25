@@ -1920,7 +1920,7 @@ INSERT INTO `districts` VALUES ('410621', '4106', '2', '浚县', 'xun xian', 'xu
 INSERT INTO `districts` VALUES ('410622', '4106', '2', '淇县', 'qi xian', 'qix', '淇县', null, null, '');
 INSERT INTO `districts` VALUES ('410671', '4106', '2', '鹤壁经济技术开发区', 'he bi jing ji ji shu kai fa qu', 'hebj', '鹤壁经济技术开发区', null, null, '');
 INSERT INTO `districts` VALUES ('410702', '4107', '2', '红旗', 'hong qi', 'hoq', '红旗区', null, null, '');
-INSERT INTO `districts` VALUES ('410703', '4107', '2', '卫滨', 'wei bin', 'web', '卫滨区', null, null, '');
+INSERT INTO `districts` VALUES ('410703', '4107', '2', '卫滨', 'wei bin', 'admin', '卫滨区', null, null, '');
 INSERT INTO `districts` VALUES ('410704', '4107', '2', '凤泉', 'feng quan', 'feq', '凤泉区', null, null, '');
 INSERT INTO `districts` VALUES ('410711', '4107', '2', '牧野', 'mu ye', 'muy', '牧野区', null, null, '');
 INSERT INTO `districts` VALUES ('410721', '4107', '2', '新乡', 'xin xiang', 'xix', '新乡县', null, null, '');
@@ -3071,7 +3071,7 @@ INSERT INTO `districts` VALUES ('610202', '6102', '2', '王益', 'wang yi', 'way
 INSERT INTO `districts` VALUES ('610203', '6102', '2', '印台', 'yin tai', 'yit', '印台区', null, null, '');
 INSERT INTO `districts` VALUES ('610204', '6102', '2', '耀州', 'yao zhou', 'yaz', '耀州区', null, null, '');
 INSERT INTO `districts` VALUES ('610222', '6102', '2', '宜君', 'yi jun', 'yij', '宜君县', null, null, '');
-INSERT INTO `districts` VALUES ('610302', '6103', '2', '渭滨', 'wei bin', 'web', '渭滨区', null, null, '');
+INSERT INTO `districts` VALUES ('610302', '6103', '2', '渭滨', 'wei bin', 'admin', '渭滨区', null, null, '');
 INSERT INTO `districts` VALUES ('610303', '6103', '2', '金台', 'jin tai', 'jit', '金台区', null, null, '');
 INSERT INTO `districts` VALUES ('610304', '6103', '2', '陈仓', 'chen cang', 'chc', '陈仓区', null, null, '');
 INSERT INTO `districts` VALUES ('610322', '6103', '2', '凤翔', 'feng xiang', 'fex', '凤翔县', null, null, '');
