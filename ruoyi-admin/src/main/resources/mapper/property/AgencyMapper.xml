@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.admin.mapper.SysAgencyMapper">
+<mapper namespace="com.ruoyi.admin.property.mapper.AgencyMapper">
     
-    <resultMap type="SysAgency" id="SysAgencyResult">
+    <resultMap type="Agency" id="AgencyResult">
         <result property="iD"    column="ID"    />
         <result property="agencyCode"    column="AGENCY_CODE"    />
         <result property="imgUrl"    column="IMG_URL"    />
@@ -38,12 +38,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="partyEnable"    column="party_enable"    />
     </resultMap>
 	
-	<sql id="selectSysAgencyVo">
-        select ID, AGENCY_CODE, IMG_URL, DEPTH, TYPE, IS_VERIFI, NAME, ADDRESS, CONTACT, WORK_TIME, INTRODUCTION, PID, PATH, LATITUDE, LONGITUDE, CITY, PROVINCE, IS_DELETED, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, COMPANY, is_opened, manager_house, monitor_phone, house_comm_id, party_dev_url, party_icon_url, party_agency_url, party_enable from sys_agency
+	<sql id="selectAgencyVo">
+        select ID, AGENCY_CODE, IMG_URL, DEPTH, TYPE, IS_VERIFI, NAME, ADDRESS, CONTACT, WORK_TIME, INTRODUCTION, PID, PATH, LATITUDE, LONGITUDE, CITY, PROVINCE, IS_DELETED, CREATED_BY, CREATED_DATE, LAST_UPDATED_BY, LAST_UPDATED_DATE, COMPANY, is_opened, manager_house, monitor_phone, house_comm_id, party_dev_url, party_icon_url, party_agency_url, party_enable
+
+        from aomygod.sys_agency
     </sql>
 	
-    <select id="selectSysAgencyList" parameterType="SysAgency" resultMap="SysAgencyResult">
-        <include refid="selectSysAgencyVo"/>
+    <select id="selectAgencyList" parameterType="Agency" resultMap="AgencyResult">
+        <include refid="selectAgencyVo"/>
         <where>  
             <if test="iD != null "> and ID = #{iD}</if>
              <if test="agencyCode != null  and agencyCode != '' "> and AGENCY_CODE = #{agencyCode}</if>
@@ -79,12 +81,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </where>
     </select>
     
-    <select id="selectSysAgencyById" parameterType="Integer" resultMap="SysAgencyResult">
-        <include refid="selectSysAgencyVo"/>
+    <select id="selectAgencyById" parameterType="Integer" resultMap="AgencyResult">
+        <include refid="selectAgencyVo"/>
         where ID = #{iD}
     </select>
         
-    <insert id="insertSysAgency" parameterType="SysAgency" useGeneratedKeys="true" keyProperty="iD">
+    <insert id="insertAgency" parameterType="Agency" useGeneratedKeys="true" keyProperty="iD">
         insert into sys_agency
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="agencyCode != null  and agencyCode != ''  ">AGENCY_CODE,</if>
@@ -152,7 +154,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 	 
-    <update id="updateSysAgency" parameterType="SysAgency">
+    <update id="updateAgency" parameterType="Agency">
         update sys_agency
         <trim prefix="SET" suffixOverrides=",">
             <if test="agencyCode != null  and agencyCode != ''  ">AGENCY_CODE = #{agencyCode},</if>
@@ -189,11 +191,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where ID = #{iD}
     </update>
 
-	<delete id="deleteSysAgencyById" parameterType="Integer">
+	<delete id="deleteAgencyById" parameterType="Integer">
         delete from sys_agency where ID = #{iD}
     </delete>
 	
-    <delete id="deleteSysAgencyByIds" parameterType="String">
+    <delete id="deleteAgencyByIds" parameterType="String">
         delete from sys_agency where ID in 
         <foreach item="iD" collection="array" open="(" separator="," close=")">
             #{iD}

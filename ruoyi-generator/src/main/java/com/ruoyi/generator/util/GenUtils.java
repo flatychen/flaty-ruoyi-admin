@@ -1,45 +1,51 @@
 package com.ruoyi.generator.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.apache.velocity.VelocityContext;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.generator.config.GenConfig;
 import com.ruoyi.generator.domain.ColumnInfo;
 import com.ruoyi.generator.domain.TableInfo;
+import org.apache.velocity.VelocityContext;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成器 工具类
- * 
+ *
  * @author ruoyi
  */
-public class GenUtils
-{
-    /** 项目空间路径 */
+public class GenUtils {
+    /**
+     * 项目空间路径
+     */
     private static final String PROJECT_PATH = getProjectPath();
 
-    /** mybatis空间路径 */
+    /**
+     * mybatis空间路径
+     */
     private static final String MYBATIS_PATH = "main/resources/mapper";
 
-    /** html空间路径 */
+    /**
+     * html空间路径
+     */
     private static final String TEMPLATES_PATH = "main/resources/templates";
 
-    /** 类型转换 */
+    /**
+     * 类型转换
+     */
     public static Map<String, String> javaTypeMap = new HashMap<String, String>();
 
     /**
      * 设置列信息
      */
-    public static List<ColumnInfo> transColums(List<ColumnInfo> columns)
-    {
+    public static List<ColumnInfo> transColums(List<ColumnInfo> columns) {
         // 列信息
         List<ColumnInfo> columsList = new ArrayList<>();
-        for (ColumnInfo column : columns)
-        {
+        for (ColumnInfo column : columns) {
             // 列名转换成Java属性名
             String attrName = StringUtils.convertToCamelCase(column.getColumnName());
             column.setAttrName(attrName);
@@ -57,14 +63,13 @@ public class GenUtils
 
     /**
      * 获取模板信息
-     * 
+     *
      * @return 模板列表
      */
-    public static VelocityContext getVelocityContext(TableInfo table)
-    {
+    public static VelocityContext getVelocityContext(TableInfo table, String parentModuleName) {
         // java对象数据传递到模板文件vm
         VelocityContext velocityContext = new VelocityContext();
-        String packageName = GenConfig.getPackageName();
+        String packageName = GenConfig.getPackageName() + "." + parentModuleName;
         velocityContext.put("tableName", table.getTableName());
         velocityContext.put("tableComment", replaceKeyword(table.getTableComment()));
         velocityContext.put("primaryKey", table.getPrimaryKey());
@@ -76,16 +81,16 @@ public class GenUtils
         velocityContext.put("package", packageName);
         velocityContext.put("author", GenConfig.getAuthor());
         velocityContext.put("datetime", DateUtils.getDate());
+        velocityContext.put("parentModuleName", parentModuleName);
         return velocityContext;
     }
 
     /**
      * 获取模板信息
-     * 
+     *
      * @return 模板列表
      */
-    public static List<String> getTemplates()
-    {
+    public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
         templates.add("vm/java/domain.java.vm");
         templates.add("vm/java/Mapper.java.vm");
@@ -103,12 +108,10 @@ public class GenUtils
     /**
      * 表名转换成Java类名
      */
-    public static String tableToJava(String tableName)
-    {
+    public static String tableToJava(String tableName) {
         String autoRemovePre = GenConfig.getAutoRemovePre();
         String tablePrefix = GenConfig.getTablePrefix();
-        if (Constants.AUTO_REOMVE_PRE.equals(autoRemovePre) && StringUtils.isNotEmpty(tablePrefix))
-        {
+        if (Constants.AUTO_REOMVE_PRE.equals(autoRemovePre) && StringUtils.isNotEmpty(tablePrefix)) {
             tableName = tableName.replaceFirst(tablePrefix, "");
         }
         return StringUtils.convertToCamelCase(tableName);
@@ -117,60 +120,49 @@ public class GenUtils
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, TableInfo table, String moduleName)
-    {
+    public static String getFileName(String template, TableInfo table, String moduleName) {
         // 小写类名
         String classname = table.getClassname();
         // 大写类名
         String className = table.getClassName();
-        String javaPath = PROJECT_PATH;
+        String javaPath = PROJECT_PATH + "/" + moduleName + "/";
         String mybatisPath = MYBATIS_PATH + "/" + moduleName + "/" + className;
         String htmlPath = TEMPLATES_PATH + "/" + moduleName + "/" + classname;
-
-        if (template.contains("domain.java.vm"))
-        {
-            return javaPath + "domain" + "/" + className + ".java";
+        String moduleFileName = "";
+        if (template.contains("domain.java.vm")) {
+            return javaPath + "domain" + "/" + moduleFileName + className + ".java";
         }
 
-        if (template.contains("Mapper.java.vm"))
-        {
-            return javaPath + "mapper" + "/" + className + "Mapper.java";
+        if (template.contains("Mapper.java.vm")) {
+            return javaPath + "mapper" + "/" + moduleFileName + className + "Mapper.java";
         }
 
-        if (template.contains("Service.java.vm"))
-        {
-            return javaPath + "service" + "/" + "I" + className + "Service.java";
+        if (template.contains("Service.java.vm")) {
+            return javaPath + "service" + "/" + moduleFileName + "I" + className + "Service.java";
         }
 
-        if (template.contains("ServiceImpl.java.vm"))
-        {
-            return javaPath + "service" + "/impl/" + className + "ServiceImpl.java";
+        if (template.contains("ServiceImpl.java.vm")) {
+            return javaPath + "service" + "/impl/" + moduleFileName + className + "ServiceImpl.java";
         }
 
-        if (template.contains("Controller.java.vm"))
-        {
-            return javaPath + "controller" + "/" + className + "Controller.java";
+        if (template.contains("Controller.java.vm")) {
+            return javaPath + "controller" + "/" + moduleFileName + className + "Controller.java";
         }
 
-        if (template.contains("Mapper.xml.vm"))
-        {
+        if (template.contains("Mapper.xml.vm")) {
             return mybatisPath + "Mapper.xml";
         }
 
-        if (template.contains("list.html.vm"))
-        {
+        if (template.contains("list.html.vm")) {
             return htmlPath + "/" + classname + ".html";
         }
-        if (template.contains("add.html.vm"))
-        {
+        if (template.contains("add.html.vm")) {
             return htmlPath + "/" + "add.html";
         }
-        if (template.contains("edit.html.vm"))
-        {
+        if (template.contains("edit.html.vm")) {
             return htmlPath + "/" + "edit.html";
         }
-        if (template.contains("sql.vm"))
-        {
+        if (template.contains("sql.vm")) {
             return classname + "Menu.sql";
         }
         return null;
@@ -178,27 +170,24 @@ public class GenUtils
 
     /**
      * 获取模块名
-     * 
+     *
      * @param packageName 包名
      * @return 模块名
      */
-    public static String getModuleName(String packageName)
-    {
+    public static String getModuleName(String packageName) {
         int lastIndex = packageName.lastIndexOf(".");
         int nameLength = packageName.length();
         String moduleName = StringUtils.substring(packageName, lastIndex + 1, nameLength);
         return moduleName;
     }
 
-    public static String getBasePackage(String packageName)
-    {
+    public static String getBasePackage(String packageName) {
         int lastIndex = packageName.lastIndexOf(".");
         String basePackage = StringUtils.substring(packageName, 0, lastIndex);
         return basePackage;
     }
 
-    public static String getProjectPath()
-    {
+    public static String getProjectPath() {
         String packageName = GenConfig.getPackageName();
         StringBuffer projectPath = new StringBuffer();
         projectPath.append("main/java/");
@@ -207,14 +196,12 @@ public class GenUtils
         return projectPath.toString();
     }
 
-    public static String replaceKeyword(String keyword)
-    {
+    public static String replaceKeyword(String keyword) {
         String keyName = keyword.replaceAll("(?:表|信息|管理)", "");
         return keyName;
     }
 
-    static
-    {
+    static {
         javaTypeMap.put("tinyint", "Integer");
         javaTypeMap.put("smallint", "Integer");
         javaTypeMap.put("mediumint", "Integer");

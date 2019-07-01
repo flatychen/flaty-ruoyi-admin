@@ -101,9 +101,10 @@
 		// 生成代码
 		function genCode(tableName) {
 
-			layer.prompt({title:"确定要生成" + tableName + "表代码吗？", formType: 1}, function(text, index){
+			layer.prompt({title:"确定要生成" + tableName + "表代码吗？"}, function(text, index){
 				location.href = prefix + "/genCode/" + tableName+"?moduleName=" + text;
 				layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
+				layer.close(index);
 			});
 
 		}

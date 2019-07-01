@@ -46,6 +46,19 @@ public class SysDept extends BaseEntity
     /** 父部门名称 */
     private String parentName;
 
+
+
+    private Integer agencyId;
+
+
+    public Integer getAgencyId() {
+        return agencyId;
+    }
+
+    public void setAgencyId(Integer agencyId) {
+        this.agencyId = agencyId;
+    }
+
     public Long getDeptId()
     {
         return deptId;

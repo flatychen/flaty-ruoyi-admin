@@ -1,7 +1,8 @@
 package com.ruoyi.generator.service;
 
-import java.util.List;
 import com.ruoyi.generator.domain.TableInfo;
+
+import java.util.List;
 
 /**
  * 代码生成 服务层
@@ -21,16 +22,19 @@ public interface IGenService
     /**
      * 生成代码
      * 
+     *
      * @param tableName 表名称
+     * @param moduleName
      * @return 数据
      */
-    public byte[] generatorCode(String tableName);
+    public byte[] generatorCode( String tableName , String parentModuleName);
 
     /**
      * 批量生成代码
      * 
      * @param tableNames 表数组
+     * @param moduleName
      * @return 数据
      */
-    public byte[] generatorCode(String[] tableNames);
+    public byte[] generatorCode(String[] tableNames, String parentModuleName);
 }

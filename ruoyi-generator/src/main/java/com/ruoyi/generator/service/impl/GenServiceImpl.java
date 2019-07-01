@@ -57,11 +57,11 @@ public class GenServiceImpl implements IGenService
      * @return 数据
      */
     @Override
-    public byte[] generatorCode(String tableName)
+    public byte[] generatorCode(String tableName , String parentModuleName)
     {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
-        generatorCode(tableName, zip);
+        generatorCode(tableName, zip,parentModuleName);
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
@@ -73,13 +73,13 @@ public class GenServiceImpl implements IGenService
      * @return 数据
      */
     @Override
-    public byte[] generatorCode(String[] tableNames)
+    public byte[] generatorCode(String[] tableNames , String parentModuleName)
     {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
         for (String tableName : tableNames)
         {
-            generatorCode(tableName, zip);
+            generatorCode(tableName, zip,parentModuleName);
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
@@ -88,7 +88,7 @@ public class GenServiceImpl implements IGenService
     /**
      * 查询表信息并生成代码
      */
-    private void generatorCode(String tableName, ZipOutputStream zip)
+    private void generatorCode(String tableName, ZipOutputStream zip,String parentModuleName)
     {
         // 查询表信息
         TableInfo table = genMapper.selectTableByName(tableName);
@@ -106,10 +106,10 @@ public class GenServiceImpl implements IGenService
 
         VelocityInitializer.initVelocity();
 
-        String packageName = GenConfig.getPackageName();
+        String packageName = GenConfig.getPackageName()+"." + parentModuleName;
         String moduleName = GenUtils.getModuleName(packageName);
 
-        VelocityContext context = GenUtils.getVelocityContext(table);
+        VelocityContext context = GenUtils.getVelocityContext(table,parentModuleName);
 
         // 获取模板列表
         List<String> templates = GenUtils.getTemplates();

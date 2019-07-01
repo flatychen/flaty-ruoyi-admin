@@ -1,14 +1,17 @@
 package com.ruoyi.system.mapper;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.ruoyi.system.domain.SysDept;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 部门管理 数据层
  * 
  * @author ruoyi
  */
+
 public interface SysDeptMapper
 {
     /**

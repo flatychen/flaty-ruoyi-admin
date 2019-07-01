@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('项目列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+							<li>
+								：<input type="text" name="agencyCode"/>
+							</li>
+
+							<li>
+								组织主图：<input type="text" name="imgUrl"/>
+							</li>
+
+							<li>
+								层次：<input type="text" name="dEPTH"/>
+							</li>
+
+							<li>
+								类型 0:小区 1：商场：<input type="text" name="tYPE"/>
+							</li>
+
+							<li>
+								是否有效 0:有效 1:无效：<input type="text" name="isVerifi"/>
+							</li>
+
+							<li>
+								名称：<input type="text" name="nAME"/>
+							</li>
+
+							<li>
+								地址：<input type="text" name="aDDRESS"/>
+							</li>
+
+							<li>
+								联系方式：<input type="text" name="cONTACT"/>
+							</li>
+
+							<li>
+								营业时间：<input type="text" name="workTime"/>
+							</li>
+
+							<li>
+								简介：<input type="text" name="iNTRODUCTION"/>
+							</li>
+
+							<li>
+								：<input type="text" name="pID"/>
+							</li>
+
+							<li>
+								路径：<input type="text" name="pATH"/>
+							</li>
+
+							<li>
+								纬度：<input type="text" name="lATITUDE"/>
+							</li>
+
+							<li>
+								经度：<input type="text" name="lONGITUDE"/>
+							</li>
+
+							<li>
+								城市：<input type="text" name="cITY"/>
+							</li>
+
+							<li>
+								省份：<input type="text" name="pROVINCE"/>
+							</li>
+
+							<li>
+								是否删除：0 ：正常 1：删除：<input type="text" name="isDeleted"/>
+							</li>
+
+							<li>
+								创建人：<input type="text" name="createdBy"/>
+							</li>
+
+							<li>
+								创建时间：<input type="text" name="createdDate"/>
+							</li>
+
+							<li>
+								最后更新人：<input type="text" name="lastUpdatedBy"/>
+							</li>
+
+							<li>
+								最后更新时间：<input type="text" name="lastUpdatedDate"/>
+							</li>
+
+							<li>
+								公司：<input type="text" name="cOMPANY"/>
+							</li>
+
+							<li>
+								是否开业，0：待开业，1：已开业：<input type="text" name="isOpened"/>
+							</li>
+
+							<li>
+								：<input type="text" name="managerHouse"/>
+							</li>
+
+							<li>
+								监控中心电话：<input type="text" name="monitorPhone"/>
+							</li>
+
+							<li>
+								房屋数库项目ID：<input type="text" name="houseCommId"/>
+							</li>
+
+							<li>
+								党建-发展党员URL：<input type="text" name="partyDevUrl"/>
+							</li>
+
+							<li>
+								社区图标：<input type="text" name="partyIconUrl"/>
+							</li>
+
+							<li>
+								项目H5 URL：<input type="text" name="partyAgencyUrl"/>
+							</li>
+
+							<li>
+								1开，0关：<input type="text" name="partyEnable"/>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group-sm" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="property:agency:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="property:agency:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="property:agency:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="property:agency:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('property:agency:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('property:agency:remove')}]];
+        var prefix = ctx + "property/agency";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
+                modalName: "项目",
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'iD', 
+					title : '',
+					visible: false
+				},
+				{
+					field : 'agencyCode', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'imgUrl', 
+					title : '组织主图',
+					sortable: true
+				},
+				{
+					field : 'dEPTH', 
+					title : '层次',
+					sortable: true
+				},
+				{
+					field : 'tYPE', 
+					title : '类型 0:小区 1：商场',
+					sortable: true
+				},
+				{
+					field : 'isVerifi', 
+					title : '是否有效 0:有效 1:无效',
+					sortable: true
+				},
+				{
+					field : 'nAME', 
+					title : '名称',
+					sortable: true
+				},
+				{
+					field : 'aDDRESS', 
+					title : '地址',
+					sortable: true
+				},
+				{
+					field : 'cONTACT', 
+					title : '联系方式',
+					sortable: true
+				},
+				{
+					field : 'workTime', 
+					title : '营业时间',
+					sortable: true
+				},
+				{
+					field : 'iNTRODUCTION', 
+					title : '简介',
+					sortable: true
+				},
+				{
+					field : 'pID', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'pATH', 
+					title : '路径',
+					sortable: true
+				},
+				{
+					field : 'lATITUDE', 
+					title : '纬度',
+					sortable: true
+				},
+				{
+					field : 'lONGITUDE', 
+					title : '经度',
+					sortable: true
+				},
+				{
+					field : 'cITY', 
+					title : '城市',
+					sortable: true
+				},
+				{
+					field : 'pROVINCE', 
+					title : '省份',
+					sortable: true
+				},
+				{
+					field : 'isDeleted', 
+					title : '是否删除：0 ：正常 1：删除',
+					sortable: true
+				},
+				{
+					field : 'createdBy', 
+					title : '创建人',
+					sortable: true
+				},
+				{
+					field : 'createdDate', 
+					title : '创建时间',
+					sortable: true
+				},
+				{
+					field : 'lastUpdatedBy', 
+					title : '最后更新人',
+					sortable: true
+				},
+				{
+					field : 'lastUpdatedDate', 
+					title : '最后更新时间',
+					sortable: true
+				},
+				{
+					field : 'cOMPANY', 
+					title : '公司',
+					sortable: true
+				},
+				{
+					field : 'isOpened', 
+					title : '是否开业，0：待开业，1：已开业',
+					sortable: true
+				},
+				{
+					field : 'managerHouse', 
+					title : '',
+					sortable: true
+				},
+				{
+					field : 'monitorPhone', 
+					title : '监控中心电话',
+					sortable: true
+				},
+				{
+					field : 'houseCommId', 
+					title : '房屋数库项目ID',
+					sortable: true
+				},
+				{
+					field : 'partyDevUrl', 
+					title : '党建-发展党员URL',
+					sortable: true
+				},
+				{
+					field : 'partyIconUrl', 
+					title : '社区图标',
+					sortable: true
+				},
+				{
+					field : 'partyAgencyUrl', 
+					title : '项目H5 URL',
+					sortable: true
+				},
+				{
+					field : 'partyEnable', 
+					title : '1开，0关',
+					sortable: true
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.iD + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.iD + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

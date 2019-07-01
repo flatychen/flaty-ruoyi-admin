@@ -264,7 +264,7 @@ function navSelectDeptTreeDoSubmit(index, layero){
 	console.log("sessionid:",$.cookie());
 	var body = layer.getChildFrame('body', index);
 	var treeId =body.find('#treeId').val();
-	$.cookie('treeId', treeId|"0");
+	$.cookie('deptId', treeId|"0");
     // var treeName = body.find('#treeName').val();
 	layer.close(index);
 }

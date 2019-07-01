@@ -54,9 +54,9 @@ public class GenController extends BaseController
     @RequiresPermissions("tool:gen:code")
     @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/genCode/{tableName}")
-    public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName,@RequestParam(value = "moduleName",required = false) String moduleName) throws IOException
+    public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName, @RequestParam(value = "moduleName",required = false) String parentModuleName) throws IOException
     {
-        byte[] data = genService.generatorCode(tableName);
+        byte[] data = genService.generatorCode(tableName,parentModuleName);
         genCode(response, data);
     }
 
@@ -67,10 +67,10 @@ public class GenController extends BaseController
     @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
     @ResponseBody
-    public void batchGenCode(HttpServletResponse response, String tables) throws IOException
+    public void batchGenCode(HttpServletResponse response, String tables ,@RequestParam(value = "moduleName",required = false) String parentModuleName ) throws IOException
     {
         String[] tableNames = Convert.toStrArray(tables);
-        byte[] data = genService.generatorCode(tableNames);
+        byte[] data = genService.generatorCode(tableNames,parentModuleName);
         genCode(response, data);
     }
 

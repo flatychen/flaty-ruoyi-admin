@@ -1,4 +1,4 @@
-package com.ruoyi.admin.domain;
+package com.ruoyi.admin.property.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -9,9 +9,9 @@ import java.util.Date;
  * 项目表 sys_agency
  * 
  * @author flaty
- * @date 2019-06-25
+ * @date 2019-07-01
  */
-public class SysAgency extends BaseEntity
+public class Agency extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
 	
