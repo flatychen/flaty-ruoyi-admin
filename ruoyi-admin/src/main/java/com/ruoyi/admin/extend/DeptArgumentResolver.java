@@ -23,7 +23,8 @@ public class DeptArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(DeptData.class);
+        boolean result = parameter.hasParameterAnnotation(DeptData.class);
+        return result;
     }
 
     @Override
