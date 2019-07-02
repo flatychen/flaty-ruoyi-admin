@@ -13,6 +13,8 @@ import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.framework.shiro.realm.UserRealm;
 import com.ruoyi.system.domain.SysUser;
 
+import java.util.Optional;
+
 /**
  * shiro 工具类
  *
@@ -61,7 +63,7 @@ public class ShiroUtils {
     }
 
     public static String getLoginName() {
-        return getSysUser().getLoginName();
+        return Optional.ofNullable(getSysUser()).map(SysUser::getLoginName).orElse("NULL");
     }
 
     public static String getIp() {

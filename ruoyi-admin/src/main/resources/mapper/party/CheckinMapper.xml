@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.party.mapper.CheckinMapper">
+    
+    <resultMap type="Checkin" id="CheckinResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="phone"    column="phone"    />
+        <result property="sex"    column="sex"    />
+        <result property="homeAddress"    column="home_address"    />
+        <result property="currentIdentity"    column="current_identity"    />
+        <result property="currentPartyBranch"    column="current_party_branch"    />
+        <result property="checkinImg"    column="checkin_img"    />
+        <result property="agencyId"    column="agency_id"    />
+        <result property="createdDate"    column="created_date"    />
+        <result property="appUserId"    column="app_user_id"    />
+    </resultMap>
+	
+	<sql id="selectCheckinVo">
+        select id, name, phone, sex, home_address, current_identity, current_party_branch, checkin_img, agency_id, created_date, app_user_id from party_checkin
+    </sql>
+	
+    <select id="selectCheckinList" parameterType="Checkin" resultMap="CheckinResult">
+        <include refid="selectCheckinVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+             <if test="sex != null "> and sex = #{sex}</if>
+             <if test="homeAddress != null  and homeAddress != '' "> and home_address = #{homeAddress}</if>
+             <if test="currentIdentity != null  and currentIdentity != '' "> and current_identity = #{currentIdentity}</if>
+             <if test="currentPartyBranch != null  and currentPartyBranch != '' "> and current_party_branch = #{currentPartyBranch}</if>
+             <if test="checkinImg != null  and checkinImg != '' "> and checkin_img = #{checkinImg}</if>
+             <if test="agencyId != null "> and agency_id = #{agencyId}</if>
+             <if test="createdDate != null "> and created_date = #{createdDate}</if>
+             <if test="appUserId != null "> and app_user_id = #{appUserId}</if>
+         </where>
+    </select>
+    
+    <select id="selectCheckinById" parameterType="Integer" resultMap="CheckinResult">
+        <include refid="selectCheckinVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCheckin" parameterType="Checkin" useGeneratedKeys="true" keyProperty="id">
+        insert into party_checkin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="sex != null  ">sex,</if>
+			<if test="homeAddress != null  and homeAddress != ''  ">home_address,</if>
+			<if test="currentIdentity != null  and currentIdentity != ''  ">current_identity,</if>
+			<if test="currentPartyBranch != null  and currentPartyBranch != ''  ">current_party_branch,</if>
+			<if test="checkinImg != null  and checkinImg != ''  ">checkin_img,</if>
+			<if test="agencyId != null  ">agency_id,</if>
+			<if test="createdDate != null  ">created_date,</if>
+			<if test="appUserId != null  ">app_user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="sex != null  ">#{sex},</if>
+			<if test="homeAddress != null  and homeAddress != ''  ">#{homeAddress},</if>
+			<if test="currentIdentity != null  and currentIdentity != ''  ">#{currentIdentity},</if>
+			<if test="currentPartyBranch != null  and currentPartyBranch != ''  ">#{currentPartyBranch},</if>
+			<if test="checkinImg != null  and checkinImg != ''  ">#{checkinImg},</if>
+			<if test="agencyId != null  ">#{agencyId},</if>
+			<if test="createdDate != null  ">#{createdDate},</if>
+			<if test="appUserId != null  ">#{appUserId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateCheckin" parameterType="Checkin">
+        update party_checkin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="sex != null  ">sex = #{sex},</if>
+            <if test="homeAddress != null  and homeAddress != ''  ">home_address = #{homeAddress},</if>
+            <if test="currentIdentity != null  and currentIdentity != ''  ">current_identity = #{currentIdentity},</if>
+            <if test="currentPartyBranch != null  and currentPartyBranch != ''  ">current_party_branch = #{currentPartyBranch},</if>
+            <if test="checkinImg != null  and checkinImg != ''  ">checkin_img = #{checkinImg},</if>
+            <if test="agencyId != null  ">agency_id = #{agencyId},</if>
+            <if test="createdDate != null  ">created_date = #{createdDate},</if>
+            <if test="appUserId != null  ">app_user_id = #{appUserId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteCheckinById" parameterType="Integer">
+        delete from party_checkin where id = #{id}
+    </delete>
+	
+    <delete id="deleteCheckinByIds" parameterType="String">
+        delete from party_checkin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

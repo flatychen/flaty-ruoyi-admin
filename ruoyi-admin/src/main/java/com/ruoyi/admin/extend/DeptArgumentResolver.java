@@ -1,12 +1,13 @@
 package com.ruoyi.admin.extend;
 
+import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.CookieUtil;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.service.ISysDeptService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -14,11 +15,14 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Component
+@Slf4j
 public class DeptArgumentResolver implements HandlerMethodArgumentResolver {
 
-    @Autowired
-    ISysDeptService iSysDeptService;
+
+
+    private ISysDeptService getISysDeptService() {
+        return SpringUtils.getBean(ISysDeptService.class);
+    }
 
 
     @Override
@@ -30,13 +34,14 @@ public class DeptArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-        String deptId = CookieUtil.getCookieValue(request, "");
+        String deptId = CookieUtil.getCookieValue(request, "deptId");
         if (StringUtils.isEmpty(deptId)) {
-            throw new RuntimeException(StringUtils.format("cookie:[deptId]不存在，请选择右上角项目"));
+//            log.warn("cookie:[deptId]不存在，请先在右上角【选择项目】");
+            throw new BusinessException(StringUtils.format("请先在右上角【选择项目】"));
         }
-        SysDept sysDept =iSysDeptService.selectDeptById(Long.parseLong(deptId));
+        SysDept sysDept =getISysDeptService().selectDeptById(Long.parseLong(deptId));
         if (sysDept == null) {
-            throw new RuntimeException(StringUtils.format("deptId:[%s]不存在",deptId));
+            throw new BusinessException(StringUtils.format("deptId:[%s]不存在",deptId));
         }
         return sysDept;
 

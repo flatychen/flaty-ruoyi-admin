@@ -17,42 +17,39 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 项目 信息操作处理
- * 
+ *
  * @author flaty
  * @date 2019-07-01
  */
 @Controller
 @RequestMapping("/party/")
-public class PartyController extends BaseController
-{
+public class PartyController extends BaseController {
     private String prefix = "party/agency";
-	
-	@Autowired
-	private IAgencyService agencyService;
+
+    @Autowired
+    private IAgencyService agencyService;
 
 //	ISysDeptService iSysDeptService;
 
-	/**
-	 * 修改项目
-	 */
-	@GetMapping("/edit")
-	public String edit(@DeptData SysDept sysDept, ModelMap mmap)
-	{
-		Agency agency = agencyService.selectAgencyById(sysDept.getAgencyId());
-		mmap.put("agency", agency);
-	    return prefix + "/edit";
-	}
-	
-	/**
-	 * 修改保存项目
-	 */
-	@RequiresPermissions("party:edit")
-	@PostMapping("/edit")
-	@ResponseBody
-	public AjaxResult editSave(Agency agency)
-	{		
-		return toAjax(agencyService.updateAgency(agency));
-	}
-	
+    /**
+     * 修改项目
+     */
+    @GetMapping("/edit")
+    public String edit(@DeptData SysDept sysDept, ModelMap mmap) {
+        Agency agency = agencyService.selectAgencyById(sysDept.getAgencyId());
+        mmap.put("agency", agency);
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存项目
+     */
+    @RequiresPermissions("party:edit")
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(Agency agency) {
+        return toAjax(agencyService.updateAgency(agency));
+    }
+
 
 }

@@ -30,13 +30,16 @@
 			<optional>true</optional> &lt;!&ndash; 表示依赖不会传递 &ndash;&gt;
 		</dependency>
 -->
-		<!-- swagger2-->
+
+<!--
+
+        &lt;!&ndash; swagger2&ndash;&gt;
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 		</dependency>
 		
-		<!--防止进入swagger页面报类型转换错误，排除2.9.2中的引用，手动增加1.5.21版本-->
+		&lt;!&ndash;防止进入swagger页面报类型转换错误，排除2.9.2中的引用，手动增加1.5.21版本&ndash;&gt;
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
@@ -49,13 +52,32 @@
             <version>1.5.21</version>
         </dependency>
 		
-		<!-- swagger2-UI-->
+		&lt;!&ndash; swagger2-UI&ndash;&gt;
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 		</dependency>
+-->
 
-		<!-- 核心模块-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <!-- 核心模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-framework</artifactId>

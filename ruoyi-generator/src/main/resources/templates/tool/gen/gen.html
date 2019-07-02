@@ -116,8 +116,8 @@
 		        $.modal.alertWarning("请选择要生成的数据");
 		        return;
 		    }
-		    $.modal.confirm("确认要生成选中的" + rows.length + "条数据吗?", function() {
-		        location.href = prefix + "/batchGenCode?tables=" + rows;
+			layer.prompt("确认要生成选中的" + rows.length + "条数据吗?", function(text,index) {
+		        location.href = prefix + "/batchGenCode?tables=" + rows +"&moduleName=" + text;;
 		        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
 		    });
 		}

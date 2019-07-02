@@ -1,24 +1,20 @@
 package com.ruoyi.framework.aspectj;
 
 import com.ruoyi.common.config.datasource.DynamicDataSourceContextHolder;
+import com.ruoyi.common.enums.DataSourceType;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
-import com.ruoyi.common.enums.DataSourceType;
 
 
 /**
  * 多数据源处理
  */
-@Aspect
-@Order(1)
-@Component
+//@Aspect
+//@Order(1)
+//@Component
 public class DataSourceAspect
 {
     protected Logger logger = LoggerFactory.getLogger(getClass());

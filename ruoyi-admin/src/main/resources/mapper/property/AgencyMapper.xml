@@ -155,7 +155,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 	 
     <update id="updateAgency" parameterType="Agency">
-        update sys_agency
+        update aomygod.sys_agency
         <trim prefix="SET" suffixOverrides=",">
             <if test="agencyCode != null  and agencyCode != ''  ">AGENCY_CODE = #{agencyCode},</if>
             <if test="imgUrl != null  and imgUrl != ''  ">IMG_URL = #{imgUrl},</if>

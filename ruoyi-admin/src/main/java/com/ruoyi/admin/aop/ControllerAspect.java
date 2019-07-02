@@ -28,7 +28,7 @@ public class ControllerAspect {
     @Autowired(required = false)
     private HttpServletRequest request;
 
-    @Around("execution(* com.ruoyi.admin.controller..*(..))   && @annotation(org.springframework.web.bind.annotation.ResponseBody))  ")
+    @Around("@annotation(org.springframework.web.bind.annotation.ResponseBody))  ")
     public Object RequestPointCut(ProceedingJoinPoint pjp)
             throws Throwable {
         String requestIp = IpUtils.getIpAddr(request);
@@ -62,7 +62,7 @@ public class ControllerAspect {
         if (StringUtils.isEmpty(requestId)) {
             MDC.put("requestId", ShiroUtils.getLoginName());
         }
-        log.info("[{}:{}],request  => {}", requestIp, request.getServletPath(), parseRequest());
+        log.info("[{}:{}],request  => {}", requestIp, request.getServletPath(), parseRequest().toString());
     }
 
 

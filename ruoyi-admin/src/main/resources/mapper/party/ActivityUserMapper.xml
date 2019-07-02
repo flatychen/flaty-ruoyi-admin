@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.party.mapper.ActivityUserMapper">
+    
+    <resultMap type="ActivityUser" id="ActivityUserResult">
+        <result property="id"    column="id"    />
+        <result property="agencyId"    column="agency_id"    />
+        <result property="activityId"    column="activity_id"    />
+        <result property="appUserId"    column="app_user_id"    />
+        <result property="pics"    column="pics"    />
+        <result property="createdDate"    column="created_date"    />
+    </resultMap>
+	
+	<sql id="selectActivityUserVo">
+        select id, agency_id, activity_id, app_user_id, pics, created_date from party_activity_user
+    </sql>
+	
+    <select id="selectActivityUserList" parameterType="ActivityUser" resultMap="ActivityUserResult">
+        <include refid="selectActivityUserVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="agencyId != null "> and agency_id = #{agencyId}</if>
+             <if test="activityId != null "> and activity_id = #{activityId}</if>
+             <if test="appUserId != null "> and app_user_id = #{appUserId}</if>
+             <if test="pics != null  and pics != '' "> and pics = #{pics}</if>
+             <if test="createdDate != null "> and created_date = #{createdDate}</if>
+         </where>
+    </select>
+    
+    <select id="selectActivityUserById" parameterType="Integer" resultMap="ActivityUserResult">
+        <include refid="selectActivityUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertActivityUser" parameterType="ActivityUser" useGeneratedKeys="true" keyProperty="id">
+        insert into party_activity_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="agencyId != null  ">agency_id,</if>
+			<if test="activityId != null  ">activity_id,</if>
+			<if test="appUserId != null  ">app_user_id,</if>
+			<if test="pics != null  and pics != ''  ">pics,</if>
+			<if test="createdDate != null  ">created_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="agencyId != null  ">#{agencyId},</if>
+			<if test="activityId != null  ">#{activityId},</if>
+			<if test="appUserId != null  ">#{appUserId},</if>
+			<if test="pics != null  and pics != ''  ">#{pics},</if>
+			<if test="createdDate != null  ">#{createdDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateActivityUser" parameterType="ActivityUser">
+        update party_activity_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="agencyId != null  ">agency_id = #{agencyId},</if>
+            <if test="activityId != null  ">activity_id = #{activityId},</if>
+            <if test="appUserId != null  ">app_user_id = #{appUserId},</if>
+            <if test="pics != null  and pics != ''  ">pics = #{pics},</if>
+            <if test="createdDate != null  ">created_date = #{createdDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteActivityUserById" parameterType="Integer">
+        delete from party_activity_user where id = #{id}
+    </delete>
+	
+    <delete id="deleteActivityUserByIds" parameterType="String">
+        delete from party_activity_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
