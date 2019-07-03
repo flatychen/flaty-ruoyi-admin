@@ -38,6 +38,7 @@ public class PartyController extends BaseController {
     public String edit(@DeptData SysDept sysDept, ModelMap mmap) {
         Agency agency = agencyService.selectAgencyById(sysDept.getAgencyId());
         mmap.put("agency", agency);
+        System.out.println("xx");
         return prefix + "/edit";
     }
 
