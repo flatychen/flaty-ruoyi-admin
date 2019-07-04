@@ -32,7 +32,9 @@ $(function () {
             autoOrientImage: false,
             validateInitialCount: true,
             initialPreview: existFileUrls,
-            initialPreviewConfig: initialPreviewConfig
+            initialPreviewConfig: initialPreviewConfig,
+            browseClass: "btn btn-primary btn-block",
+            showCaption: false,
 
         }).on('fileuploaded', function (event, data, previewId, index) {
             console.log("fileuploaded:", data)
