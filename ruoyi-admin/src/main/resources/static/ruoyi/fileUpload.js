@@ -4,41 +4,57 @@
  * Copyright (c) 2019 ruoyi
  */
 
-$(function() {
+$(function () {
 
-    console.log("flatyUpload")
-    var $fileInput = $('.flatyUpload');
-    // var $fileValInput = $fileInput.siblings().find("input[type='hidden']");
-    var $fileValInput = $fileInput.siblings();
-    console.log("$fileValInput:",$fileValInput.html());
-    var existFileUrls = $fileValInput.val();
-    var fileArray = $.common.split(existFileUrls, ",");
-    console.log("fileArray:",fileArray);
-    var initialPreviewConfig = [];
-    fileArray.forEach(function (o) {
-        initialPreviewConfig.push({
-            extra:{url:o}
+    $('.flatyUpload').each(function () {
+        var $fileInput = $(this);
+        // var $fileValInput = $fileInput.siblings().find("input[type='hidden']");
+        var $fileValInput = $fileInput.siblings();
+        var existFileUrls = $fileValInput.val();
+        var fileArray = $.common.split(existFileUrls, ",");
+        console.log("fileArray:", fileArray);
+        var initialPreviewConfig = [];
+        fileArray.forEach(function (o) {
+            initialPreviewConfig.push({
+                extra: {url: o}
+            })
         })
-    })
-    $fileInput.fileinput({
-        'uploadUrl': 'http://lars.aylives.cn/Lars/upload',
-        showClose:false,
-        initialPreviewShowDelete:true,
-        initialPreviewDownloadUrl:true,
-        deleteUrl:"/login",
-        removeFromPreviewOnError:true,
-        maxFileCount:5,
-        uploadAsync:false,
-        initialPreview: existFileUrls,
-        initialPreviewConfig:initialPreviewConfig
+        $fileInput.fileinput({
+            'uploadUrl': 'http://lars.aylives.cn/Lars/upload',
+            showClose: false,
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreviewShowDelete: true,
+            initialPreviewDownloadUrl: true,
+            deleteUrl: "/tool/test",
+            removeFromPreviewOnError: true,
+            uploadAsync: true,
+            autoOrientImage: false,
+            validateInitialCount: true,
+            initialPreview: existFileUrls,
+            initialPreviewConfig: initialPreviewConfig
 
-    }).on('fileuploaded', function(event, data, previewId, index) {
-        console.log("fileuploaded:",data)
-        var res = data.response;
-    }).on('filebeforedelete', function(event, key, data) {
-        console.log("fileuploaded:",event.target)
-        console.log("key:",key)
-        console.log("data:",data)
+        }).on('fileuploaded', function (event, data, previewId, index) {
+            console.log("fileuploaded:", data)
+            var res = data.response;
+            if (res.code == "200") {
+                fileArray.push(res.data.url);
+                $fileValInput.val(fileArray.join(","))
+                $.modal.msgSuccess("上传成功");
+            }
+        }).on('filebeforedelete', function (event, key, data) {
+            var existFileArray = []
+            fileArray.forEach(function (o) {
+                if (!o == data.url)
+                    existFileArray.push(o)
+            })
+            fileArray = existFileArray;
+            $fileValInput.val(existFileArray.join(","))
+
+        });
+
+
     });
+
 
 });
