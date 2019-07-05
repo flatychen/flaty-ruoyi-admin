@@ -15,13 +15,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="isDefault"  column="is_default"  />
 		<result property="status"     column="status"      />
 		<result property="createBy"   column="create_by"   />
-		<result property="createTime" column="create_time" />
+		<result property="createdDate" column="created_date" />
 		<result property="updateBy"   column="update_by"   />
-		<result property="updateTime" column="update_time" />
+		<result property="updatedDate" column="updated_date" />
 	</resultMap>
 	
 	<sql id="selectDictDataVo">
-        select dict_code, dict_sort, dict_label, dict_value, dict_type, css_class, list_class, is_default, status, create_by, create_time, remark 
+        select dict_code, dict_sort, dict_label, dict_value, dict_type, css_class, list_class, is_default, status, create_by, created_date, remark
 		from sys_dict_data
     </sql>
 
@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null">status = #{status},</if>
  			<if test="remark != null">remark = #{remark},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
- 			update_time = sysdate()
+ 			updated_date = sysdate()
  		</set>
  		where dict_code = #{dictCode}
 	</update>
@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null">status,</if>
  			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
- 			create_time
+ 			created_date
  		)values(
  		    <if test="dictSort != null and dictSort != ''">#{dictSort},</if>
  		    <if test="dictLabel != null and dictLabel != ''">#{dictLabel},</if>

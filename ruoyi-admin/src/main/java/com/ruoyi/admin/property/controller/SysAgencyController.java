@@ -1,7 +1,7 @@
 package com.ruoyi.admin.property.controller;
 
 import com.ruoyi.admin.property.domain.Agency;
-import com.ruoyi.admin.property.service.IAgencyService;
+import com.ruoyi.admin.property.service.ISysAgencyService;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -20,34 +20,34 @@ import java.util.List;
  * 项目 信息操作处理
  * 
  * @author flaty
- * @date 2019-07-01
+ * @date 2019-07-05
  */
 @Controller
-@RequestMapping("/property/agency")
-public class AgencyController extends BaseController
+@RequestMapping("/property/sysAgency")
+public class SysAgencyController extends BaseController
 {
-    private String prefix = "property/agency";
+    private String prefix = "property/sysAgency";
 	
 	@Autowired
-	private IAgencyService agencyService;
+	private ISysAgencyService sysAgencyService;
 	
-	@RequiresPermissions("property:agency:view")
+	@RequiresPermissions("property:sysAgency:view")
 	@GetMapping()
-	public String agency()
+	public String sysAgency()
 	{
-	    return prefix + "/agency";
+	    return prefix + "/sysAgency";
 	}
 	
 	/**
 	 * 查询项目列表
 	 */
-	@RequiresPermissions("property:agency:list")
+	@RequiresPermissions("property:sysAgency:list")
 	@PostMapping("/list")
 	@ResponseBody
-	public TableDataInfo list(Agency agency)
+	public TableDataInfo list(Agency sysAgency)
 	{
 		startPage();
-        List<Agency> list = agencyService.selectAgencyList(agency);
+        List<Agency> list = sysAgencyService.selectSysAgencyList(sysAgency);
 		return getDataTable(list);
 	}
 	
@@ -55,14 +55,14 @@ public class AgencyController extends BaseController
 	/**
 	 * 导出项目列表
 	 */
-	@RequiresPermissions("property:agency:export")
+	@RequiresPermissions("property:sysAgency:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Agency agency)
+    public AjaxResult export(Agency sysAgency)
     {
-    	List<Agency> list = agencyService.selectAgencyList(agency);
+    	List<Agency> list = sysAgencyService.selectSysAgencyList(sysAgency);
         ExcelUtil<Agency> util = new ExcelUtil<Agency>(Agency.class);
-        return util.exportExcel(list, "agency");
+        return util.exportExcel(list, "sysAgency");
     }
 	
 	/**
@@ -77,13 +77,13 @@ public class AgencyController extends BaseController
 	/**
 	 * 新增保存项目
 	 */
-	@RequiresPermissions("property:agency:add")
+	@RequiresPermissions("property:sysAgency:add")
 	@Log(title = "项目", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
-	public AjaxResult addSave(Agency agency)
+	public AjaxResult addSave(Agency sysAgency)
 	{		
-		return toAjax(agencyService.insertAgency(agency));
+		return toAjax(sysAgencyService.insertSysAgency(sysAgency));
 	}
 
 	/**
@@ -92,33 +92,33 @@ public class AgencyController extends BaseController
 	@GetMapping("/edit/{iD}")
 	public String edit(@PathVariable("iD") Integer iD, ModelMap mmap)
 	{
-		Agency agency = agencyService.selectAgencyById(iD);
-		mmap.put("agency", agency);
+		Agency sysAgency = sysAgencyService.selectSysAgencyById(iD);
+		mmap.put("sysAgency", sysAgency);
 	    return prefix + "/edit";
 	}
 	
 	/**
 	 * 修改保存项目
 	 */
-	@RequiresPermissions("property:agency:edit")
+	@RequiresPermissions("property:sysAgency:edit")
 	@Log(title = "项目", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
-	public AjaxResult editSave(Agency agency)
+	public AjaxResult editSave(Agency sysAgency)
 	{		
-		return toAjax(agencyService.updateAgency(agency));
+		return toAjax(sysAgencyService.updateSysAgency(sysAgency));
 	}
 	
 	/**
 	 * 删除项目
 	 */
-	@RequiresPermissions("property:agency:remove")
+	@RequiresPermissions("property:sysAgency:remove")
 	@Log(title = "项目", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
 	{		
-		return toAjax(agencyService.deleteAgencyByIds(ids));
+		return toAjax(sysAgencyService.deleteSysAgencyByIds(ids));
 	}
 	
 }

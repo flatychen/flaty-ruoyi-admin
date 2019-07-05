@@ -2,7 +2,7 @@ package com.ruoyi.admin.party.controller;
 
 import com.ruoyi.admin.extend.DeptData;
 import com.ruoyi.admin.property.domain.Agency;
-import com.ruoyi.admin.property.service.IAgencyService;
+import com.ruoyi.admin.property.service.ISysAgencyService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.system.domain.SysDept;
@@ -27,16 +27,15 @@ public class PartyController extends BaseController {
     private String prefix = "party/agency";
 
     @Autowired
-    private IAgencyService agencyService;
+    private ISysAgencyService agencyService;
 
-//	ISysDeptService iSysDeptService;
 
     /**
      * 修改项目
      */
     @GetMapping("/edit")
     public String edit(@DeptData SysDept sysDept, ModelMap mmap) {
-        Agency agency = agencyService.selectAgencyById(sysDept.getAgencyId());
+        Agency agency = agencyService.selectSysAgencyById(sysDept.getAgencyId());
         mmap.put("agency", agency);
         System.out.println("xx");
         return prefix + "/edit";
@@ -49,7 +48,7 @@ public class PartyController extends BaseController {
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Agency agency) {
-        return toAjax(agencyService.updateAgency(agency));
+        return toAjax(agencyService.updateSysAgency(agency));
     }
 
 

@@ -1,30 +1,34 @@
 package com.ruoyi.admin.party.service.impl;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.ruoyi.admin.party.mapper.ActivityMapper;
+import com.ruoyi.admin.core.impl.AbstractService;
 import com.ruoyi.admin.party.domain.Activity;
+import com.ruoyi.admin.party.mapper.ActivityMapper;
 import com.ruoyi.admin.party.service.IActivityService;
 import com.ruoyi.common.core.text.Convert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
- *  服务层实现
+ * 党建服务 服务层实现
  * 
  * @author flaty
- * @date 2019-07-02
+ * @date 2019-07-05
  */
 @Service
-public class ActivityServiceImpl implements IActivityService 
+public class ActivityServiceImpl extends AbstractService<Activity> implements IActivityService
 {
 	@Autowired
 	private ActivityMapper activityMapper;
 
+
+
 	/**
-     * 查询信息
+     * 查询党建服务信息
      * 
-     * @param id ID
-     * @return 信息
+     * @param id 党建服务ID
+     * @return 党建服务信息
      */
     @Override
 	public Activity selectActivityById(Integer id)
@@ -33,10 +37,10 @@ public class ActivityServiceImpl implements IActivityService
 	}
 	
 	/**
-     * 查询列表
+     * 查询党建服务列表
      * 
-     * @param activity 信息
-     * @return 集合
+     * @param activity 党建服务信息
+     * @return 党建服务集合
      */
 	@Override
 	public List<Activity> selectActivityList(Activity activity)
@@ -45,9 +49,9 @@ public class ActivityServiceImpl implements IActivityService
 	}
 	
     /**
-     * 新增
+     * 新增党建服务
      * 
-     * @param activity 信息
+     * @param activity 党建服务信息
      * @return 结果
      */
 	@Override
@@ -57,9 +61,9 @@ public class ActivityServiceImpl implements IActivityService
 	}
 	
 	/**
-     * 修改
+     * 修改党建服务
      * 
-     * @param activity 信息
+     * @param activity 党建服务信息
      * @return 结果
      */
 	@Override
@@ -69,7 +73,7 @@ public class ActivityServiceImpl implements IActivityService
 	}
 
 	/**
-     * 删除对象
+     * 删除党建服务对象
      * 
      * @param ids 需要删除的数据ID
      * @return 结果

@@ -324,9 +324,9 @@ public class SysUser extends BaseEntity
             .append("loginIp", getLoginIp())
             .append("loginDate", getLoginDate())
             .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
+            .append("createTime", getCreatedDate())
             .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
+            .append("updateTime", getUpdatedDate())
             .append("remark", getRemark())
             .append("dept", getDept())
             .toString();

@@ -11,14 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="noticeContent"  column="notice_content"  />
         <result property="status"         column="status"          />
         <result property="createBy"       column="create_by"       />
-        <result property="createTime"     column="create_time"     />
+        <result property="createdDate"     column="created_date"     />
         <result property="updateBy"       column="update_by"       />
-        <result property="updateTime"     column="update_time"     />
+        <result property="updatedDate"     column="updated_date"     />
         <result property="remark"         column="remark"          />
     </resultMap>
     
     <sql id="selectNoticeVo">
-        select notice_id, notice_title, notice_type, notice_content, status, create_by, create_time, update_by, update_time, remark 
+        select notice_id, notice_title, notice_type, notice_content, status, create_by, created_date, update_by, updated_date, remark
 		from sys_notice
     </sql>
     
@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="status != null and status != '' ">status, </if>
 			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
- 			create_time
+ 			created_date
  		)values(
 			<if test="noticeTitle != null and noticeTitle != ''">#{noticeTitle}, </if>
 			<if test="noticeType != null and noticeType != ''">#{noticeType}, </if>
@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="noticeContent != null">notice_content = #{noticeContent}, </if>
             <if test="status != null and status != ''">status = #{status}, </if>
             <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
- 			update_time = sysdate()
+ 			updated_date = sysdate()
         </set>
         where notice_id = #{noticeId}
     </update>

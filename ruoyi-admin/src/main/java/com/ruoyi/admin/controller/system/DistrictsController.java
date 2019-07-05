@@ -93,8 +93,8 @@ public class DistrictsController extends BaseController
 	public AjaxResult addSave(Districts districts)
 	{		
 	    districts.setPid(districts.getId()/100);
-	    districts.setCreateTime(new Date());
-	    districts.setUpdateTime(new Date());
+	    districts.setCreatedDate(new Date());
+	    districts.setUpdatedDate(new Date());
 	    districts.setOperator(ShiroUtils.getLoginName());
 		return toAjax(districtsService.insertDistricts(districts));
 	}
@@ -121,7 +121,7 @@ public class DistrictsController extends BaseController
 	{		
 	    districts.setPid(districts.getId()/100);
 	    districts.setOperator(ShiroUtils.getLoginName());
-	    districts.setUpdateTime(new Date());
+	    districts.setUpdatedDate(new Date());
 		return toAjax(districtsService.updateDistricts(districts));
 	}
 	

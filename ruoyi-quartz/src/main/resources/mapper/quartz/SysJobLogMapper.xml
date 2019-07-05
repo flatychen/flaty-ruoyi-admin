@@ -13,11 +13,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="jobMessage"     column="job_message"     />
 		<result property="status"         column="status"          />
 		<result property="exceptionInfo"  column="exception_info"  />
-		<result property="createTime"     column="create_time"     />
+		<result property="createdDate"     column="created_date"     />
 	</resultMap>
 	
 	<sql id="selectJobLogVo">
-        select job_log_id, job_name, job_group, method_name, method_params, job_message, status, exception_info, create_time 
+        select job_log_id, job_name, job_group, method_name, method_params, job_message, status, exception_info, created_date
 		from sys_job_log
     </sql>
 	
@@ -34,10 +34,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND method_name like concat('%', #{methodName}, '%')
 			</if>
 			<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-				and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+				and date_format(created_date,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
 			</if>
 			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-				and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+				and date_format(created_date,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 			</if>
 		</where>
 	</select>
@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="jobMessage != null and jobMessage != ''">job_message,</if>
  			<if test="status != null and status != ''">status,</if>
  			<if test="exceptionInfo != null and exceptionInfo != ''">exception_info,</if>
- 			create_time
+ 			created_date
  		)values(
  			<if test="jobLogId != null and jobLogId != 0">#{jobLogId},</if>
  			<if test="jobName != null and jobName != ''">#{jobName},</if>

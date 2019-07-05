@@ -17,19 +17,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="perms"          column="perms"          />
 		<result property="icon"           column="icon"           />
 		<result property="createBy"       column="create_by"      />
-		<result property="createTime"     column="create_time"    />
-		<result property="updateTime"     column="update_time"    />
+		<result property="createdDate"     column="created_date"    />
+		<result property="updatedDate"     column="updated_date"    />
 		<result property="updateBy"       column="update_by"      />
 		<result property="remark"         column="remark"         />
 	</resultMap>
 	
 	<sql id="selectMenuVo">
-        select menu_id, menu_name, parent_id, order_num, url, target, menu_type, visible, ifnull(perms,'') as perms, icon, create_by, create_time 
+        select menu_id, menu_name, parent_id, order_num, url, target, menu_type, visible, ifnull(perms,'') as perms, icon, create_by, created_date
 		from sys_menu
     </sql>
     
     <select id="selectMenusByUserId" parameterType="Long" resultMap="SysMenuResult">
-		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms, m.target, m.menu_type, m.icon, m.order_num, m.create_time
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms, m.target, m.menu_type, m.icon, m.order_num, m.created_date
 		from sys_menu m
 			 left join sys_role_menu rm on m.menu_id = rm.menu_id
 			 left join sys_user_role ur on rm.role_id = ur.role_id
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectMenuNormalAll" resultMap="SysMenuResult">
-		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms, m.target, m.menu_type, m.icon, m.order_num, m.create_time
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms, m.target, m.menu_type, m.icon, m.order_num, m.created_date
 		from sys_menu m
 		where m.menu_type in ('M', 'C') and m.visible = 0
 		order by m.order_num
@@ -113,7 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="icon !=null and icon != ''">icon = #{icon},</if>
  			<if test="remark != null and remark != ''">remark = #{remark},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
- 			update_time = sysdate()
+ 			updated_date = sysdate()
  		</set>
  		where menu_id = #{menuId}
 	</update>
@@ -132,7 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="icon != null and icon != ''">icon,</if>
  			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
- 			create_time
+ 			created_date
  		)values(
  			<if test="menuId != null and menuId != 0">#{menuId},</if>
  			<if test="parentId != null and parentId != 0">#{parentId},</if>

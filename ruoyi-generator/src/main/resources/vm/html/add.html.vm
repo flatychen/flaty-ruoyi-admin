@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
 	<th:block th:include="include :: header('新增${tableComment}')" />
+	<th:block th:include="include :: bootstrap-fileinput-css"/>
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -32,6 +33,14 @@
 					<input id="${column.attrname}" name="${column.attrname}" class="form-control time-input" type="text">
 				</div>
 			</div>
+#elseif(${column.configInfo.type} == "file")
+			<div class="form-group">
+				<label class="col-sm-3 control-label">${column.columnComment}：</label>
+				<div class="col-sm-8">
+					<input id="${column.attrname}" name="${column.attrname}"   type="hidden" >
+					<input class="flatyUpload" name="img" type="file"   data-max-file-count="1" id="fileinput" required>
+				</div>
+			</div>
 #elseif(${column.configInfo.type} == "fk")
 #end
 #end
@@ -40,6 +49,7 @@
 		</form>
 	</div>
     <div th:include="include::footer"></div>
+	<th:block th:include="include :: flaty-fileinput-js"/>
     <script type="text/javascript">
 		var prefix = ctx + "${moduleName}/${classname}"
 		$("#form-${classname}-add").validate({

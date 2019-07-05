@@ -183,9 +183,9 @@ public class SysDept extends BaseEntity
             .append("status", getStatus())
             .append("delFlag", getDelFlag())
             .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
+            .append("createTime", getCreatedDate())
             .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
+            .append("updateTime", getUpdatedDate())
             .toString();
     }
 }

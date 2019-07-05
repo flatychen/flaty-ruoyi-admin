@@ -136,7 +136,7 @@ public class Districts extends BaseEntity
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("id", getId()).append("pid", getPid())
                 .append("deep", getDeep()).append("name", getName()).append("pinyin", getPinyin())
                 .append("pinyinShor", getPinyinShor()).append("extName", getExtName())
-                .append("createTime", getCreateTime()).append("updateTime", getUpdateTime())
+                .append("createTime", getCreatedDate()).append("updateTime", getUpdatedDate())
                 .append("operator", getOperator()).toString();
     }
 }

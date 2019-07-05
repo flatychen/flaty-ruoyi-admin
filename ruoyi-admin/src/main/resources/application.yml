@@ -89,8 +89,10 @@ mybatis:
     mapperLocations: classpath*:mapper/**/*Mapper.xml
 
 mapper:
+  mappers: com.ruoyi.admin.core.MyMapper
   not-empty: true
   identity: MYSQL
+  wrap-keyword: '`{0}`'
 
 # PageHelper分页插件
 pagehelper: 

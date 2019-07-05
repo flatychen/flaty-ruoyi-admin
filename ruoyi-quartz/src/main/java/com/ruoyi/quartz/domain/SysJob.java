@@ -168,9 +168,9 @@ public class SysJob extends BaseEntity implements Serializable
             .append("concurrent", getConcurrent())
             .append("status", getStatus())
             .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
+            .append("createTime", getCreatedDate())
             .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
+            .append("updateTime", getUpdatedDate())
             .append("remark", getRemark())
             .toString();
     }

@@ -13,15 +13,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status"       column="status"         />
 		<result property="delFlag"      column="del_flag"       />
 		<result property="createBy"     column="create_by"      />
-		<result property="createTime"   column="create_time"    />
+		<result property="createdDate"   column="created_date"    />
 		<result property="updateBy"     column="update_by"      />
-		<result property="updateTime"   column="update_time"    />
+		<result property="updatedDate"   column="updated_date"    />
 		<result property="remark"       column="remark"         />
 	</resultMap>
 	
 	<sql id="selectRoleContactVo">
         select distinct r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope,
-            r.status, r.del_flag, r.create_time, r.remark 
+            r.status, r.del_flag, r.created_date, r.remark
         from sys_role r
 	        left join sys_user_role ur on ur.role_id = r.role_id
 	        left join sys_user u on u.user_id = ur.user_id
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
     
     <sql id="selectRoleVo">
-		select r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status, r.del_flag, r.create_time, r.remark 
+		select r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status, r.del_flag, r.created_date, r.remark
         from sys_role r
 	</sql>
 	
@@ -49,10 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND r.data_scope = #{dataScope}
 		</if>
 		<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-			and date_format(r.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+			and date_format(r.created_date,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
 		</if>
 		<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-			and date_format(r.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+			and date_format(r.created_date,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
@@ -99,7 +99,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">status = #{status},</if>
  			<if test="remark != null">remark = #{remark},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
- 			update_time = sysdate()
+ 			updated_date = sysdate()
  		</set>
  		where role_id = #{roleId}
 	</update>
@@ -114,7 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">status,</if>
  			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
- 			create_time
+ 			created_date
  		)values(
  			<if test="roleId != null and roleId != 0">#{roleId},</if>
  			<if test="roleName != null and roleName != ''">#{roleName},</if>

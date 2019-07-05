@@ -4,6 +4,7 @@ import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.generator.config.GenConfig;
+import com.ruoyi.generator.domain.ColumnConfigInfo;
 import com.ruoyi.generator.domain.ColumnInfo;
 import com.ruoyi.generator.domain.TableInfo;
 import org.apache.velocity.VelocityContext;
@@ -39,6 +40,8 @@ public class GenUtils {
      */
     public static Map<String, String> javaTypeMap = new HashMap<String, String>();
 
+
+
     /**
      * 设置列信息
      */
@@ -56,9 +59,36 @@ public class GenUtils {
             String attrType = javaTypeMap.get(column.getDataType());
             column.setAttrType(attrType);
 
+            if (column.getConfigInfo() == null) {
+                column.setConfigInfo(checkDbConfigInfo(column));
+            }
+
             columsList.add(column);
         }
         return columsList;
+    }
+
+    /**
+     * FIXME 表单代码生成
+     *
+     * @param columnInfo
+     * @return
+     */
+    private static ColumnConfigInfo checkDbConfigInfo(ColumnInfo columnInfo) {
+        ColumnConfigInfo columnConfigInfo = new ColumnConfigInfo();
+        // 同时检查字段类型
+        if (columnInfo.getAttrType().toLowerCase().equalsIgnoreCase("date")) {
+            columnConfigInfo.setType("date");
+            return columnConfigInfo;
+        }
+        // 检查字段名字
+        if (StringUtils.containsAny(columnInfo.getColumnName().toLowerCase(), "url", "img","file")) {
+            columnConfigInfo.setType("file");
+            return columnConfigInfo;
+        }
+
+
+        return null;
     }
 
     /**
@@ -224,5 +254,12 @@ public class GenUtils {
         javaTypeMap.put("date", "Date");
         javaTypeMap.put("datetime", "Date");
         javaTypeMap.put("timestamp", "Date");
+    }
+
+
+    static {
+        javaTypeMap.put("Date", "date");
+        javaTypeMap.put("smallint", "Integer");
+        javaTypeMap.put("mediumint", "Integer");
     }
 }

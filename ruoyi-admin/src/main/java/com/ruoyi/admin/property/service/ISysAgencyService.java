@@ -1,15 +1,17 @@
 package com.ruoyi.admin.property.service;
 
+import com.ruoyi.admin.core.IService;
 import com.ruoyi.admin.property.domain.Agency;
+
 import java.util.List;
 
 /**
  * 项目 服务层
  * 
  * @author flaty
- * @date 2019-07-01
+ * @date 2019-07-05
  */
-public interface IAgencyService 
+public interface ISysAgencyService  extends IService<Agency>
 {
 	/**
      * 查询项目信息
@@ -17,31 +19,31 @@ public interface IAgencyService
      * @param iD 项目ID
      * @return 项目信息
      */
-	public Agency selectAgencyById(Integer iD);
+	public Agency selectSysAgencyById(Integer iD);
 	
 	/**
      * 查询项目列表
      * 
-     * @param agency 项目信息
+     * @param sysAgency 项目信息
      * @return 项目集合
      */
-	public List<Agency> selectAgencyList(Agency agency);
+	public List<Agency> selectSysAgencyList(Agency sysAgency);
 	
 	/**
      * 新增项目
      * 
-     * @param agency 项目信息
+     * @param sysAgency 项目信息
      * @return 结果
      */
-	public int insertAgency(Agency agency);
+	public int insertSysAgency(Agency sysAgency);
 	
 	/**
      * 修改项目
      * 
-     * @param agency 项目信息
+     * @param sysAgency 项目信息
      * @return 结果
      */
-	public int updateAgency(Agency agency);
+	public int updateSysAgency(Agency sysAgency);
 		
 	/**
      * 删除项目信息
@@ -49,6 +51,6 @@ public interface IAgencyService
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int deleteAgencyByIds(String ids);
+	public int deleteSysAgencyByIds(String ids);
 	
 }

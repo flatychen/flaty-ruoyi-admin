@@ -27,8 +27,8 @@ CREATE TABLE `districts` (
   `pinyin` varchar(64) DEFAULT NULL COMMENT '拼音',
   `pinyin_shor` varchar(64) DEFAULT '' COMMENT '拼音缩写',
   `ext_name` varchar(64) DEFAULT '' COMMENT '扩展名',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `created_date` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated_date` datetime DEFAULT NULL COMMENT '更新时间',
   `operator` varchar(32) DEFAULT '' COMMENT '操作人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='地区';

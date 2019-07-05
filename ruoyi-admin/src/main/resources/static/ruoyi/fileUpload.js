@@ -11,7 +11,7 @@ $(function () {
         // var $fileValInput = $fileInput.siblings().find("input[type='hidden']");
         var $fileValInput = $fileInput.siblings();
         var existFileUrls = $fileValInput.val();
-        var fileArray = $.common.split(existFileUrls, ",");
+        var fileArray = $.common.split(existFileUrls, ",")||[];
         console.log("fileArray:", fileArray);
         var initialPreviewConfig = [];
         fileArray.forEach(function (o) {
@@ -33,7 +33,6 @@ $(function () {
             validateInitialCount: true,
             initialPreview: existFileUrls,
             initialPreviewConfig: initialPreviewConfig,
-            browseClass: "btn btn-primary btn-block",
             showCaption: false,
 
         }).on('fileuploaded', function (event, data, previewId, index) {

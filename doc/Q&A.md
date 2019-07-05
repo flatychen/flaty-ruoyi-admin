@@ -42,7 +42,7 @@ filterChainDefinitionMap.put("your url", "anon");
 
 ```
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date              createTime;
+    private Date              createdDate;
 ```
 
 方法二：添加全局配置
@@ -56,7 +56,7 @@ spring
 如果在页面上要格式化时间 ps: *还是$看使用场景
 
 ```
-*{#dates.format(createTime, 'yyyy-MM-dd HH:mm:ss')}
+*{#dates.format(createdDate, 'yyyy-MM-dd HH:mm:ss')}
 ```
 
 如果在`excel`导出里

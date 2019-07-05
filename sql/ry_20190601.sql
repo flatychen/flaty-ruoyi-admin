@@ -14,9 +14,9 @@ create table sys_dept (
   status 			char(1) 		default '0' 			   comment '部门状态（0正常 1停用）',
   del_flag			char(1) 		default '0' 			   comment '删除标志（0代表存在 2代表删除）',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 	    datetime                                   comment '创建时间',
+  created_date 	    datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
-  update_time       datetime                                   comment '更新时间',
+  updated_date       datetime                                   comment '更新时间',
   primary key (dept_id)
 ) engine=innodb auto_increment=200 comment = '部门表';
 
@@ -55,9 +55,9 @@ create table sys_user (
   login_ip          varchar(50)     default ''                 comment '最后登陆IP',
   login_date        datetime                                   comment '最后登陆时间',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 	    datetime                                   comment '创建时间',
+  created_date 	    datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
-  update_time       datetime                                   comment '更新时间',
+  updated_date       datetime                                   comment '更新时间',
   remark 		    varchar(500) 	default '' 				   comment '备注',
   primary key (user_id)
 ) engine=innodb auto_increment=100 comment = '用户信息表';
@@ -81,9 +81,9 @@ create table sys_post
 	post_sort     int(4)          not null                   comment '显示顺序',
 	status        char(1)         not null                   comment '状态（0正常 1停用）',
     create_by     varchar(64)     default ''                 comment '创建者',
-    create_time   datetime                                   comment '创建时间',
+    created_date   datetime                                   comment '创建时间',
     update_by     varchar(64) 	  default ''			     comment '更新者',
-	update_time   datetime                                   comment '更新时间',
+	updated_date   datetime                                   comment '更新时间',
     remark 		  varchar(500) 	  default null 				 comment '备注',
 	primary key (post_id)
 ) engine=innodb comment = '岗位信息表';
@@ -110,9 +110,9 @@ create table sys_role (
   status 			char(1) 		not null 			       comment '角色状态（0正常 1停用）',
   del_flag			char(1) 		default '0' 			   comment '删除标志（0代表存在 2代表删除）',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 		datetime                                   comment '创建时间',
+  created_date 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
-  update_time 		datetime                                   comment '更新时间',
+  updated_date 		datetime                                   comment '更新时间',
   remark 			varchar(500) 	default null 			   comment '备注',
   primary key (role_id)
 ) engine=innodb auto_increment=100 comment = '角色信息表';
@@ -140,9 +140,9 @@ create table sys_menu (
   perms 			varchar(100) 	default null 			   comment '权限标识',
   icon 				varchar(100) 	default '#' 			   comment '菜单图标',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 		datetime                                   comment '创建时间',
+  created_date 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
-  update_time 		datetime                                   comment '更新时间',
+  updated_date 		datetime                                   comment '更新时间',
   remark 			varchar(500) 	default '' 				   comment '备注',
   primary key (menu_id)
 ) engine=innodb auto_increment=2000 comment = '菜单权限表';
@@ -426,9 +426,9 @@ create table sys_dict_type
 	dict_type        varchar(100)    default ''                 comment '字典类型',
     status 			 char(1) 		 default '0'			    comment '状态（0正常 1停用）',
     create_by        varchar(64)     default ''                 comment '创建者',
-    create_time      datetime                                   comment '创建时间',
+    created_date      datetime                                   comment '创建时间',
     update_by        varchar(64) 	 default ''			        comment '更新者',
-	update_time      datetime                                   comment '更新时间',
+	updated_date      datetime                                   comment '更新时间',
     remark 	         varchar(500) 	 default null 				comment '备注',
 	primary key (dict_id),
 	unique (dict_type)
@@ -461,9 +461,9 @@ create table sys_dict_data
 	is_default       char(1)         default 'N'                comment '是否默认（Y是 N否）',
     status 			 char(1) 		 default '0'			    comment '状态（0正常 1停用）',
     create_by        varchar(64)     default ''                 comment '创建者',
-    create_time      datetime                                   comment '创建时间',
+    created_date      datetime                                   comment '创建时间',
     update_by        varchar(64) 	 default ''			        comment '更新者',
-	update_time      datetime                                   comment '更新时间',
+	updated_date      datetime                                   comment '更新时间',
     remark 	         varchar(500) 	 default null 				comment '备注',
 	primary key (dict_code)
 ) engine=innodb auto_increment=100 comment = '字典数据表';
@@ -508,9 +508,9 @@ create table sys_config (
 	config_value       varchar(100)  default ''                 comment '参数键值',
 	config_type        char(1)       default 'N'                comment '系统内置（Y是 N否）',
     create_by          varchar(64)   default ''                 comment '创建者',
-    create_time 	   datetime                                 comment '创建时间',
+    created_date 	   datetime                                 comment '创建时间',
     update_by          varchar(64)   default ''                 comment '更新者',
-    update_time        datetime                                 comment '更新时间',
+    updated_date        datetime                                 comment '更新时间',
 	remark 	           varchar(500)  default null 				comment '备注',
 	primary key (config_id)
 ) engine=innodb auto_increment=100 comment = '参数配置表';
@@ -572,9 +572,9 @@ create table sys_job (
   concurrent          char(1)       default '1'                comment '是否并发执行（0允许 1禁止）',
   status              char(1)       default '0'                comment '状态（0正常 1暂停）',
   create_by           varchar(64)   default ''                 comment '创建者',
-  create_time         datetime                                 comment '创建时间',
+  created_date         datetime                                 comment '创建时间',
   update_by           varchar(64)   default ''                 comment '更新者',
-  update_time         datetime                                 comment '更新时间',
+  updated_date         datetime                                 comment '更新时间',
   remark              varchar(500)  default ''                 comment '备注信息',
   primary key (job_id, job_name, job_group)
 ) engine=innodb auto_increment=100 comment = '定时任务调度表';
@@ -596,7 +596,7 @@ create table sys_job_log (
   job_message         varchar(500)                             comment '日志信息',
   status              char(1)       default '0'                comment '执行状态（0正常 1失败）',
   exception_info      varchar(2000) default ''                 comment '异常信息',
-  create_time         datetime                                 comment '创建时间',
+  created_date         datetime                                 comment '创建时间',
   primary key (job_log_id)
 ) engine=innodb comment = '定时任务调度日志表';
 
@@ -612,9 +612,9 @@ create table sys_notice (
   notice_content    varchar(2000)   default null               comment '公告内容',
   status 			char(1) 		default '0' 			   comment '公告状态（0正常 1关闭）',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 		datetime                                   comment '创建时间',
+  created_date 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
-  update_time 		datetime                                   comment '更新时间',
+  updated_date 		datetime                                   comment '更新时间',
   remark 			varchar(255) 	default null 			   comment '备注',
   primary key (notice_id)
 ) engine=innodb auto_increment=10 comment = '通知公告表';

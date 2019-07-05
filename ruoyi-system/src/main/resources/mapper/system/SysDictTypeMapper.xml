@@ -10,13 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dictType"   column="dict_type"   />
 		<result property="status"     column="status"      />
 		<result property="createBy"   column="create_by"   />
-		<result property="createTime" column="create_time" />
+		<result property="createdDate" column="created_date" />
 		<result property="updateBy"   column="update_by"   />
-		<result property="updateTime" column="update_time" />
+		<result property="updatedDate" column="updated_date" />
 	</resultMap>
 	
 	<sql id="selectDictTypeVo">
-        select dict_id, dict_name, dict_type, status, create_by, create_time, remark 
+        select dict_id, dict_name, dict_type, status, create_by, created_date, remark
 		from sys_dict_type
     </sql>
 
@@ -33,10 +33,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND dict_type like concat('%', #{dictType}, '%')
 			</if>
 			<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
-				and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+				and date_format(created_date,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
 			</if>
 			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
-				and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+				and date_format(created_date,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 			</if>
 	    </where>
 	</select>
@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null">status = #{status},</if>
  			<if test="remark != null">remark = #{remark},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
- 			update_time = sysdate()
+ 			updated_date = sysdate()
  		</set>
  		where dict_id = #{dictId}
 	</update>
@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null">status,</if>
  			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
- 			create_time
+ 			created_date
  		)values(
  			<if test="dictName != null and dictName != ''">#{dictName},</if>
  			<if test="dictType != null and dictType != ''">#{dictType},</if>

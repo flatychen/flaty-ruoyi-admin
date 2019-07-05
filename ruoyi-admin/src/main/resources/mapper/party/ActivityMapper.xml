@@ -17,13 +17,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="selectActivityVo">
         select id, title, `desc`, desc_url, img_url, created_date, agency_id from aomygod.party_activity
     </sql>
-
+	
     <select id="selectActivityList" parameterType="Activity" resultMap="ActivityResult">
         <include refid="selectActivityVo"/>
         <where>  
             <if test="id != null "> and id = #{id}</if>
              <if test="title != null  and title != '' "> and title = #{title}</if>
-             <if test="desc != null  and desc != '' "> and `desc` = #{desc}</if>
+             <if test="desc != null  and desc != '' "> and desc = #{desc}</if>
              <if test="descUrl != null  and descUrl != '' "> and desc_url = #{descUrl}</if>
              <if test="imgUrl != null  and imgUrl != '' "> and img_url = #{imgUrl}</if>
              <if test="createdDate != null "> and created_date = #{createdDate}</if>
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into aomygod.party_activity
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="title != null  and title != ''  ">title,</if>
-			<if test="desc != null  and desc != ''  ">`desc`,</if>
+			<if test="desc != null  and desc != ''  ">desc,</if>
 			<if test="descUrl != null  and descUrl != ''  ">desc_url,</if>
 			<if test="imgUrl != null  and imgUrl != ''  ">img_url,</if>
 			<if test="createdDate != null  ">created_date,</if>
@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update aomygod.party_activity
         <trim prefix="SET" suffixOverrides=",">
             <if test="title != null  and title != ''  ">title = #{title},</if>
-            <if test="desc != null  and desc != ''  ">`desc` = #{desc},</if>
+            <if test="desc != null  and desc != ''  ">desc = #{desc},</if>
             <if test="descUrl != null  and descUrl != ''  ">desc_url = #{descUrl},</if>
             <if test="imgUrl != null  and imgUrl != ''  ">img_url = #{imgUrl},</if>
             <if test="createdDate != null  ">created_date = #{createdDate},</if>

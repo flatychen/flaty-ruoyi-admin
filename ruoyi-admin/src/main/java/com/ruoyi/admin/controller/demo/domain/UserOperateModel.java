@@ -136,14 +136,14 @@ public class UserOperateModel extends BaseEntity
     }
 
     @Override
-    public Date getCreateTime()
+    public Date getCreatedDate()
     {
         return createTime;
     }
 
     @Override
-    public void setCreateTime(Date createTime)
+    public void setCreatedDate(Date createdDate)
     {
-        this.createTime = createTime;
+        this.createTime = createdDate;
     }
 }

@@ -1,7 +1,9 @@
 package com.ruoyi.admin.party.controller;
 
+import com.ruoyi.admin.core.join.ServiceJoinHelper;
 import com.ruoyi.admin.party.domain.Activity;
 import com.ruoyi.admin.party.service.IActivityService;
+import com.ruoyi.admin.property.service.ISysAgencyService;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -17,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- *  信息操作处理
+ * 党建服务 信息操作处理
  * 
  * @author flaty
- * @date 2019-07-02
+ * @date 2019-07-05
  */
 @Controller
 @RequestMapping("/party/activity")
@@ -30,7 +32,10 @@ public class ActivityController extends BaseController
 	
 	@Autowired
 	private IActivityService activityService;
-	
+
+	@Autowired
+	ISysAgencyService iSysAgencyService;
+
 	@RequiresPermissions("party:activity:view")
 	@GetMapping()
 	public String activity()
@@ -39,7 +44,7 @@ public class ActivityController extends BaseController
 	}
 	
 	/**
-	 * 查询列表
+	 * 查询党建服务列表
 	 */
 	@RequiresPermissions("party:activity:list")
 	@PostMapping("/list")
@@ -48,12 +53,14 @@ public class ActivityController extends BaseController
 	{
 		startPage();
         List<Activity> list = activityService.selectActivityList(activity);
+		ServiceJoinHelper.join(Activity.class,list,iSysAgencyService);
+
 		return getDataTable(list);
 	}
 	
 	
 	/**
-	 * 导出列表
+	 * 导出党建服务列表
 	 */
 	@RequiresPermissions("party:activity:export")
     @PostMapping("/export")
@@ -66,7 +73,7 @@ public class ActivityController extends BaseController
     }
 	
 	/**
-	 * 新增
+	 * 新增党建服务
 	 */
 	@GetMapping("/add")
 	public String add()
@@ -75,10 +82,10 @@ public class ActivityController extends BaseController
 	}
 	
 	/**
-	 * 新增保存
+	 * 新增保存党建服务
 	 */
 	@RequiresPermissions("party:activity:add")
-	@Log(title = "", businessType = BusinessType.INSERT)
+	@Log(title = "党建服务", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(Activity activity)
@@ -87,21 +94,23 @@ public class ActivityController extends BaseController
 	}
 
 	/**
-	 * 修改
+	 * 修改党建服务
 	 */
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, ModelMap mmap)
 	{
+
 		Activity activity = activityService.selectActivityById(id);
+		activity = activityService.getById(id);
 		mmap.put("activity", activity);
 	    return prefix + "/edit";
 	}
 	
 	/**
-	 * 修改保存
+	 * 修改保存党建服务
 	 */
 	@RequiresPermissions("party:activity:edit")
-	@Log(title = "", businessType = BusinessType.UPDATE)
+	@Log(title = "党建服务", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(Activity activity)
@@ -110,10 +119,10 @@ public class ActivityController extends BaseController
 	}
 	
 	/**
-	 * 删除
+	 * 删除党建服务
 	 */
 	@RequiresPermissions("party:activity:remove")
-	@Log(title = "", businessType = BusinessType.DELETE)
+	@Log(title = "党建服务", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)

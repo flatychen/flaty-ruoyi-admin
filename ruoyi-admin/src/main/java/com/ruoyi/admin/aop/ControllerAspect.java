@@ -57,12 +57,12 @@ public class ControllerAspect {
 //        return result;
 //    }
 
-    private void logRequestLog(String requestIp) {
+    private void logRequestLog(String requestIp) throws Exception {
         String requestId = MDC.get("requestId");
         if (StringUtils.isEmpty(requestId)) {
             MDC.put("requestId", ShiroUtils.getLoginName());
         }
-        log.info("[{}:{}],request  => {}", requestIp, request.getServletPath(), parseRequest().toString());
+        log.info("[{}:{}],request  => {}", requestIp, request.getServletPath(), com.ruoyi.common.json.JSON.marshal(this.parseRequest()));
     }
 
 
