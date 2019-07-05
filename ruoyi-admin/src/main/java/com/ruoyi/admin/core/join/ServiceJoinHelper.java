@@ -155,6 +155,8 @@ public class  ServiceJoinHelper {
             List<Object> list = serviceJoinable.findByIds(sourceValues.get(sourceField));
             if (!CollectionUtils.isEmpty(list)) {
                 targetValues.put(targetField, list);
+            }else {
+                log.warn("sourceField:{} -> {} 查询为null",sourceField.getName(),sourceValues.get(sourceField));
             }
         }
         return targetValues;

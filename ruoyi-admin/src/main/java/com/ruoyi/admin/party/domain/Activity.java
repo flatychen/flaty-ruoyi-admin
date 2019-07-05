@@ -21,7 +21,7 @@ public class Activity extends BaseEntity
 	private static final long serialVersionUID = 1L;
 
 	@Transient
-	@JoinField
+	@JoinField(sourceField = "agencyId")
 	private Agency agency;
 
 	/**  */
