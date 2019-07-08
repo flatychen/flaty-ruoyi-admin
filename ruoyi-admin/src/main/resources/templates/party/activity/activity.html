@@ -11,22 +11,27 @@
 					<div class="select-list">
 						<ul>
 							<li>
+								选择：<input type="text" name="desc"  onclick="selectList()"/>
+							</li>
+							<li>
 								标题：<input type="text" name="title"/>
 							</li>
+<!--
 
 							<li>
 								内容：<input type="text" name="desc"/>
 							</li>
+-->
 
 							<li class="select-time">
-								<label>： </label>
+								<label>创建时间： </label>
 								<input type="text" class="time-input" id="startCreatedDate" placeholder="开始" name="params[beginCreatedDate]"/>
 								<span>-</span>
 								<input type="text" class="time-input" id="endCreatedDate" placeholder="结束" name="params[endCreatedDate]"/>
 							</li>
-							<li>
+							<!--<li>
 								项目：<input type="text" name="agencyId"/>
-							</li>
+							</li>-->
 
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -122,6 +127,29 @@
             };
             $.table.init(options);
         });
+
+
+		/* 用于搜索等弹出框做出选择 */
+		function submitHandler(index, layero) {
+			var rows = $.table.selectFirstColumns();
+			if (rows.length == 0) {
+				$.modal.alertWarning("请至少选择一条记录");
+				return;
+			}
+			//弹出选择的值
+			alert(rows.join());
+			$.modal.close();
+			// 父页面的方法
+			// parent.selectUsers();
+			// 父页面的变量
+			parent.$('#userids').html(rows.join());
+		}
+
+
+
+		function selectList(){
+			$.modal.open("选择用户", prefix);
+		}
     </script>
 </body>
 </html>
