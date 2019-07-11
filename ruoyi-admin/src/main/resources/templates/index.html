@@ -29,8 +29,14 @@
         </div>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
-                <li class="logo">
-				     <span class="logo-lg">RuoYi</span>
+                <li class="logo"
+					th:each="cookie :${#httpServletRequest.getCookies()}"
+					th:if="${cookie.getName().equals('treeName')}"
+                    th:text="${T(java.net.URLDecoder).decode(cookie.value)}"
+
+				>
+				     <span class="logo-lg" id="deptName"
+					 >RuoYi</span>
             	</li>
             	<li>
             		<div class="user-panel">
@@ -266,10 +272,12 @@ function navSelectDeptTreeDoSubmit(index, layero){
 	if ($.tree.notAllowParents(tree)) {
 		var body = layer.getChildFrame('body', index);
 		var treeId =body.find('#treeId').val();
-		$.cookie('deptId', treeId|"0");
+		var treeName =body.find('#treeName').val();
+		$.cookie('deptId', treeId||"0");
+		$.cookie('treeName', treeName||"0");
 		// var treeName = body.find('#treeName').val();
 		layer.close(index);
-
+		window.location.reload();
 	}
 
 }
