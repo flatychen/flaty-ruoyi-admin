@@ -1,15 +1,16 @@
 package com.ruoyi.admin.party.mapper;
 
 import com.ruoyi.admin.party.domain.ActivityUser;
-import java.util.List;	
+import java.util.List;
+import com.ruoyi.admin.core.MyMapper;
 
 /**
  *  数据层
  * 
  * @author flaty
- * @date 2019-07-02
+ * @date 2019-07-10
  */
-public interface ActivityUserMapper 
+public interface ActivityUserMapper extends MyMapper<ActivityUser>
 {
 	/**
      * 查询信息

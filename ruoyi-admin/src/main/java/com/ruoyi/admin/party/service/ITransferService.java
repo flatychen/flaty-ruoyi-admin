@@ -1,15 +1,17 @@
 package com.ruoyi.admin.party.service;
 
+import com.ruoyi.admin.core.IService;
 import com.ruoyi.admin.party.domain.Transfer;
+
 import java.util.List;
 
 /**
  *  服务层
  * 
  * @author flaty
- * @date 2019-07-02
+ * @date 2019-07-10
  */
-public interface ITransferService 
+public interface ITransferService  extends IService<Transfer>
 {
 	/**
      * 查询信息

@@ -1,29 +1,27 @@
 package com.ruoyi.admin.party.controller;
 
-import java.util.List;
+import com.ruoyi.admin.extend.DeptData;
+import com.ruoyi.admin.party.domain.Transfer;
+import com.ruoyi.admin.party.service.ITransferService;
+import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.system.domain.SysDept;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.admin.party.domain.Transfer;
-import com.ruoyi.admin.party.service.ITransferService;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.page.TableDataInfo;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 /**
  *  信息操作处理
  * 
  * @author flaty
- * @date 2019-07-02
+ * @date 2019-07-10
  */
 @Controller
 @RequestMapping("/party/transfer")
@@ -40,16 +38,41 @@ public class TransferController extends BaseController
 	{
 	    return prefix + "/transfer";
 	}
-	
+
+//	/**
+//	 * 选择列表
+//	 */
+//	@GetMapping("/select")
+//	public String transferSelect()
+//	{
+//		return prefix + "/select";
+//	}
+//
+//
+//	/**
+//	 * 选择列表数据
+//	 */
+//	@PostMapping("/select/list")
+//	@ResponseBody
+//	public TableDataInfo selectList(@DeptData SysDept sysDept,Transfer transfer)
+//	{
+//		startPage();
+//		transfer.setAgencyId(sysDept.getAgencyId());
+//		List<Transfer> list = transferService.selectTransferList(transfer);
+//		return getDataTable(list);
+//	}
+
+
 	/**
 	 * 查询列表
 	 */
 	@RequiresPermissions("party:transfer:list")
 	@PostMapping("/list")
 	@ResponseBody
-	public TableDataInfo list(Transfer transfer)
+	public TableDataInfo list(@DeptData SysDept sysDept,Transfer transfer)
 	{
 		startPage();
+		transfer.setAgencyId(sysDept.getAgencyId());
         List<Transfer> list = transferService.selectTransferList(transfer);
 		return getDataTable(list);
 	}

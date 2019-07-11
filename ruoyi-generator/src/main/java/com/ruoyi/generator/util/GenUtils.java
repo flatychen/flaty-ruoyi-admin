@@ -129,6 +129,7 @@ public class GenUtils {
         templates.add("vm/java/Controller.java.vm");
         templates.add("vm/xml/Mapper.xml.vm");
         templates.add("vm/html/list.html.vm");
+        templates.add("vm/html/select.html.vm");
         templates.add("vm/html/add.html.vm");
         templates.add("vm/html/edit.html.vm");
         templates.add("vm/sql/sql.vm");
@@ -191,6 +192,9 @@ public class GenUtils {
         }
         if (template.contains("edit.html.vm")) {
             return htmlPath + "/" + "edit.html";
+        }
+        if (template.contains("select.html.vm")) {
+            return htmlPath + "/" + "select.html";
         }
         if (template.contains("sql.vm")) {
             return classname + "Menu.sql";

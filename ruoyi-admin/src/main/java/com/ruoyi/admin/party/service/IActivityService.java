@@ -9,7 +9,7 @@ import java.util.List;
  * 党建服务 服务层
  * 
  * @author flaty
- * @date 2019-07-05
+ * @date 2019-07-10
  */
 public interface IActivityService  extends IService<Activity>
 {

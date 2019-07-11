@@ -24,7 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectTransferVo">
-        select id, name, sex, birthday, nation, education, current_party, add_party_date, company_duty, home_address, company_party_phone, phone, others, agency_id, created_date, app_user_id from party_transfer
+        select id, name, sex, birthday, nation, education, current_party, add_party_date, company_duty,
+               home_address, company_party_phone, phone, others, agency_id, created_date, app_user_id from aomygod.party_transfer
     </sql>
 	
     <select id="selectTransferList" parameterType="Transfer" resultMap="TransferResult">
@@ -55,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertTransfer" parameterType="Transfer" useGeneratedKeys="true" keyProperty="id">
-        insert into party_transfer
+        insert into aomygod.party_transfer
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="name != null  and name != ''  ">name,</if>
 			<if test="sex != null  ">sex,</if>
@@ -93,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 	 
     <update id="updateTransfer" parameterType="Transfer">
-        update party_transfer
+        update aomygod.party_transfer
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null  and name != ''  ">name = #{name},</if>
             <if test="sex != null  ">sex = #{sex},</if>
@@ -115,11 +116,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
 	<delete id="deleteTransferById" parameterType="Integer">
-        delete from party_transfer where id = #{id}
+        delete from aomygod.party_transfer where id = #{id}
     </delete>
 	
     <delete id="deleteTransferByIds" parameterType="String">
-        delete from party_transfer where id in 
+        delete from aomygod.party_transfer where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -1,6 +1,6 @@
 package com.ruoyi.admin.party.mapper;
 
-import com.ruoyi.admin.party.domain.Transfer;
+import com.ruoyi.admin.party.domain.Checkin;
 import java.util.List;
 import com.ruoyi.admin.core.MyMapper;
 
@@ -10,7 +10,7 @@ import com.ruoyi.admin.core.MyMapper;
  * @author flaty
  * @date 2019-07-10
  */
-public interface TransferMapper extends MyMapper<Transfer>
+public interface CheckinMapper extends MyMapper<Checkin>
 {
 	/**
      * 查询信息
@@ -18,31 +18,31 @@ public interface TransferMapper extends MyMapper<Transfer>
      * @param id ID
      * @return 信息
      */
-	public Transfer selectTransferById(Integer id);
+	public Checkin selectCheckinById(Integer id);
 	
 	/**
      * 查询列表
      * 
-     * @param transfer 信息
+     * @param checkin 信息
      * @return 集合
      */
-	public List<Transfer> selectTransferList(Transfer transfer);
+	public List<Checkin> selectCheckinList(Checkin checkin);
 	
 	/**
      * 新增
      * 
-     * @param transfer 信息
+     * @param checkin 信息
      * @return 结果
      */
-	public int insertTransfer(Transfer transfer);
+	public int insertCheckin(Checkin checkin);
 	
 	/**
      * 修改
      * 
-     * @param transfer 信息
+     * @param checkin 信息
      * @return 结果
      */
-	public int updateTransfer(Transfer transfer);
+	public int updateCheckin(Checkin checkin);
 	
 	/**
      * 删除
@@ -50,7 +50,7 @@ public interface TransferMapper extends MyMapper<Transfer>
      * @param id ID
      * @return 结果
      */
-	public int deleteTransferById(Integer id);
+	public int deleteCheckinById(Integer id);
 	
 	/**
      * 批量删除
@@ -58,6 +58,6 @@ public interface TransferMapper extends MyMapper<Transfer>
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int deleteTransferByIds(String[] ids);
+	public int deleteCheckinByIds(String[] ids);
 	
 }

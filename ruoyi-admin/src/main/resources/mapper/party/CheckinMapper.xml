@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectCheckinVo">
-        select id, name, phone, sex, home_address, current_identity, current_party_branch, checkin_img, agency_id, created_date, app_user_id from party_checkin
+            select id, name, phone, sex, home_address, current_identity, current_party_branch, checkin_img, agency_id, created_date, app_user_id from aomygod.party_checkin
     </sql>
 	
     <select id="selectCheckinList" parameterType="Checkin" resultMap="CheckinResult">
@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertCheckin" parameterType="Checkin" useGeneratedKeys="true" keyProperty="id">
-        insert into party_checkin
+        insert into aomygod.party_checkin
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="name != null  and name != ''  ">name,</if>
 			<if test="phone != null  and phone != ''  ">phone,</if>
@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 	 
     <update id="updateCheckin" parameterType="Checkin">
-        update party_checkin
+        update aomygod.party_checkin
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null  and name != ''  ">name = #{name},</if>
             <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
@@ -90,11 +90,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
 	<delete id="deleteCheckinById" parameterType="Integer">
-        delete from party_checkin where id = #{id}
+        delete from aomygod.party_checkin where id = #{id}
     </delete>
 	
     <delete id="deleteCheckinByIds" parameterType="String">
-        delete from party_checkin where id in 
+        delete from aomygod.party_checkin where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

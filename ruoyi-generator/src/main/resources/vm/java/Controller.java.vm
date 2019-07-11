@@ -18,7 +18,8 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-
+import com.ruoyi.system.domain.SysDept;
+import com.ruoyi.admin.extend.DeptData;
 /**
  * ${tableComment} 信息操作处理
  * 
@@ -40,7 +41,30 @@ public class ${className}Controller extends BaseController
 	{
 	    return prefix + "/${classname}";
 	}
-	
+
+	/**
+	 * 选择列表
+	 */
+	@GetMapping("/select")
+	public String ${classname}Select()
+	{
+		return prefix + "/select";
+	}
+
+
+	/**
+	 * 选择列表数据
+	 */
+	@PostMapping("/select/list")
+	@ResponseBody
+	public TableDataInfo selectList(@DeptData SysDept sysDept,${className} ${classname})
+	{
+		startPage();
+		List<${className}> list = ${classname}Service.select${className}List(${classname});
+		return getDataTable(list);
+	}
+
+
 	/**
 	 * 查询${tableComment}列表
 	 */

@@ -10,46 +10,16 @@
 				<form id="formId">
 					<div class="select-list">
 						<ul>
-							<li>
-								：<input type="text" name="name"/>
+							<!--<li>
+								<input type="hidden" id="activityId" name="activityId"   />
+								服务：<input type="text" id="activityIdName"  placeholder="请选择" onclick="selectList()" />
+							</li>-->
+							<li class="select-time">
+								<label>报到时间： </label>
+								<input type="text" class="time-input" id="startCreatedDate" placeholder="开始" name="params[beginCreatedDate]"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endCreatedDate" placeholder="结束" name="params[endCreatedDate]"/>
 							</li>
-
-							<li>
-								：<input type="text" name="phone"/>
-							</li>
-
-							<li>
-								：<input type="text" name="sex"/>
-							</li>
-
-							<li>
-								：<input type="text" name="homeAddress"/>
-							</li>
-
-							<li>
-								：<input type="text" name="currentIdentity"/>
-							</li>
-
-							<li>
-								：<input type="text" name="currentPartyBranch"/>
-							</li>
-
-							<li>
-								：<input type="text" name="checkinImg"/>
-							</li>
-
-							<li>
-								：<input type="text" name="agencyId"/>
-							</li>
-
-							<li>
-								：<input type="text" name="createdDate"/>
-							</li>
-
-							<li>
-								：<input type="text" name="appUserId"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -60,12 +30,12 @@
 			</div>
 			
 	        <div class="btn-group-sm" id="toolbar" role="group">
-				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="party:checkin:add">
-					<i class="fa fa-plus"></i> 添加
-				</a>
-				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="party:checkin:edit">
-					<i class="fa fa-edit"></i> 修改
-				</a>
+<!--				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="party:checkin:add">-->
+<!--					<i class="fa fa-plus"></i> 添加-->
+<!--				</a>-->
+<!--				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="party:checkin:edit">-->
+<!--					<i class="fa fa-edit"></i> 修改-->
+<!--				</a>-->
 				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="party:checkin:remove">
 					<i class="fa fa-remove"></i> 删除
 				</a>
@@ -95,6 +65,7 @@
 		        showExport: true,
                 columns: [{
 		            checkbox: true
+					// radio: true,
 		        },
 				{
 					field : 'id', 
@@ -103,52 +74,42 @@
 				},
 				{
 					field : 'name', 
-					title : '',
+					title : '姓名',
 					sortable: true
 				},
 				{
 					field : 'phone', 
-					title : '',
-					sortable: true
-				},
-				{
-					field : 'sex', 
-					title : '',
+					title : '电话',
 					sortable: true
 				},
 				{
 					field : 'homeAddress', 
-					title : '',
+					title : '家庭地址',
 					sortable: true
 				},
 				{
 					field : 'currentIdentity', 
-					title : '',
+					title : '当前身份',
 					sortable: true
 				},
 				{
 					field : 'currentPartyBranch', 
-					title : '',
+					title : '当前党组织',
 					sortable: true
 				},
+				// {
+				// 	field : 'checkinImg',
+				// 	title : '图片',
+				// 	sortable: true
+				// },
 				{
-					field : 'checkinImg', 
-					title : '',
-					sortable: true
-				},
-				{
-					field : 'agencyId', 
-					title : '',
+					field : 'agency.name',
+					title : '所属项目',
 					sortable: true
 				},
 				{
 					field : 'createdDate', 
-					title : '',
-					sortable: true
-				},
-				{
-					field : 'appUserId', 
-					title : '',
+					title : '报到时间',
 					sortable: true
 				},
 		        {
@@ -164,6 +125,21 @@
             };
             $.table.init(options);
         });
+
+
+
+
+		function selectList(){
+			$.modal.open("选择",  ctx + "/select");
+		}
+
+
+		function setSelectVals(ids,names){
+			$('#activityId').val(ids);
+			$('#activityIdName').val(names);
+		}
+
+
     </script>
 </body>
 </html>

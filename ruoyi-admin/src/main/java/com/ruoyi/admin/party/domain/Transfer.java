@@ -3,214 +3,85 @@ package com.ruoyi.admin.party.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.core.domain.BaseEntity;
-import java.util.Date;
+import com.ruoyi.common.annotation.Excel;
+import javax.persistence.*;
+
+import lombok.Data;
 
 /**
  * 表 party_transfer
  * 
  * @author flaty
- * @date 2019-07-02
+ * @date 2019-07-10
  */
+@Data
+@Table(name = "party_transfer")
 public class Transfer extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
 	
 	/**  */
+	@Column(name = "id")
+		@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Excel(name = "", prompt = "")
 	private Integer id;
 	/**  */
+	@Column(name = "name")
+		@Excel(name = "", prompt = "")
 	private String name;
 	/**  */
+	@Column(name = "sex")
+		@Excel(name = "", prompt = "")
 	private Integer sex;
 	/**  */
+	@Column(name = "birthday")
+		@Excel(name = "", prompt = "")
 	private String birthday;
 	/**  */
+	@Column(name = "nation")
+		@Excel(name = "", prompt = "")
 	private String nation;
 	/**  */
+	@Column(name = "education")
+		@Excel(name = "", prompt = "")
 	private String education;
 	/**  */
+	@Column(name = "current_party")
+		@Excel(name = "", prompt = "")
 	private String currentParty;
 	/**  */
+	@Column(name = "add_party_date")
+		@Excel(name = "", prompt = "")
 	private String addPartyDate;
 	/**  */
+	@Column(name = "company_duty")
+		@Excel(name = "", prompt = "")
 	private String companyDuty;
 	/**  */
+	@Column(name = "home_address")
+		@Excel(name = "", prompt = "")
 	private String homeAddress;
 	/**  */
+	@Column(name = "company_party_phone")
+		@Excel(name = "", prompt = "")
 	private String companyPartyPhone;
 	/**  */
+	@Column(name = "phone")
+		@Excel(name = "", prompt = "")
 	private String phone;
 	/**  */
+	@Column(name = "others")
+		@Excel(name = "", prompt = "")
 	private String others;
 	/**  */
+	@Column(name = "agency_id")
+		@Excel(name = "", prompt = "")
 	private Integer agencyId;
 	/**  */
-	private Date createdDate;
-	/**  */
+	@Column(name = "app_user_id")
+		@Excel(name = "", prompt = "")
 	private Integer appUserId;
 
-	public void setId(Integer id) 
-	{
-		this.id = id;
-	}
 
-	public Integer getId() 
-	{
-		return id;
-	}
-	public void setName(String name) 
-	{
-		this.name = name;
-	}
-
-	public String getName() 
-	{
-		return name;
-	}
-	public void setSex(Integer sex) 
-	{
-		this.sex = sex;
-	}
-
-	public Integer getSex() 
-	{
-		return sex;
-	}
-	public void setBirthday(String birthday) 
-	{
-		this.birthday = birthday;
-	}
-
-	public String getBirthday() 
-	{
-		return birthday;
-	}
-	public void setNation(String nation) 
-	{
-		this.nation = nation;
-	}
-
-	public String getNation() 
-	{
-		return nation;
-	}
-	public void setEducation(String education) 
-	{
-		this.education = education;
-	}
-
-	public String getEducation() 
-	{
-		return education;
-	}
-	public void setCurrentParty(String currentParty) 
-	{
-		this.currentParty = currentParty;
-	}
-
-	public String getCurrentParty() 
-	{
-		return currentParty;
-	}
-	public void setAddPartyDate(String addPartyDate) 
-	{
-		this.addPartyDate = addPartyDate;
-	}
-
-	public String getAddPartyDate() 
-	{
-		return addPartyDate;
-	}
-	public void setCompanyDuty(String companyDuty) 
-	{
-		this.companyDuty = companyDuty;
-	}
-
-	public String getCompanyDuty() 
-	{
-		return companyDuty;
-	}
-	public void setHomeAddress(String homeAddress) 
-	{
-		this.homeAddress = homeAddress;
-	}
-
-	public String getHomeAddress() 
-	{
-		return homeAddress;
-	}
-	public void setCompanyPartyPhone(String companyPartyPhone) 
-	{
-		this.companyPartyPhone = companyPartyPhone;
-	}
-
-	public String getCompanyPartyPhone() 
-	{
-		return companyPartyPhone;
-	}
-	public void setPhone(String phone) 
-	{
-		this.phone = phone;
-	}
-
-	public String getPhone() 
-	{
-		return phone;
-	}
-	public void setOthers(String others) 
-	{
-		this.others = others;
-	}
-
-	public String getOthers() 
-	{
-		return others;
-	}
-	public void setAgencyId(Integer agencyId) 
-	{
-		this.agencyId = agencyId;
-	}
-
-	public Integer getAgencyId() 
-	{
-		return agencyId;
-	}
-	public void setCreatedDate(Date createdDate) 
-	{
-		this.createdDate = createdDate;
-	}
-
-	public Date getCreatedDate() 
-	{
-		return createdDate;
-	}
-	public void setAppUserId(Integer appUserId) 
-	{
-		this.appUserId = appUserId;
-	}
-
-	public Integer getAppUserId() 
-	{
-		return appUserId;
-	}
-
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("name", getName())
-            .append("sex", getSex())
-            .append("birthday", getBirthday())
-            .append("nation", getNation())
-            .append("education", getEducation())
-            .append("currentParty", getCurrentParty())
-            .append("addPartyDate", getAddPartyDate())
-            .append("companyDuty", getCompanyDuty())
-            .append("homeAddress", getHomeAddress())
-            .append("companyPartyPhone", getCompanyPartyPhone())
-            .append("phone", getPhone())
-            .append("others", getOthers())
-            .append("agencyId", getAgencyId())
-            .append("createdDate", getCreatedDate())
-            .append("appUserId", getAppUserId())
-            .toString();
-    }
 }

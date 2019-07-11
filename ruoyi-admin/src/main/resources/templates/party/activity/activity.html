@@ -11,28 +11,20 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								选择：<input type="text" name="desc"  onclick="selectList()"/>
+								选择：<input type="text" name="select" onclick="selectList()"/>
 							</li>
 							<li>
 								标题：<input type="text" name="title"/>
 							</li>
-<!--
-
-							<li>
-								内容：<input type="text" name="desc"/>
-							</li>
--->
-
 							<li class="select-time">
 								<label>创建时间： </label>
 								<input type="text" class="time-input" id="startCreatedDate" placeholder="开始" name="params[beginCreatedDate]"/>
 								<span>-</span>
 								<input type="text" class="time-input" id="endCreatedDate" placeholder="结束" name="params[endCreatedDate]"/>
 							</li>
-							<!--<li>
+						<!--	<li>
 								项目：<input type="text" name="agencyId"/>
 							</li>-->
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -78,6 +70,7 @@
 		        showExport: true,
                 columns: [{
 		            checkbox: true
+					// radio: true,
 		        },
 				{
 					field : 'id', 
@@ -110,7 +103,7 @@
 					sortable: true
 				},
 				{
-					field : 'agencyId', 
+					field : 'agency.name',
 					title : '项目',
 					sortable: true
 				},
@@ -129,7 +122,7 @@
         });
 
 
-		/* 用于搜索等弹出框做出选择 */
+		/* 用于搜索选择等弹出框做出选择 */
 		function submitHandler(index, layero) {
 			var rows = $.table.selectFirstColumns();
 			if (rows.length == 0) {
@@ -142,14 +135,15 @@
 			// 父页面的方法
 			// parent.selectUsers();
 			// 父页面的变量
-			parent.$('#userids').html(rows.join());
+			// parent.$('#userids').html(rows.join());
 		}
 
 
 
 		function selectList(){
-			$.modal.open("选择用户", prefix);
+			$.modal.open("选择", prefix + "/select");
 		}
+
     </script>
 </body>
 </html>

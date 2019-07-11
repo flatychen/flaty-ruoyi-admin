@@ -1,28 +1,25 @@
 package com.ruoyi.admin.party.service.impl;
 
-import com.ruoyi.admin.core.impl.AbstractService;
-import com.ruoyi.admin.party.domain.Activity;
-import com.ruoyi.admin.party.mapper.ActivityMapper;
-import com.ruoyi.admin.party.service.IActivityService;
-import com.ruoyi.common.core.text.Convert;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import com.ruoyi.admin.core.impl.AbstractService;
+import com.ruoyi.admin.party.mapper.ActivityMapper;
+import com.ruoyi.admin.party.domain.Activity;
+import com.ruoyi.admin.party.service.IActivityService;
+import com.ruoyi.common.core.text.Convert;
 
 /**
  * 党建服务 服务层实现
  * 
  * @author flaty
- * @date 2019-07-05
+ * @date 2019-07-10
  */
 @Service
 public class ActivityServiceImpl extends AbstractService<Activity> implements IActivityService
 {
 	@Autowired
 	private ActivityMapper activityMapper;
-
-
 
 	/**
      * 查询党建服务信息

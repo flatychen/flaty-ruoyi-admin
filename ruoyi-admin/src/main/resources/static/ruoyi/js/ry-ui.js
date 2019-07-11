@@ -156,8 +156,8 @@
         			        type: 1,
         			        closeBtn: true,
         			        shadeClose: true,
-        			        area: ['auto', 'auto'],
-        			        content: "<img src='" + src + "' />"
+        			        area: ['auto', '400px'],
+        			        content: "<img  height='500px'  src='" + src + "' />"
         			    });
     			    } else if ($.common.equals("blank", target)) {
     			        window.open(src);
@@ -218,6 +218,20 @@
 					return $.common.sprintf("<img class='img-circle img-xs' data-target='%s' src='%s/%s'/>", _target, _path, value);
 				} else {
 					return $.common.nullToStr(value);
+				}
+			},
+			imageUrlView: function (url,sep,target) {
+				sep = sep ? sep : ",";
+				// blank or self
+				var _target = $.common.isEmpty(target) ? 'self' : target;
+				if ($.common.isNotEmpty(url)) {
+					var result = ""
+					$.common.split(url,sep).forEach(function (value) {
+						result +=  $.common.sprintf("<img class='img-circle img-xs' data-target='%s' src='%s'/>", _target, value);
+					})
+					return result;
+				} else {
+					return $.common.nullToStr(url);
 				}
 			},
             // 搜索-默认第一个form

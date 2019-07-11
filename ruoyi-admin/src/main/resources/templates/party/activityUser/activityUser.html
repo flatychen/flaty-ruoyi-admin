@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
 	<th:block th:include="include :: header('列表')" />
+	<th:block th:include="include :: select2-css" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,25 +12,15 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								：<input type="text" name="agencyId"/>
+								     <input type="hidden" id="activityId" name="activityId"   />
+								服务：<input type="text" id="activityIdName"  placeholder="请选择" onclick="selectList()" />
 							</li>
-
-							<li>
-								：<input type="text" name="activityId"/>
+							<li class="select-time">
+								<label>创建时间： </label>
+								<input type="text" class="time-input" id="startCreatedDate" placeholder="开始" name="params[beginCreatedDate]"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endCreatedDate" placeholder="结束" name="params[endCreatedDate]"/>
 							</li>
-
-							<li>
-								：<input type="text" name="appUserId"/>
-							</li>
-
-							<li>
-								：<input type="text" name="pics"/>
-							</li>
-
-							<li>
-								：<input type="text" name="createdDate"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -40,12 +31,12 @@
 			</div>
 			
 	        <div class="btn-group-sm" id="toolbar" role="group">
-				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="party:activityUser:add">
+				<!--<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="party:activityUser:add">
 					<i class="fa fa-plus"></i> 添加
 				</a>
 				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="party:activityUser:edit">
 					<i class="fa fa-edit"></i> 修改
-				</a>
+				</a>-->
 				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="party:activityUser:remove">
 					<i class="fa fa-remove"></i> 删除
 				</a>
@@ -59,6 +50,7 @@
 		</div>
 	</div>
     <div th:include="include :: footer"></div>
+	 <th:block th:include="include :: select2-js" />
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('party:activityUser:edit')}]];
         var removeFlag = [[${@permission.hasPermi('party:activityUser:remove')}]];
@@ -75,6 +67,7 @@
 		        showExport: true,
                 columns: [{
 		            checkbox: true
+					// radio: true,
 		        },
 				{
 					field : 'id', 
@@ -82,28 +75,30 @@
 					visible: false
 				},
 				{
-					field : 'agencyId', 
-					title : '',
+					field : 'agency.name',
+					title : '项目',
 					sortable: true
 				},
 				{
-					field : 'activityId', 
-					title : '',
+					field : 'activity.name',
+					title : '服务',
 					sortable: true
 				},
 				{
 					field : 'appUserId', 
-					title : '',
+					title : '用户ID',
 					sortable: true
 				},
 				{
-					field : 'pics', 
-					title : '',
-					sortable: true
+					field : 'pics',
+					title : '用户图片',
+					formatter: function(value, row, index) {
+						return $.table.imageUrlView(value);
+					}
 				},
 				{
 					field : 'createdDate', 
-					title : '',
+					title : '创建时间',
 					sortable: true
 				},
 		        {
@@ -119,6 +114,20 @@
             };
             $.table.init(options);
         });
+
+
+
+
+
+		function selectList(){
+			$.modal.open("选择",  ctx + "party/activity" + "/select");
+		}
+
+		function setSelectVals(ids,names){
+			$('#activityId').val(ids);
+			$('#activityIdName').val(names);
+		}
+
     </script>
 </body>
 </html>

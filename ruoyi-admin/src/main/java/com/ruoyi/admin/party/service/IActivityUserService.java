@@ -2,14 +2,16 @@ package com.ruoyi.admin.party.service;
 
 import com.ruoyi.admin.party.domain.ActivityUser;
 import java.util.List;
+import com.ruoyi.admin.core.MyMapper;
+import com.ruoyi.admin.core.IService;
 
 /**
  *  服务层
  * 
  * @author flaty
- * @date 2019-07-02
+ * @date 2019-07-10
  */
-public interface IActivityUserService 
+public interface IActivityUserService  extends IService<ActivityUser>
 {
 	/**
      * 查询信息

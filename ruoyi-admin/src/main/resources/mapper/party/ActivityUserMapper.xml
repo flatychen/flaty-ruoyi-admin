@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectActivityUserVo">
-        select id, agency_id, activity_id, app_user_id, pics, created_date from party_activity_user
+            select id, agency_id, activity_id, app_user_id, pics, created_date from aomygod.party_activity_user
     </sql>
 	
     <select id="selectActivityUserList" parameterType="ActivityUser" resultMap="ActivityUserResult">
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertActivityUser" parameterType="ActivityUser" useGeneratedKeys="true" keyProperty="id">
-        insert into party_activity_user
+        insert into aomygod.party_activity_user
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="agencyId != null  ">agency_id,</if>
 			<if test="activityId != null  ">activity_id,</if>
@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 	 
     <update id="updateActivityUser" parameterType="ActivityUser">
-        update party_activity_user
+        update aomygod.party_activity_user
         <trim prefix="SET" suffixOverrides=",">
             <if test="agencyId != null  ">agency_id = #{agencyId},</if>
             <if test="activityId != null  ">activity_id = #{activityId},</if>
@@ -65,11 +65,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
 	<delete id="deleteActivityUserById" parameterType="Integer">
-        delete from party_activity_user where id = #{id}
+        delete from aomygod.party_activity_user where id = #{id}
     </delete>
 	
     <delete id="deleteActivityUserByIds" parameterType="String">
-        delete from party_activity_user where id in 
+        delete from aomygod.party_activity_user where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

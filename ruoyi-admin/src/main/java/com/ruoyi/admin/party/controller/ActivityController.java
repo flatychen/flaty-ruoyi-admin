@@ -1,6 +1,7 @@
 package com.ruoyi.admin.party.controller;
 
 import com.ruoyi.admin.core.join.ServiceJoinHelper;
+import com.ruoyi.admin.extend.DeptData;
 import com.ruoyi.admin.party.domain.Activity;
 import com.ruoyi.admin.party.service.IActivityService;
 import com.ruoyi.admin.property.service.ISysAgencyService;
@@ -10,6 +11,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.system.domain.SysDept;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,12 +19,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 /**
  * 党建服务 信息操作处理
  * 
  * @author flaty
- * @date 2019-07-05
+ * @date 2019-07-10
  */
 @Controller
 @RequestMapping("/party/activity")
@@ -33,8 +34,10 @@ public class ActivityController extends BaseController
 	@Autowired
 	private IActivityService activityService;
 
+
 	@Autowired
 	ISysAgencyService iSysAgencyService;
+
 
 	@RequiresPermissions("party:activity:view")
 	@GetMapping()
@@ -42,7 +45,30 @@ public class ActivityController extends BaseController
 	{
 	    return prefix + "/activity";
 	}
-	
+
+	/**
+	 * 选择列表
+	 */
+	@GetMapping("/select")
+	public String activitySelect()
+	{
+		return prefix + "/select";
+	}
+
+
+	/**
+	 * 选择列表数据
+	 */
+	@PostMapping("/select/list")
+	@ResponseBody
+	public TableDataInfo selectList(@DeptData SysDept sysDept,Activity activity)
+	{
+		startPage();
+		List<Activity> list = activityService.selectActivityList(activity);
+		return getDataTable(list);
+	}
+
+
 	/**
 	 * 查询党建服务列表
 	 */
@@ -53,8 +79,7 @@ public class ActivityController extends BaseController
 	{
 		startPage();
         List<Activity> list = activityService.selectActivityList(activity);
-		ServiceJoinHelper.join(Activity.class,list,iSysAgencyService);
-
+		ServiceJoinHelper.join(Activity.class, list, iSysAgencyService);
 		return getDataTable(list);
 	}
 	
@@ -99,9 +124,7 @@ public class ActivityController extends BaseController
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, ModelMap mmap)
 	{
-
 		Activity activity = activityService.selectActivityById(id);
-		activity = activityService.getById(id);
 		mmap.put("activity", activity);
 	    return prefix + "/edit";
 	}

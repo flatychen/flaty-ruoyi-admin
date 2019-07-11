@@ -3,6 +3,7 @@ package com.ruoyi.admin.party.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ruoyi.admin.core.impl.AbstractService;
 import com.ruoyi.admin.party.mapper.ActivityUserMapper;
 import com.ruoyi.admin.party.domain.ActivityUser;
 import com.ruoyi.admin.party.service.IActivityUserService;
@@ -12,10 +13,10 @@ import com.ruoyi.common.core.text.Convert;
  *  服务层实现
  * 
  * @author flaty
- * @date 2019-07-02
+ * @date 2019-07-10
  */
 @Service
-public class ActivityUserServiceImpl implements IActivityUserService 
+public class ActivityUserServiceImpl extends AbstractService<ActivityUser> implements IActivityUserService
 {
 	@Autowired
 	private ActivityUserMapper activityUserMapper;
