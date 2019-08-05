@@ -34,6 +34,7 @@ public class PartyController extends BaseController {
      * 修改项目
      */
     @GetMapping("/edit")
+    @RequiresPermissions("party:edit")
     public String edit(@DeptData SysDept sysDept, ModelMap mmap) {
         Agency agency = agencyService.selectSysAgencyById(sysDept.getAgencyId());
         mmap.put("agency", agency);

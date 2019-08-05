@@ -17,21 +17,32 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * 用于服务端join的接口
+ *
  * @author flaty
  */
 @Slf4j
-public class  ServiceJoinHelper {
+public class ServiceJoinHelper {
 
 
-    private static final int DEFALUT_LIST_SIZE = 16;
+    private static final int DEFAULT_LIST_SIZE = 32;
 
 
+    /**
+     * filed -> joinfield 快速映射表
+     */
     private static ConcurrentMap<Field, JoinField> targetJoinFieldConcurrentMap = new ConcurrentHashMap<>();
 
 
     /**
-     *
-     *
+     * target缓存
+     */
+    private static ConcurrentMap<Class, List<Field>> targetFieldCache = new ConcurrentHashMap<>(DEFAULT_LIST_SIZE);
+    /**
+     * source缓存
+     */
+    private static ConcurrentMap<Class, List<Field>> sourceFieldCache = new ConcurrentHashMap<>(DEFAULT_LIST_SIZE);
+
+    /**
      * @param clazz
      * @param beans
      * @param serviceJoinables
@@ -47,7 +58,7 @@ public class  ServiceJoinHelper {
             return;
         }
 
-        // 1. 查询目标bean中的field，并且排序  fixme 可以缓存
+        // 1. 查询目标bean中的field，并且排序
         List<Field> targetFields = prepareTargetField(clazz);
 
 
@@ -57,7 +68,7 @@ public class  ServiceJoinHelper {
             return;
         }
 
-        // 2. 查询源field ,与上述目标field保持顺序一致 fixme 可以缓存
+        // 2. 查询源field ,与上述目标field保持顺序一致
 
         List<Field> sourceFields = reflectSourceFields(clazz, targetFields);
 
@@ -65,7 +76,7 @@ public class  ServiceJoinHelper {
         Map<Field, Field> targetFieldToSourceFieldMap = buildTargetAndSourceMap(sourceFields, targetFields);
 
         // 4. 通过反射得到源field 的值列表，注意 sourceFieldValueMap 用于后期快速查找
-        Map<BeanField<S>, Object> sourceFieldValueMap = Maps.newHashMapWithExpectedSize(DEFALUT_LIST_SIZE);
+        Map<BeanField<S>, Object> sourceFieldValueMap = Maps.newHashMapWithExpectedSize(DEFAULT_LIST_SIZE);
         Map<Field, List<Integer>> sourceValues = reflectAndBuildSourceFieldValues(beans, sourceFields, sourceFieldValueMap);
 
 
@@ -94,9 +105,9 @@ public class  ServiceJoinHelper {
     }
 
     private static Map<BeanField, Object> buildTargetFieldValuesMap(List<Field> targetFields, Map<Field, List<Object>> targetValues) {
-        Map<BeanField, Object> targetFieldValueMap = Maps.newHashMapWithExpectedSize(DEFALUT_LIST_SIZE);
+        Map<BeanField, Object> targetFieldValueMap = Maps.newHashMapWithExpectedSize(DEFAULT_LIST_SIZE);
         targetValues.forEach((targetField, oneTargetFieldValues) -> {
-            Field targetIdField = getOuterTargetField(targetField,oneTargetFieldValues);
+            Field targetIdField = getOuterTargetField(targetField, oneTargetFieldValues);
             for (Object oneTargetFieldValue : oneTargetFieldValues) {
                 Object o = null;
                 try {
@@ -113,15 +124,15 @@ public class  ServiceJoinHelper {
     private static Field getOuterTargetField(Field targetField, List<Object> oneTargetFieldValues) {
         JoinField joinField = targetJoinFieldConcurrentMap.get(targetField);
         Class targetObjectClass = oneTargetFieldValues.get(0).getClass();
-        Field targetIdField = FieldUtils.getField(targetObjectClass,joinField.customOuterField(), true);
+        Field targetIdField = FieldUtils.getField(targetObjectClass, joinField.customOuterField(), true);
         return targetIdField;
     }
 
     private static <S> Map<Field, List<Integer>> reflectAndBuildSourceFieldValues(List<S> beans, List<Field> sourceFields, Map<BeanField<S>, Object> sourceFieldValueMap) {
-        Map<Field, List<Integer>> sourceValues = Maps.newHashMapWithExpectedSize(DEFALUT_LIST_SIZE);
+        Map<Field, List<Integer>> sourceValues = Maps.newHashMapWithExpectedSize(DEFAULT_LIST_SIZE);
         // 4. 获取源field字段值的列表
         for (Field sourceField : sourceFields) {
-            List<Integer> values = Lists.newArrayListWithCapacity(DEFALUT_LIST_SIZE);
+            List<Integer> values = Lists.newArrayListWithCapacity(DEFAULT_LIST_SIZE);
             for (S bean : beans) {
                 Object sourceVal = null;
                 try {
@@ -147,7 +158,7 @@ public class  ServiceJoinHelper {
      * @return
      */
     private static Map<Field, List<Object>> fetchTargetFieldValues(List<Field> targetFields, Map<Field, Field> targetFieldToSourceFieldMap, Map<Field, List<Integer>> sourceValues, ServiceJoinable[] serviceJoinables) {
-        Map<Field, List<Object>> targetValues = Maps.newHashMapWithExpectedSize(DEFALUT_LIST_SIZE);
+        Map<Field, List<Object>> targetValues = Maps.newHashMapWithExpectedSize(DEFAULT_LIST_SIZE);
         for (int i = 0; i < serviceJoinables.length; i++) {
             Field targetField = targetFields.get(i);
             Field sourceField = targetFieldToSourceFieldMap.get(targetField);
@@ -155,15 +166,14 @@ public class  ServiceJoinHelper {
             List<Object> list = serviceJoinable.findByIds(sourceValues.get(sourceField));
             if (!CollectionUtils.isEmpty(list)) {
                 targetValues.put(targetField, list);
-            }else {
-                log.warn("sourceField:{} -> {} 查询为null",sourceField.getName(),sourceValues.get(sourceField));
+            } else {
+                log.warn("sourceField:{} -> {} 查询为null", sourceField.getName(), sourceValues.get(sourceField));
             }
         }
         return targetValues;
     }
 
     /**
-     *
      * 建立target与source的关系
      *
      * @param sourceFields
@@ -171,7 +181,7 @@ public class  ServiceJoinHelper {
      * @return
      */
     private static Map<Field, Field> buildTargetAndSourceMap(List<Field> sourceFields, List<Field> targetFields) {
-        Map<Field, Field> fieldFieldMap = Maps.newHashMapWithExpectedSize(DEFALUT_LIST_SIZE);
+        Map<Field, Field> fieldFieldMap = Maps.newHashMapWithExpectedSize(DEFAULT_LIST_SIZE);
         for (int i = 0; i < targetFields.size(); i++) {
             fieldFieldMap.put(targetFields.get(i), sourceFields.get(i));
         }
@@ -189,18 +199,23 @@ public class  ServiceJoinHelper {
      */
     private static <S> List<Field> reflectSourceFields(Class<S> clazz, List<Field> targetFields) {
         // 通过目标filed获取来源field
-        List<Field> sourceFields = Lists.newArrayListWithCapacity(DEFALUT_LIST_SIZE);
-        for (Field targetField : targetFields) {
-            JoinField joinField =  targetJoinFieldConcurrentMap.get(targetField);
-            Field sourceField = FieldUtils.getDeclaredField(clazz, joinField.sourceField(), true);
-            if (sourceField == null) {
-                log.warn("@JoinField sourceField:{} 不存在", joinField.sourceField());
-                throw new IllegalArgumentException();
-            } else {
-                sourceFields.add(sourceField);
+
+        return sourceFieldCache.computeIfAbsent(clazz, c -> {
+            List<Field> sourceFields = Lists.newArrayListWithCapacity(DEFAULT_LIST_SIZE);
+            for (Field targetField : targetFields) {
+                JoinField joinField = targetJoinFieldConcurrentMap.get(targetField);
+                Field sourceField = FieldUtils.getDeclaredField(clazz, joinField.sourceField(), true);
+                if (sourceField == null) {
+                    log.warn("@JoinField sourceField:{} 不存在", joinField.sourceField());
+                    throw new IllegalArgumentException();
+                } else {
+                    sourceFields.add(sourceField);
+                }
             }
-        }
-        return sourceFields;
+            return sourceFields;
+        });
+
+
     }
 
     /**
@@ -211,20 +226,26 @@ public class  ServiceJoinHelper {
      * @return
      */
     private static <S> List<Field> prepareTargetField(Class<S> clazz) {
-        List<Field> fields = FieldUtils.getFieldsListWithAnnotation(clazz, JoinField.class);
-        fields.stream().forEach(field -> {
-            JoinField joinField = field.getAnnotation(JoinField.class);
-            targetJoinFieldConcurrentMap.putIfAbsent(field, joinField);
+
+        return targetFieldCache.computeIfAbsent(clazz, c -> {
+            List<Field> fields = FieldUtils.getFieldsListWithAnnotation(clazz, JoinField.class);
+
+
+            fields.stream().forEach(field -> {
+                JoinField joinField = field.getAnnotation(JoinField.class);
+                targetJoinFieldConcurrentMap.putIfAbsent(field, joinField);
+            });
+
+            fields.sort((o1, o2) -> {
+                JoinField j1 = targetJoinFieldConcurrentMap.get(o1);
+                JoinField j2 = targetJoinFieldConcurrentMap.get(o2);
+                return new Integer(j1.order()).compareTo(new Integer(j2.order()));
+            });
+
+            return fields;
         });
 
-        fields.sort((o1, o2) -> {
-            JoinField j1 = targetJoinFieldConcurrentMap.get(o1);
-            JoinField j2 = targetJoinFieldConcurrentMap.get(o2);
-            return new Integer(j1.order()).compareTo(new Integer(j2.order()));
-        });
-        return fields;
     }
-
 
 
     /**
