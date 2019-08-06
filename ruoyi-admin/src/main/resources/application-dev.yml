@@ -52,3 +52,9 @@ spring:
                 wall:
                     config:
                         multi-statement-allow: true
+
+
+
+user-center:
+    url: http://admin-user-center-test.aylives.cn/
+    rootId: 1

@@ -357,3 +357,9 @@ $RECYCLE.BIN/
 # jrebel
 
 ./**/rebel.xml
+/ruoyi-admin/src/main/resources/rebel.xml
+/ruoyi-common/src/main/resources/rebel.xml
+/ruoyi-generator/src/main/resources/rebel.xml
+/ruoyi-quartz/src/main/resources/rebel.xml
+/ruoyi-system/src/main/resources/rebel.xml
+/ruoyi-framework/src/main/resources/rebel.xml
