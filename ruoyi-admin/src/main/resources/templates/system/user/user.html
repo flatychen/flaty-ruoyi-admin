@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	
-	<div class="container-div ui-layout-center">
+	<div class="container-div ui-layout-center" style="width:100%">
 		<div class="row">
 			<div class="col-sm-12 search-collapse">
 				<form id="user-form">
@@ -86,6 +86,7 @@
 		</div>
 	</div>
 	
+
 	<th:block th:include="include :: footer" />
 	<th:block th:include="include :: layout-latest-js" />
 	<th:block th:include="include :: ztree-js" />
@@ -100,7 +101,7 @@
 		    if ($(this).width() < 769) {
 		        panehHidden = true;
 		    }
-		    $('body').layout({ initClosed: panehHidden, west__size: 185 });
+		    $('body').layout({ resizable: true,initClosed: panehHidden, west__size: 200 });
 		    queryUserList();
 		    queryDeptTree();
 		});

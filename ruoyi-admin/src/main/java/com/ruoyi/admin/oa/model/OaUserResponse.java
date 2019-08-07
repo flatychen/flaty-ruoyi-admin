@@ -1,5 +1,7 @@
 package com.ruoyi.admin.oa.model;
 
+import org.springframework.util.CollectionUtils;
+
 import java.util.List;
 
 public class OaUserResponse {
@@ -106,6 +108,14 @@ public class OaUserResponse {
         private String orgId;
         private Object loginToken;
         private List<DeptsBean> depts;
+
+
+        public DeptsBean getLatestDept() {
+            if (!CollectionUtils.isEmpty(depts)) {
+               return depts.get(0);
+            }
+            return null;
+        }
 
         public int getUserId() {
             return userId;
@@ -462,6 +472,7 @@ public class OaUserResponse {
             public void setParentOaid(String parentOaid) {
                 this.parentOaid = parentOaid;
             }
+
         }
     }
 }

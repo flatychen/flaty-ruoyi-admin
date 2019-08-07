@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/oa/user")
 public class OaUserController extends BaseController {
-    private String prefix = "oa/user";
+    private String prefix = "oa/";
 
 	@Autowired
 	OaService oaService;
@@ -25,30 +25,28 @@ public class OaUserController extends BaseController {
     @RequiresPermissions("oa:user:view")
     @GetMapping()
     public String view() {
-        return prefix + "/activity";
+        return prefix + "/user";
     }
 
 
     /**
      * 查询用户列表
      */
-    @RequiresPermissions("oa:user:list")
+//    @RequiresPermissions("oa:user:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(@RequestParam("userName") String  userName) {
-		if (StringUtils.isBlank(userName)) {
-			throw new IllegalArgumentException("userName不能为空");
-		}
+    public TableDataInfo list(@RequestParam(value = "userName") String  userName) {
         return getDataTable(oaService.queryUser(userName));
     }
 
 
     /**
-     * 修改项目
+     * 添加用户
      */
-    @GetMapping("/add")
-    @RequiresPermissions("oa:user:add")
-    public Object add(@RequestParam("userName") String  userName) {
+    @RequestMapping("/add")
+//    @RequiresPermissions("oa:user:add")
+    @ResponseBody
+    public Object edit(@RequestParam("userName") String  userName) {
         if (StringUtils.isBlank(userName)) {
             throw new IllegalArgumentException("userName不能为空");
         }

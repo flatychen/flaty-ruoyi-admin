@@ -9,6 +9,7 @@ import com.ruoyi.admin.oa.model.OaUserResponse.DataBean.DeptsBean;
 import com.ruoyi.admin.oa.service.OaService;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.system.domain.SysDept;
+import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysDeptService;
 import com.ruoyi.system.service.ISysUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -45,10 +43,14 @@ public class OaServiceImpl implements OaService {
     @Value("${user-center.rootId}")
     String adminUserCenterRootId;
 
-    String url = adminUserCenterPrefix + "/user/getUserInfoByUserName";
 
     @Override
     public List<DataBean> queryUser(String userName) {
+        if (StringUtils.isBlank(userName)) {
+            return new ArrayList<>();
+        }
+
+
         return Optional.ofNullable(fetchOaUser(userName)).orElse(Lists.newArrayList());
     }
 
@@ -59,24 +61,36 @@ public class OaServiceImpl implements OaService {
         Validate.isTrue(queryUser.size() == 1);
         DataBean user = queryUser.get(0);
 
-        String result = iSysUserService.checkLoginNameUnique(user.getUsername());
-        if (UserConstants.USER_NAME_NOT_UNIQUE.equalsIgnoreCase(result)) {
-            throw new IllegalArgumentException("用户已经存在");
-        }
-
         saveOaDepts(user.getDepts());
-        saveOaUser(user.getDepts());
-
-//        iSysUserService.insertUser();
+        saveOaUser(user);
 
 
     }
 
-    private void saveOaUser(List<DeptsBean> depts) {
+    private void saveOaUser(DataBean user) {
+
+        String result = iSysUserService.checkLoginNameUnique(user.getUsername());
+        if (UserConstants.USER_NAME_NOT_UNIQUE.equalsIgnoreCase(result)) {
+            log.warn("用户已经存在!不执行保存用户。");
+            return;
+        }
+
+        SysUser sysUser = new SysUser();
+        sysUser.setDeptId(Long.valueOf(user.getDeptId()));
+        sysUser.setLoginName(user.getUsername());
+        sysUser.setUserName(user.getUsername());
+        sysUser.setEmail(user.getEmail());
+        sysUser.setPhonenumber(user.getMobile());
+        sysUser.setStatus("0");
+        sysUser.setCreatedDate(new Date());
+        sysUser.setUpdatedDate(new Date());
+
+        iSysUserService.insertUser(sysUser);
     }
 
     private void saveOaDepts(List<DeptsBean> depts) {
         Map<Integer, DeptsBean> deptsBeanMap = depts.stream().collect(Collectors.toMap(DeptsBean::getDeptId, d -> d));
+        List<SysDept> sysDepts = Lists.newArrayList();
         for (DeptsBean dept : depts) {
 
             if (iSysDeptService.selectDeptById(Long.valueOf((dept.getDeptId()))) != null) {
@@ -90,18 +104,23 @@ public class OaServiceImpl implements OaService {
             sysDept.setParentId(Long.valueOf(dept.getParentId()));
             List<String> ancestors = Lists.newArrayList();
             getAncestor((dept.getDeptId()), deptsBeanMap, ancestors);
-            log.info("deptId:{}", StringUtils.join(ancestors, ","));
-//            sysDept.setAncestors();
+            sysDept.setAncestors(StringUtils.join(ancestors, ","));
             sysDept.setDeptName(dept.getDeptName());
             sysDept.setOrderNum("0");
             sysDept.setStatus("0");
             sysDept.setCreatedDate(new Date());
             sysDept.setUpdatedDate(new Date());
+            sysDepts.add(sysDept);
 
-            iSysDeptService.insertDept(sysDept);
         }
 
+        sysDepts.sort((o1, o2) -> {
+            return  o1.getAncestors().length() - o2.getAncestors().length();
+        });
 
+        for (SysDept sysDept : sysDepts) {
+            iSysDeptService.insertDept(sysDept);
+        }
 
 
     }
@@ -118,6 +137,7 @@ public class OaServiceImpl implements OaService {
 
 
     private List<DataBean> fetchOaUser(String userName) {
+        String url = adminUserCenterPrefix + "/user/getUserInfoByUserName?userName={userName}&rootId={rootId}";
         Map<String, String> params = ImmutableMap.of("userName", userName, "rootId", adminUserCenterRootId);
         OaUserResponse oaUserResponse = restTemplate.getForObject(url, OaUserResponse.class, params);
         log.info("fetchOaUser url:{} , params:{},response:{}", url, params, JSON.toJSONString(oaUserResponse));

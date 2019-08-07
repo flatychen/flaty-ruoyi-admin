@@ -57,4 +57,4 @@ spring:
 
 user-center:
     url: http://admin-user-center-test.aylives.cn/
-    rootId: 1
+    rootId: 10098
