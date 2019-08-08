@@ -1,11 +1,12 @@
 package com.ruoyi.admin.oa.service.impl;
 
+import cn.hutool.core.text.StrFormatter;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.ruoyi.admin.oa.model.OaUserResponse;
-import com.ruoyi.admin.oa.model.OaUserResponse.DataBean;
-import com.ruoyi.admin.oa.model.OaUserResponse.DataBean.DeptsBean;
+import com.ruoyi.admin.oa.model.LoginUserResult;
+import com.ruoyi.admin.oa.model.OaResult;
+import com.ruoyi.admin.oa.model.QueryUserResult;
 import com.ruoyi.admin.oa.service.OaService;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.system.domain.SysDept;
@@ -17,11 +18,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.ruoyi.admin.oa.model.QueryUserResult.OaDept;
 
 /**
  *
@@ -45,7 +51,7 @@ public class OaServiceImpl implements OaService {
 
 
     @Override
-    public List<DataBean> queryUser(String userName) {
+    public List<QueryUserResult> queryUser(String userName) {
         if (StringUtils.isBlank(userName)) {
             return new ArrayList<>();
         }
@@ -55,11 +61,16 @@ public class OaServiceImpl implements OaService {
     }
 
     @Override
-    public void saveUserAndDept(List<DataBean> queryUser) {
+    public QueryUserResult authUser(String token) {
+        return this.fetchOaUserByToken(token);
+    }
+
+    @Override
+    public void saveUserAndDept(List<QueryUserResult> queryUser) {
         Validate.notNull(queryUser);
         Validate.notEmpty(queryUser);
         Validate.isTrue(queryUser.size() == 1);
-        DataBean user = queryUser.get(0);
+        QueryUserResult user = queryUser.get(0);
 
         saveOaDepts(user.getDepts());
         saveOaUser(user);
@@ -67,7 +78,7 @@ public class OaServiceImpl implements OaService {
 
     }
 
-    private void saveOaUser(DataBean user) {
+    private void saveOaUser(QueryUserResult user) {
 
         String result = iSysUserService.checkLoginNameUnique(user.getUsername());
         if (UserConstants.USER_NAME_NOT_UNIQUE.equalsIgnoreCase(result)) {
@@ -88,10 +99,10 @@ public class OaServiceImpl implements OaService {
         iSysUserService.insertUser(sysUser);
     }
 
-    private void saveOaDepts(List<DeptsBean> depts) {
-        Map<Integer, DeptsBean> deptsBeanMap = depts.stream().collect(Collectors.toMap(DeptsBean::getDeptId, d -> d));
+    private void saveOaDepts(List<OaDept> depts) {
+        Map<Integer, OaDept> deptsBeanMap = depts.stream().collect(Collectors.toMap(OaDept::getDeptId, d -> d));
         List<SysDept> sysDepts = Lists.newArrayList();
-        for (DeptsBean dept : depts) {
+        for (OaDept dept : depts) {
 
             if (iSysDeptService.selectDeptById(Long.valueOf((dept.getDeptId()))) != null) {
                 log.warn("deptId:{} 已经存在", dept.getDeptId());
@@ -115,7 +126,7 @@ public class OaServiceImpl implements OaService {
         }
 
         sysDepts.sort((o1, o2) -> {
-            return  o1.getAncestors().length() - o2.getAncestors().length();
+            return o1.getAncestors().length() - o2.getAncestors().length();
         });
 
         for (SysDept sysDept : sysDepts) {
@@ -125,27 +136,52 @@ public class OaServiceImpl implements OaService {
 
     }
 
-    private void getAncestor(Integer deptId, Map<Integer, DeptsBean> deptsBeanMap, List<String> ancestors) {
+    private void getAncestor(Integer deptId, Map<Integer, OaDept> oaDeptMap, List<String> ancestors) {
         String _deptId = String.valueOf(deptId);
-        if (adminUserCenterRootId.equalsIgnoreCase(_deptId) || !deptsBeanMap.containsKey(deptId)) {
+        if (adminUserCenterRootId.equalsIgnoreCase(_deptId) || !oaDeptMap.containsKey(deptId)) {
             return;
         }
-        Integer parentDeptId = (deptsBeanMap.get(deptId).getParentId());
-        getAncestor(parentDeptId, deptsBeanMap, ancestors);
+        Integer parentDeptId = (oaDeptMap.get(deptId).getParentId());
+        getAncestor(parentDeptId, oaDeptMap, ancestors);
         ancestors.add(_deptId);
     }
 
 
-    private List<DataBean> fetchOaUser(String userName) {
+    private List<QueryUserResult> fetchOaUser(String userName) {
         String url = adminUserCenterPrefix + "/user/getUserInfoByUserName?userName={userName}&rootId={rootId}";
         Map<String, String> params = ImmutableMap.of("userName", userName, "rootId", adminUserCenterRootId);
-        OaUserResponse oaUserResponse = restTemplate.getForObject(url, OaUserResponse.class, params);
-        log.info("fetchOaUser url:{} , params:{},response:{}", url, params, JSON.toJSONString(oaUserResponse));
-        if (oaUserResponse.success()) {
-            return oaUserResponse.getData();
-        } else {
-            throw new FetchOaException();
+        ResponseEntity<OaResult<List<QueryUserResult>>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<OaResult<List<QueryUserResult>>>() {
+        }, params);
+        log.info("fetchOaUser url:{} , params:{},response:{}", url, params, JSON.toJSONString(response.getBody()));
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            OaResult<List<QueryUserResult>> oaUserResponse = response.getBody();
+            if (oaUserResponse.success()) {
+                return oaUserResponse.getData();
+            }
         }
+        throw new FetchOaException(StrFormatter.format("userName:{} fetchOaUser error", userName));
+    }
+
+    private QueryUserResult fetchOaUserByToken(String token) {
+        String url = adminUserCenterPrefix + "/user/getUserInfoByToken?loginToken={token}";
+        Map<String, String> params = ImmutableMap.of("token", token);
+
+        ResponseEntity<OaResult<LoginUserResult>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<OaResult<LoginUserResult>>() {
+        }, params);
+        log.info("fetchOaUser url:{} , params:{},response:{}", url, params, JSON.toJSONString(response.getBody()));
+        if (response.getStatusCode().is2xxSuccessful()) {
+            OaResult<LoginUserResult> oaUserResponse = response.getBody();
+            if (oaUserResponse.success()) {
+                return oaUserResponse.getData().getUserInfo();
+            }else if(oaUserResponse.tokenNotValid()){
+                throw new FetchOaException(StrFormatter.format("token:{} fetchOaUser 不合法或已过期", token));
+            }
+        }
+
+        throw new FetchOaException(StrFormatter.format("token:{} fetchOaUser error", token));
+
+
     }
 
 
@@ -154,8 +190,13 @@ public class OaServiceImpl implements OaService {
      */
     public class FetchOaException extends RuntimeException {
 
-        public FetchOaException() {
-            super("获取oa数据失败！");
+        public FetchOaException(Throwable cause) {
+            super(cause);
+        }
+
+
+        public FetchOaException(String message) {
+            super(message);
         }
     }
 

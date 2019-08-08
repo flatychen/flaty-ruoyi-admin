@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -55,13 +56,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public AjaxResult notFount(RuntimeException e) {
         log.error("运行时异常:", e);
-        return AjaxResult.error("运行时异常:" + e.getMessage());
+        return AjaxResult.error("运行时异常:" + e.toString());
     }
     /**
      * 拦截未知的运行时异常
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public AjaxResult requestNotValid(RuntimeException e) {
+    @ResponseBody
+    public AjaxResult requestNotValid(MissingServletRequestParameterException e) {
         log.error("请求缺少参数:", e);
         return AjaxResult.error("请求缺少参数:" + e.getMessage());
     }

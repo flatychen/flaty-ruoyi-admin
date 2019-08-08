@@ -77,6 +77,13 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.6.1</version>
+        </dependency>
+
+
         <!-- 核心模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
