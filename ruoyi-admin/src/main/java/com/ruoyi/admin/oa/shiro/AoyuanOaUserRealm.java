@@ -38,7 +38,7 @@ public class AoyuanOaUserRealm extends UserRealm {
             log.warn(StrFormatter.format("用户名:{} 不存在",upToken.getUsername()));
             throw new AuthenticationException(StrFormatter.format("用户名:{} 不存在",upToken.getUsername()));
         }
-        if (CollectionUtils.isEmpty(iSysRoleService.selectRolesByUserId(user.getUserId()))) {
+        if (CollectionUtils.isEmpty(iSysRoleService.selectRoleKeys(user.getUserId()))) {
             log.warn(StrFormatter.format("用户名:{} 角色不存在 ",upToken.getUsername()));
             throw new AuthenticationException(StrFormatter.format("用户名:{} 角色不存在 ",upToken.getUsername()));
         }

@@ -35,26 +35,35 @@ spring:
             testWhileIdle: true
             testOnBorrow: false
             testOnReturn: false
-            webStatFilter:
-                enabled: true
-            statViewServlet:
-                enabled: true
-                # 设置白名单，不填则允许所有访问
-                allow:
-                url-pattern: /monitor/druid/*
             filter:
-                stat:
+                slf4j:
                     enabled: true
-                    # 慢SQL记录
-                    log-slow-sql: true
-                    slow-sql-millis: 1000
-                    merge-sql: true
-                wall:
-                    config:
-                        multi-statement-allow: true
+                    statement-executable-sql-log-enable: true
+#            webStatFilter:
+#                enabled: true
+#            statViewServlet:
+#                enabled: true
+#                # 设置白名单，不填则允许所有访问
+#                allow:
+#                url-pattern: /monitor/druid/*
+#            filter:
+#                stat:
+#                    enabled: true
+#                    # 慢SQL记录
+#                    log-slow-sql: true
+#                    slow-sql-millis: 1000
+#                    merge-sql: true
+#                wall:
+#                    config:
+#                        multi-statement-allow: true
+
+
 
 
 
 user-center:
     url: http://admin-user-center-test.aylives.cn/
     rootId: 10098
+logging:
+    level:
+        druid.sql.Statement: debug

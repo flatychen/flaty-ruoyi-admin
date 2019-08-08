@@ -4,14 +4,17 @@ import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.ISysDeptService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -49,6 +52,9 @@ public class DataScopeAspect {
      */
     public static final String DATA_SCOPE = "dataScope";
 
+    @Autowired
+    ISysDeptService iSysDeptService;
+
     // 配置织入点
     @Pointcut("@annotation(com.ruoyi.common.annotation.DataScope)")
     public void dataScopePointCut() {
@@ -82,8 +88,17 @@ public class DataScopeAspect {
      * @param user      用户
      * @param alias     别名
      */
-    public static void dataScopeFilter(JoinPoint joinPoint, SysUser user, String alias) {
+    public void dataScopeFilter(JoinPoint joinPoint, SysUser user, String alias) {
         StringBuilder sqlString = new StringBuilder();
+
+        SysDept sysDept = iSysDeptService.selectDeptById(user.getDeptId());
+        if (sysDept == null) {
+            return;
+        }
+
+        String ancestorStr = sysDept.getAncestors() + ","+sysDept.getDeptId()+"%";
+
+
 
         for (SysRole role : user.getRoles()) {
             String dataScope = role.getDataScope();
@@ -91,15 +106,15 @@ public class DataScopeAspect {
                 sqlString = new StringBuilder();
                 break;
             } else if (DATA_SCOPE_CUSTOM.equals(dataScope)) {
-                sqlString.append(StringUtils.format(
-                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", alias,
-                        role.getRoleId()));
+                sqlString.append(StringUtils.format(" OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", alias, role.getRoleId()));
             } else if (DATA_SCOPE_DEPT.equals(dataScope)) {
                 sqlString.append(StringUtils.format(" OR {}.dept_id = {} ", alias, user.getDeptId()));
             } else if (DATA_SCOPE_DEPT_AND_CHILD.equals(dataScope)) {
-                sqlString.append(StringUtils.format(
-                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id = {} or parent_id= {} )", alias,
-                        user.getDeptId(), user.getDeptId()));
+//                sqlString.append(StringUtils.format(
+//                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id = {} or parent_id= {} )", alias,
+//                        user.getDeptId(), user.getDeptId()));
+                sqlString.append(StringUtils.format(" OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE ancestors like '{}' or dept_id = {} )", alias,
+                                                    ancestorStr,user.getDeptId()));
             }
         }
 

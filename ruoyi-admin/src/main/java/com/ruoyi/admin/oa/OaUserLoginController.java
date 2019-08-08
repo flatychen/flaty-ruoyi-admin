@@ -34,7 +34,7 @@ public class OaUserLoginController extends BaseController {
             subject.login(usernamePasswordToken);
         } catch (AuthenticationException e) {
             logger.error("AuthenticationException {}", e.getMessage());
-            throw new BusinessException(StrFormatter.format("oa登录失败:请检查用户:{}是否在管理后台添加成功", usernamePasswordToken.getUsername()));
+            throw new BusinessException(StrFormatter.format("oa登录失败!请检查用户:{}是否在管理后台添加和是否分配角色！", usernamePasswordToken.getUsername()));
         }
         return "redirect:/index";
     }
