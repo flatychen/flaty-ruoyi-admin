@@ -4,7 +4,6 @@ import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysDeptService;
@@ -90,16 +89,6 @@ public class DataScopeAspect {
      */
     public void dataScopeFilter(JoinPoint joinPoint, SysUser user, String alias) {
         StringBuilder sqlString = new StringBuilder();
-
-        SysDept sysDept = iSysDeptService.selectDeptById(user.getDeptId());
-        if (sysDept == null) {
-            return;
-        }
-
-        String ancestorStr = sysDept.getAncestors() + ","+sysDept.getDeptId()+"%";
-
-
-
         for (SysRole role : user.getRoles()) {
             String dataScope = role.getDataScope();
             if (DATA_SCOPE_ALL.equals(dataScope)) {
@@ -113,8 +102,10 @@ public class DataScopeAspect {
 //                sqlString.append(StringUtils.format(
 //                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id = {} or parent_id= {} )", alias,
 //                        user.getDeptId(), user.getDeptId()));
-                sqlString.append(StringUtils.format(" OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE ancestors like '{}' or dept_id = {} )", alias,
-                                                    ancestorStr,user.getDeptId()));
+                sqlString.append(StringUtils.format(
+                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id = {} or find_in_set( {} , ancestors ) )",
+                        alias, user.getDeptId(), user.getDeptId()));
+
             }
         }
 
