@@ -34,23 +34,21 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("system/oss")
-public class SysOssController extends BaseController
-{
-    private String              prefix = "system/oss";
+public class SysOssController extends BaseController {
+    private String prefix = "system/oss" ;
 
-    private final static String KEY    = CloudConstant.CLOUD_STORAGE_CONFIG_KEY;
-
-    @Autowired
-    private ISysOssService      sysOssService;
+    private final static String KEY = CloudConstant.CLOUD_STORAGE_CONFIG_KEY;
 
     @Autowired
-    private ISysConfigService   sysConfigService;
+    private ISysOssService sysOssService;
+
+    @Autowired
+    private ISysConfigService sysConfigService;
 
     @RequiresPermissions("system:dept:view")
     @GetMapping()
-    public String dept()
-    {
-        return prefix + "/oss";
+    public String dept() {
+        return prefix + "/oss" ;
     }
 
     /**
@@ -59,8 +57,7 @@ public class SysOssController extends BaseController
     @RequestMapping("list")
     @RequiresPermissions("sys:oss:list")
     @ResponseBody
-    public TableDataInfo list(SysOss sysOss)
-    {
+    public TableDataInfo list(SysOss sysOss) {
         startPage();
         List<SysOss> list = sysOssService.getList(sysOss);
         return getDataTable(list);
@@ -71,13 +68,12 @@ public class SysOssController extends BaseController
      */
     @RequestMapping("config")
     @RequiresPermissions("sys:oss:config")
-    public String config(Model model)
-    {
+    public String config(Model model) {
         String jsonconfig = sysConfigService.selectConfigByKey(CloudConstant.CLOUD_STORAGE_CONFIG_KEY);
         // 获取云存储配置信息
         CloudStorageConfig config = JSON.parseObject(jsonconfig, CloudStorageConfig.class);
         model.addAttribute("config", config);
-        return prefix + "/config";
+        return prefix + "/config" ;
     }
 
     /**
@@ -86,22 +82,16 @@ public class SysOssController extends BaseController
     @RequestMapping("saveConfig")
     @RequiresPermissions("sys:oss:config")
     @ResponseBody
-    public AjaxResult saveConfig(CloudStorageConfig config)
-    {
+    public AjaxResult saveConfig(CloudStorageConfig config) {
         // 校验类型
         ValidatorUtils.validateEntity(config);
-        if (config.getType() == CloudService.QINIU.getValue())
-        {
+        if (config.getType() == CloudService.QINIU.getValue()) {
             // 校验七牛数据
             ValidatorUtils.validateEntity(config, QiniuGroup.class);
-        }
-        else if (config.getType() == CloudService.ALIYUN.getValue())
-        {
+        } else if (config.getType() == CloudService.ALIYUN.getValue()) {
             // 校验阿里云数据
             ValidatorUtils.validateEntity(config, AliyunGroup.class);
-        }
-        else if (config.getType() == CloudService.QCLOUD.getValue())
-        {
+        } else if (config.getType() == CloudService.QCLOUD.getValue()) {
             // 校验腾讯云数据
             ValidatorUtils.validateEntity(config, QcloudGroup.class);
         }
@@ -114,10 +104,8 @@ public class SysOssController extends BaseController
     @RequestMapping("/upload")
     @RequiresPermissions("sys:oss:add")
     @ResponseBody
-    public AjaxResult upload(@RequestParam("file") MultipartFile file) throws Exception
-    {
-        if (file.isEmpty())
-        {
+    public AjaxResult upload(@RequestParam("file") MultipartFile file) throws Exception {
+        if (file.isEmpty()) {
             throw new OssException("上传文件不能为空");
         }
         // 上传文件
@@ -133,7 +121,7 @@ public class SysOssController extends BaseController
         ossEntity.setFileName(fileName);
         ossEntity.setCreateTime(new Date());
         ossEntity.setService(storage.getService());
-        return toAjax(sysOssService.save(ossEntity)).put("url", ossEntity.getUrl()).put("fileName",ossEntity.getFileName());
+        return toAjax(sysOssService.save(ossEntity)).put("url", ossEntity.getUrl()).put("fileName", ossEntity.getFileName());
     }
 
     /**
@@ -141,18 +129,16 @@ public class SysOssController extends BaseController
      */
     @GetMapping("edit/{ossId}")
     @RequiresPermissions("sys:oss:edit")
-    public String edit(@PathVariable("ossId") Long ossId, Model model)
-    {
+    public String edit(@PathVariable("ossId") Long ossId, Model model) {
         SysOss sysOss = sysOssService.findById(ossId);
         model.addAttribute("sysOss", sysOss);
-        return prefix + "/edit";
+        return prefix + "/edit" ;
     }
 
     @GetMapping("editor")
     @RequiresPermissions("sys:oss:add")
-    public String editor()
-    {
-        return prefix + "/editor";
+    public String editor() {
+        return prefix + "/editor" ;
     }
 
     /**
@@ -161,8 +147,7 @@ public class SysOssController extends BaseController
     @PostMapping("edit")
     @RequiresPermissions("sys:oss:edit")
     @ResponseBody
-    public AjaxResult editSave(SysOss sysOss)
-    {
+    public AjaxResult editSave(SysOss sysOss) {
         return toAjax(sysOssService.update(sysOss));
     }
 
@@ -172,8 +157,7 @@ public class SysOssController extends BaseController
     @RequestMapping("remove")
     @RequiresPermissions("sys:oss:remove")
     @ResponseBody
-    public AjaxResult delete(String ids)
-    {
+    public AjaxResult delete(String ids) {
         return toAjax(sysOssService.deleteByIds(ids));
     }
 }

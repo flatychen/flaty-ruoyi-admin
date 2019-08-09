@@ -24,7 +24,7 @@ public interface IGenService
      * 
      *
      * @param tableName 表名称
-     * @param moduleName
+     * @param parentModuleName
      * @return 数据
      */
     public byte[] generatorCode( String tableName , String parentModuleName);
@@ -33,7 +33,7 @@ public interface IGenService
      * 批量生成代码
      * 
      * @param tableNames 表数组
-     * @param moduleName
+     * @param parentModuleName
      * @return 数据
      */
     public byte[] generatorCode(String[] tableNames, String parentModuleName);
