@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
 	<th:block th:include="include :: header('修改${functionName}')" />
+	<th:block th:include="include :: bootstrap-fileinput-css"/>
 	#foreach($column in $columns)
 		#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
 			<th:block th:include="include :: datetimepicker-css" />
@@ -107,6 +108,7 @@
 	</form>
 </div>
 <th:block th:include="include :: footer" />
+<th:block th:include="include :: flaty-fileinput-js"/>
 	#foreach($column in $columns)
 		#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
 		<th:block th:include="include :: datetimepicker-js" />

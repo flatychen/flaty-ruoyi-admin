@@ -1,6 +1,6 @@
 package com.ruoyi.admin.party.controller;
 
-import com.ruoyi.admin.extend.DeptData;
+import com.ruoyi.admin.core.dept.DeptData;
 import com.ruoyi.admin.party.domain.Transfer;
 import com.ruoyi.admin.party.service.ITransferService;
 import com.ruoyi.common.annotation.Log;

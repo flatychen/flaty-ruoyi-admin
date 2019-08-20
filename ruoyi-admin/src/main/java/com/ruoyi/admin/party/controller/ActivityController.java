@@ -1,7 +1,7 @@
 package com.ruoyi.admin.party.controller;
 
 import com.ruoyi.admin.core.join.ServiceJoinHelper;
-import com.ruoyi.admin.extend.DeptData;
+import com.ruoyi.admin.core.dept.DeptData;
 import com.ruoyi.admin.party.domain.Activity;
 import com.ruoyi.admin.party.service.IActivityService;
 import com.ruoyi.admin.property.service.ISysAgencyService;

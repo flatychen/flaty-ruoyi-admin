@@ -1,4 +1,4 @@
-package com.ruoyi.admin.extend;
+package com.ruoyi.admin.core.dept;
 
 import java.lang.annotation.*;
 

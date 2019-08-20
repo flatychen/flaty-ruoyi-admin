@@ -1,6 +1,6 @@
 package com.ruoyi.admin.party.controller;
 
-import com.ruoyi.admin.extend.DeptData;
+import com.ruoyi.admin.core.dept.DeptData;
 import com.ruoyi.admin.party.domain.Checkin;
 import com.ruoyi.admin.party.service.ICheckinService;
 import com.ruoyi.common.annotation.Log;

@@ -2,7 +2,7 @@ package com.ruoyi.admin.party.controller;
 
 import com.ruoyi.admin.core.BaseBusinessController;
 import com.ruoyi.admin.core.join.ServiceJoinHelper;
-import com.ruoyi.admin.extend.DeptData;
+import com.ruoyi.admin.core.dept.DeptData;
 import com.ruoyi.admin.party.domain.ActivityUser;
 import com.ruoyi.admin.party.service.IActivityService;
 import com.ruoyi.admin.party.service.IActivityUserService;

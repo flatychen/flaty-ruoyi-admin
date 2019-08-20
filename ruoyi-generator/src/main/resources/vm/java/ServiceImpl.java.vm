@@ -1,84 +1,96 @@
-package ${package}.service.impl;
+package ${packageName}.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.admin.core.impl.AbstractService;
-import ${package}.mapper.${className}Mapper;
-import ${package}.domain.${className};
-import ${package}.service.I${className}Service;
+import ${packageName}.mapper.${ClassName}Mapper;
+import ${packageName}.domain.${ClassName};
+import ${packageName}.service.I${ClassName}Service;
 import com.ruoyi.common.core.text.Convert;
-
 /**
- * ${tableComment} 服务层实现
- * 
+ * ${functionName}Service业务层处理
+ *
  * @author ${author}
  * @date ${datetime}
  */
 @Service
-public class ${className}ServiceImpl extends AbstractService<${className}> implements I${className}Service
+public class ${ClassName}ServiceImpl extends AbstractService<${ClassName}> implements I${ClassName}Service
 {
+
 	@Autowired
-	private ${className}Mapper ${classname}Mapper;
+	private ${ClassName}Mapper ${className}Mapper;
 
 	/**
-     * 查询${tableComment}信息
-     * 
-     * @param ${primaryKey.attrname} ${tableComment}ID
-     * @return ${tableComment}信息
-     */
-    @Override
-	public ${className} select${className}ById(${primaryKey.attrType} ${primaryKey.attrname})
-	{
-	    return ${classname}Mapper.select${className}ById(${primaryKey.attrname});
-	}
-	
-	/**
-     * 查询${tableComment}列表
-     * 
-     * @param ${classname} ${tableComment}信息
-     * @return ${tableComment}集合
-     */
+	 * 查询${functionName}
+	 *
+	 * @param ${pkColumn.javaField} ${functionName}ID
+	 * @return ${functionName}
+	 */
 	@Override
-	public List<${className}> select${className}List(${className} ${classname})
+	public ${ClassName} select${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField})
 	{
-	    return ${classname}Mapper.select${className}List(${classname});
-	}
-	
-    /**
-     * 新增${tableComment}
-     * 
-     * @param ${classname} ${tableComment}信息
-     * @return 结果
-     */
-	@Override
-	public int insert${className}(${className} ${classname})
-	{
-	    return ${classname}Mapper.insert${className}(${classname});
-	}
-	
-	/**
-     * 修改${tableComment}
-     * 
-     * @param ${classname} ${tableComment}信息
-     * @return 结果
-     */
-	@Override
-	public int update${className}(${className} ${classname})
-	{
-	    return ${classname}Mapper.update${className}(${classname});
+		return ${className}Mapper.select${ClassName}ById(${pkColumn.javaField});
 	}
 
 	/**
-     * 删除${tableComment}对象
-     * 
-     * @param ids 需要删除的数据ID
-     * @return 结果
-     */
+	 * 查询${functionName}列表
+	 *
+	 * @param ${className} ${functionName}
+	 * @return ${functionName}
+	 */
 	@Override
-	public int delete${className}ByIds(String ids)
+	public List<${ClassName}> select${ClassName}List(${ClassName} ${className})
 	{
-		return ${classname}Mapper.delete${className}ByIds(Convert.toStrArray(ids));
+		return ${className}Mapper.select${ClassName}List(${className});
 	}
+
+	/**
+	 * 新增${functionName}
+	 *
+	 * @param ${className} ${functionName}
+	 * @return 结果
+	 */
+	@Override
+	public int insert${ClassName}(${ClassName} ${className})
+	{
+		return ${className}Mapper.insert${ClassName}(${className});
+	}
+
+	/**
+	 * 修改${functionName}
+	 *
+	 * @param ${className} ${functionName}
+	 * @return 结果
+	 */
+	@Override
+	public int update${ClassName}(${ClassName} ${className})
+	{
+		return ${className}Mapper.update${ClassName}(${className});
+	}
+
+	/**
+	 * 删除${functionName}对象
+	 *
+	 * @param ids 需要删除的数据ID
+	 * @return 结果
+	 */
+	@Override
+	public int delete${ClassName}ByIds(String ids)
+	{
+		return ${className}Mapper.delete${ClassName}ByIds(Convert.toStrArray(ids));
+	}
+
+	/**
+	 * 删除${functionName}信息
+	 *
+	 * @param ${pkColumn.javaField} ${functionName}ID
+	 * @return 结果
+	 */
+	public int delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField})
+	{
+		return ${className}Mapper.delete${ClassName}ById(${pkColumn.javaField});
+	}
+
 	
 }

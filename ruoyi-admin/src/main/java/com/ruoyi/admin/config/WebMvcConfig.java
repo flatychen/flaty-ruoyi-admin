@@ -1,6 +1,6 @@
 package com.ruoyi.admin.config;
 
-import com.ruoyi.admin.extend.DeptArgumentResolver;
+import com.ruoyi.admin.core.dept.DeptArgumentResolver;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;

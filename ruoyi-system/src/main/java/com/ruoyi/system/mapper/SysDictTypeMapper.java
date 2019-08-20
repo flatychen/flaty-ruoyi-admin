@@ -1,8 +1,9 @@
 package com.ruoyi.system.mapper;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import com.ruoyi.system.domain.SysDictType;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * 字典表 数据层
@@ -34,6 +35,16 @@ public interface SysDictTypeMapper
      * @return 字典类型
      */
     public SysDictType selectDictTypeById(Long dictId);
+
+
+    /**
+     * 根据字典类型查询信息
+     *
+     * @param dictType 字典类型
+     * @return 字典类型
+     */
+    public SysDictType selectDictTypeByType(String dictType);
+
 
     /**
      * 通过字典ID删除字典信息

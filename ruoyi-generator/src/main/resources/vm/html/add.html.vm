@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
 	<th:block th:include="include :: header('新增${functionName}')" />
+	<th:block th:include="include :: bootstrap-fileinput-css"/>
 	#foreach($column in $columns)
 		#if($column.insert && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
 			<th:block th:include="include :: datetimepicker-css" />
@@ -93,6 +94,14 @@
 							</div>
 						</div>
 					</div>
+				#elseif($column.htmlType == "file")
+					<div class="form-group">
+						<label class="col-sm-3 control-label">${comment}：</label>
+						<div class="col-sm-8">
+							<input id="${field}" name="${field}"   type="hidden" >
+							<input class="flatyUpload" name="img" type="file"   data-max-file-count="1" id="fileinput" #if($column.required) required#end>
+						</div>
+					</div>
 				#elseif($column.htmlType == "textarea")
 					<div class="form-group">
 						<label class="col-sm-3 control-label">${comment}：</label>
@@ -106,6 +115,7 @@
 	</form>
 </div>
 <th:block th:include="include :: footer" />
+<th:block th:include="include :: flaty-fileinput-js"/>
 	#foreach($column in $columns)
 		#if($column.insert && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
 		<th:block th:include="include :: datetimepicker-js" />

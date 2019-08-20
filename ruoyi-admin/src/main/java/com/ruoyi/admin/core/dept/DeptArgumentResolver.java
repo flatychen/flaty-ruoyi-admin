@@ -1,4 +1,4 @@
-package com.ruoyi.admin.extend;
+package com.ruoyi.admin.core.dept;
 
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.CookieUtil;

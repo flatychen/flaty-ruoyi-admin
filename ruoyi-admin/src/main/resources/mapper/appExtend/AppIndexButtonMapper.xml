@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.appExtend.mapper.AppIndexButtonMapper">
+    
+    <resultMap type="AppIndexButton" id="AppIndexButtonResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="icon"    column="icon"    />
+        <result property="androidPackageName"    column="android_package_name"    />
+        <result property="iosType"    column="ios_type"    />
+        <result property="createdDate"    column="created_date"    />
+        <result property="extend"    column="extend"    />
+        <result property="classify"    column="classify"    />
+    </resultMap>
+
+    <sql id="selectAppIndexButtonVo">
+        select id, title, icon, android_package_name, ios_type, created_date, extend, classify from app_index_button
+    </sql>
+
+    <select id="selectAppIndexButtonList" parameterType="AppIndexButton" resultMap="AppIndexButtonResult">
+        <include refid="selectAppIndexButtonVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="createdDate != null "> and created_date = #{createdDate}</if>
+            <if test="classify != null  and classify != ''"> and classify = #{classify}</if>
+        </where>
+    </select>
+    
+    <select id="selectAppIndexButtonById" parameterType="Long" resultMap="AppIndexButtonResult">
+        <include refid="selectAppIndexButtonVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAppIndexButton" parameterType="AppIndexButton" useGeneratedKeys="true" keyProperty="id">
+        insert into app_index_button
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null  and title != ''">title,</if>
+            <if test="icon != null  and icon != ''">icon,</if>
+            <if test="androidPackageName != null  and androidPackageName != ''">android_package_name,</if>
+            <if test="iosType != null  and iosType != ''">ios_type,</if>
+            <if test="createdDate != null ">created_date,</if>
+            <if test="extend != null  and extend != ''">extend,</if>
+            <if test="classify != null  and classify != ''">classify,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null  and title != ''">#{title},</if>
+            <if test="icon != null  and icon != ''">#{icon},</if>
+            <if test="androidPackageName != null  and androidPackageName != ''">#{androidPackageName},</if>
+            <if test="iosType != null  and iosType != ''">#{iosType},</if>
+            <if test="createdDate != null ">#{createdDate},</if>
+            <if test="extend != null  and extend != ''">#{extend},</if>
+            <if test="classify != null  and classify != ''">#{classify},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAppIndexButton" parameterType="AppIndexButton">
+        update app_index_button
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null  and title != ''">title = #{title},</if>
+            <if test="icon != null  and icon != ''">icon = #{icon},</if>
+            <if test="androidPackageName != null  and androidPackageName != ''">android_package_name = #{androidPackageName},</if>
+            <if test="iosType != null  and iosType != ''">ios_type = #{iosType},</if>
+            <if test="createdDate != null ">created_date = #{createdDate},</if>
+            <if test="extend != null  and extend != ''">extend = #{extend},</if>
+            <if test="classify != null  and classify != ''">classify = #{classify},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAppIndexButtonById" parameterType="Long">
+        delete from app_index_button where id = #{id}
+    </delete>
+
+    <delete id="deleteAppIndexButtonByIds" parameterType="String">
+        delete from app_index_button where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

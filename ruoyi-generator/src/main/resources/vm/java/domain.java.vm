@@ -1,4 +1,4 @@
-package ${package}.domain;
+package ${packageName}.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -7,43 +7,51 @@ import com.ruoyi.common.annotation.Excel;
 import javax.persistence.*;
 
 import lombok.Data;
-#foreach ($column in $columns)
-#if($column.attrType == 'Date' && ($column.attrname != 'createBy' && $column.attrname != 'createdDate' && $column.attrname != 'updateBy' && $column.attrname != 'updatedDate' && $column.attrname != 'remark'))
 import java.util.Date;
-#break
-#end
-#end
-#foreach ($column in $columns)
-#if($column.attrType == 'BigDecimal')
-import java.math.BigDecimal;
-#break
-#end
+#foreach ($import in $importList)
+import ${import};
 #end
 
+
+
+
 /**
- * ${tableComment}表 ${tableName}
+ * ${functionName}对象 ${tableName}
  * 
  * @author ${author}
  * @date ${datetime}
  */
 @Data
 @Table(name = "${tableName}")
-public class ${className} extends BaseEntity
+public class ${ClassName} extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
-	
+
+
 #foreach ($column in $columns)
-#if($column.attrname != 'createBy' && $column.attrname != 'createdDate' && $column.attrname != 'updateBy' && $column.attrname != 'updatedDate' && $column.attrname != 'remark')
+	#if($column.attrname != 'createBy' && $column.attrname != 'createdDate' && $column.attrname != 'updateBy' && $column.attrname != 'updatedDate' && $column.attrname != 'remark')
 	/** $column.columnComment */
-	@Column(name = "$column.columnName")
-	#if($column.columnName == $primaryKey.columnName)
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Column(name = "$column.columnName")
+		#if($column.isPk == 1)
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Excel(name = "id", prompt = "id")
+		#else
+		@Excel(name = "$column.columnComment", prompt = "$column.columnComment")
+		#end
+
+	private $column.javaType $column.javaField;
 	#end
-	@Excel(name = "$column.columnComment", prompt = "$column.columnComment")
-	private $column.attrType $column.attrname;
 #end
-#end
+
+
+
+
+
+
+
+
+
 
 
 }

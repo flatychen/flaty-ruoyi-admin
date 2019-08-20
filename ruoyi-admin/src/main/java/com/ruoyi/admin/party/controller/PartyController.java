@@ -1,6 +1,6 @@
 package com.ruoyi.admin.party.controller;
 
-import com.ruoyi.admin.extend.DeptData;
+import com.ruoyi.admin.core.dept.DeptData;
 import com.ruoyi.admin.property.domain.Agency;
 import com.ruoyi.admin.property.service.ISysAgencyService;
 import com.ruoyi.common.core.controller.BaseController;
