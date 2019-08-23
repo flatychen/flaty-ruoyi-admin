@@ -9,7 +9,7 @@ import com.ruoyi.admin.core.IService;
  * 首页按钮Service接口
  *
  * @author flaty
- * @date 2019-08-20
+ * @date 2019-08-23
  */
 public interface IAppIndexButtonService  extends IService<AppIndexButton>
 {

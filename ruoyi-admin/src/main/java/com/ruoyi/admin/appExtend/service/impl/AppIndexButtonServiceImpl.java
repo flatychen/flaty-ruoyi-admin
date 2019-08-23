@@ -12,7 +12,7 @@ import com.ruoyi.common.core.text.Convert;
  * 首页按钮Service业务层处理
  *
  * @author flaty
- * @date 2019-08-20
+ * @date 2019-08-23
  */
 @Service
 public class AppIndexButtonServiceImpl extends AbstractService<AppIndexButton> implements IAppIndexButtonService

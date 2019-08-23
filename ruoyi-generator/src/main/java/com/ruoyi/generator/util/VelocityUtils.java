@@ -95,6 +95,7 @@ public class VelocityUtils
         if (GenConstants.TPL_CRUD.equals(tplCategory))
         {
             templates.add("vm/html/list.html.vm");
+            templates.add("vm/html/select.html.vm");
         }
         else if (GenConstants.TPL_TREE.equals(tplCategory))
         {
@@ -154,6 +155,10 @@ public class VelocityUtils
         else if (template.contains("list.html.vm"))
         {
             fileName = StringUtils.format("{}/{}.html", htmlPath, businessName);
+        }
+        else if (template.contains("select.html.vm"))
+        {
+            fileName = StringUtils.format("{}/select.html", htmlPath);
         }
         else if (template.contains("list-tree.html.vm"))
         {

@@ -22,7 +22,7 @@ import ${import};
  * @date ${datetime}
  */
 @Data
-@Table(name = "${tableName}")
+@Table(name = "aomygod.${tableName}")
 public class ${ClassName} extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;

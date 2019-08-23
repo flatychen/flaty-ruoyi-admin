@@ -6,7 +6,7 @@ import com.ruoyi.admin.core.MyMapper;
  * 首页按钮Mapper接口
  *
  * @author flaty
- * @date 2019-08-20
+ * @date 2019-08-23
  */
 public interface AppIndexButtonMapper extends MyMapper<AppIndexButton>
 {

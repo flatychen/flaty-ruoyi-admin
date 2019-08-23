@@ -6,25 +6,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="AppIndexButton" id="AppIndexButtonResult">
         <result property="id"    column="id"    />
+        <result property="region"    column="region"    />
+        <result property="classify"    column="classify"    />
         <result property="title"    column="title"    />
         <result property="icon"    column="icon"    />
-        <result property="androidPackageName"    column="android_package_name"    />
+        <result property="androidType"    column="android_type"    />
         <result property="iosType"    column="ios_type"    />
-        <result property="createdDate"    column="created_date"    />
         <result property="extend"    column="extend"    />
-        <result property="classify"    column="classify"    />
+        <result property="url"    column="url"    />
+        <result property="type"    column="type"    />
+        <result property="createdDate"    column="created_date"    />
     </resultMap>
 
     <sql id="selectAppIndexButtonVo">
-        select id, title, icon, android_package_name, ios_type, created_date, extend, classify from app_index_button
+        select id, region, classify, title, icon, android_type, ios_type, extend, url, type, created_date from aomygod.app_index_button
     </sql>
 
     <select id="selectAppIndexButtonList" parameterType="AppIndexButton" resultMap="AppIndexButtonResult">
         <include refid="selectAppIndexButtonVo"/>
         <where>  
-            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
             <if test="createdDate != null "> and created_date = #{createdDate}</if>
-            <if test="classify != null  and classify != ''"> and classify = #{classify}</if>
         </where>
     </select>
     
@@ -34,47 +37,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertAppIndexButton" parameterType="AppIndexButton" useGeneratedKeys="true" keyProperty="id">
-        insert into app_index_button
+        insert into aomygod.app_index_button
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="region != null  and region != ''">region,</if>
+            <if test="classify != null  and classify != ''">classify,</if>
             <if test="title != null  and title != ''">title,</if>
             <if test="icon != null  and icon != ''">icon,</if>
-            <if test="androidPackageName != null  and androidPackageName != ''">android_package_name,</if>
+            <if test="androidType != null  and androidType != ''">android_type,</if>
             <if test="iosType != null  and iosType != ''">ios_type,</if>
-            <if test="createdDate != null ">created_date,</if>
             <if test="extend != null  and extend != ''">extend,</if>
-            <if test="classify != null  and classify != ''">classify,</if>
+            <if test="url != null  and url != ''">url,</if>
+            <if test="type != null  and type != ''">type,</if>
+            <if test="createdDate != null ">created_date,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="region != null  and region != ''">#{region},</if>
+            <if test="classify != null  and classify != ''">#{classify},</if>
             <if test="title != null  and title != ''">#{title},</if>
             <if test="icon != null  and icon != ''">#{icon},</if>
-            <if test="androidPackageName != null  and androidPackageName != ''">#{androidPackageName},</if>
+            <if test="androidType != null  and androidType != ''">#{androidType},</if>
             <if test="iosType != null  and iosType != ''">#{iosType},</if>
-            <if test="createdDate != null ">#{createdDate},</if>
             <if test="extend != null  and extend != ''">#{extend},</if>
-            <if test="classify != null  and classify != ''">#{classify},</if>
+            <if test="url != null  and url != ''">#{url},</if>
+            <if test="type != null  and type != ''">#{type},</if>
+            <if test="createdDate != null ">#{createdDate},</if>
          </trim>
     </insert>
 
     <update id="updateAppIndexButton" parameterType="AppIndexButton">
-        update app_index_button
+        update aomygod.app_index_button
         <trim prefix="SET" suffixOverrides=",">
+            <if test="region != null  and region != ''">region = #{region},</if>
+            <if test="classify != null  and classify != ''">classify = #{classify},</if>
             <if test="title != null  and title != ''">title = #{title},</if>
             <if test="icon != null  and icon != ''">icon = #{icon},</if>
-            <if test="androidPackageName != null  and androidPackageName != ''">android_package_name = #{androidPackageName},</if>
+            <if test="androidType != null  and androidType != ''">android_type = #{androidType},</if>
             <if test="iosType != null  and iosType != ''">ios_type = #{iosType},</if>
-            <if test="createdDate != null ">created_date = #{createdDate},</if>
             <if test="extend != null  and extend != ''">extend = #{extend},</if>
-            <if test="classify != null  and classify != ''">classify = #{classify},</if>
+            <if test="url != null  and url != ''">url = #{url},</if>
+            <if test="type != null  and type != ''">type = #{type},</if>
+            <if test="createdDate != null ">created_date = #{createdDate},</if>
         </trim>
         where id = #{id}
     </update>
 
     <delete id="deleteAppIndexButtonById" parameterType="Long">
-        delete from app_index_button where id = #{id}
+        delete from aomygod.app_index_button where id = #{id}
     </delete>
 
     <delete id="deleteAppIndexButtonByIds" parameterType="String">
-        delete from app_index_button where id in 
+        delete from aomygod.app_index_button where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
