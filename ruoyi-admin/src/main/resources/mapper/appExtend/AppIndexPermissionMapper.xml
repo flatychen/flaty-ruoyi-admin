@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.appExtend.mapper.AppIndexPermissionMapper">
+    
+    <resultMap type="AppIndexPermission" id="AppIndexPermissionResult">
+        <result property="id"    column="id"    />
+        <result property="buttonId"    column="button_id"    />
+        <result property="type"    column="type"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="createdDate"    column="created_date"    />
+    </resultMap>
+
+    <sql id="selectAppIndexPermissionVo">
+        select id, button_id, type, order_num, created_date from aomygod.app_index_permission
+    </sql>
+
+    <select id="selectAppIndexPermissionList" parameterType="AppIndexPermission" resultMap="AppIndexPermissionResult">
+        <include refid="selectAppIndexPermissionVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="createdDate != null "> and created_date = #{createdDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectAppIndexPermissionById" parameterType="Long" resultMap="AppIndexPermissionResult">
+        <include refid="selectAppIndexPermissionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAppIndexPermission" parameterType="AppIndexPermission" useGeneratedKeys="true" keyProperty="id">
+        insert into aomygod.app_index_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buttonId != null ">button_id,</if>
+            <if test="type != null  and type != ''">type,</if>
+            <if test="orderNum != null ">order_num,</if>
+            <if test="createdDate != null ">created_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buttonId != null ">#{buttonId},</if>
+            <if test="type != null  and type != ''">#{type},</if>
+            <if test="orderNum != null ">#{orderNum},</if>
+            <if test="createdDate != null ">#{createdDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAppIndexPermission" parameterType="AppIndexPermission">
+        update aomygod.app_index_permission
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buttonId != null ">button_id = #{buttonId},</if>
+            <if test="type != null  and type != ''">type = #{type},</if>
+            <if test="orderNum != null ">order_num = #{orderNum},</if>
+            <if test="createdDate != null ">created_date = #{createdDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAppIndexPermissionById" parameterType="Long">
+        delete from aomygod.app_index_permission where id = #{id}
+    </delete>
+
+    <delete id="deleteAppIndexPermissionByIds" parameterType="String">
+        delete from aomygod.app_index_permission where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

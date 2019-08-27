@@ -15,11 +15,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="extend"    column="extend"    />
         <result property="url"    column="url"    />
         <result property="type"    column="type"    />
+        <result property="orderNum"    column="order_num"    />
         <result property="createdDate"    column="created_date"    />
     </resultMap>
 
     <sql id="selectAppIndexButtonVo">
-        select id, region, classify, title, icon, android_type, ios_type, extend, url, type, created_date from aomygod.app_index_button
+        select id, region, classify, title, icon, android_type, ios_type, extend, url, type,order_num, created_date from aomygod.app_index_button
     </sql>
 
     <select id="selectAppIndexButtonList" parameterType="AppIndexButton" resultMap="AppIndexButtonResult">
@@ -48,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="extend != null  and extend != ''">extend,</if>
             <if test="url != null  and url != ''">url,</if>
             <if test="type != null  and type != ''">type,</if>
+            <if test="orderNum != null  and orderNum != ''">order_num,</if>
             <if test="createdDate != null ">created_date,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -60,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="extend != null  and extend != ''">#{extend},</if>
             <if test="url != null  and url != ''">#{url},</if>
             <if test="type != null  and type != ''">#{type},</if>
+            <if test="orderNum != null  and orderNum != ''">#{orderNum},</if>
             <if test="createdDate != null ">#{createdDate},</if>
          </trim>
     </insert>
@@ -76,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="extend != null  and extend != ''">extend = #{extend},</if>
             <if test="url != null  and url != ''">url = #{url},</if>
             <if test="type != null  and type != ''">type = #{type},</if>
+            <if test="orderNum != null  and orderNum != ''">order_num = #{orderNum},</if>
             <if test="createdDate != null ">created_date = #{createdDate},</if>
         </trim>
         where id = #{id}

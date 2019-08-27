@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('列表')"/>
-    <th:block th:include="include :: select2-css"/>
+    <th:block th:include="include :: header('权限分组列表')"/>
 </head>
 <body class="gray-bg">
 <div class="container-div">
+
     <div class="row">
         <div class="col-sm-12 search-collapse">
             <form id="formId">
                 <div class="select-list">
                     <ul>
                         <li>
-                            <input type="hidden" id="activityId" name="activityId"/>
-                            服务：<input type="text" id="activityIdName" placeholder="请选择" onclick="selectList()"/>
+                            权限类型：
+                            <select name="type" th:with="type=${@dict.getType('app_index_permission')}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                        th:value="${dict.dictValue}"></option>
+                            </select>
                         </li>
                         <li class="select-time">
-                            <label>创建时间： </label>
-                            <input type="text" class="time-input" id="startCreatedDate" placeholder="开始"
+                            <label>创建时间：</label>
+                            <input type="text" class="time-input" id="startTime" placeholder="开始时间"
                                    name="params[beginCreatedDate]"/>
                             <span>-</span>
-                            <input type="text" class="time-input" id="endCreatedDate" placeholder="结束"
+                            <input type="text" class="time-input" id="endTime" placeholder="结束时间"
                                    name="params[endCreatedDate]"/>
                         </li>
                         <li>
@@ -35,17 +39,19 @@
         </div>
 
         <div class="btn-group-sm" id="toolbar" role="group">
-            <!--<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="party:activityUser:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="appExtend:permission:add">
                 <i class="fa fa-plus"></i> 添加
             </a>
-            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="party:activityUser:edit">
+            <a class="btn btn-primary single disabled" onclick="$.operate.edit()"
+               shiro:hasPermission="appExtend:permission:edit">
                 <i class="fa fa-edit"></i> 修改
-            </a>-->
-            <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
-               shiro:hasPermission="party:activityUser:remove">
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
+               shiro:hasPermission="appExtend:permission:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="party:activityUser:export">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="appExtend:permission:export">
                 <i class="fa fa-download"></i> 导出
             </a>
         </div>
@@ -53,13 +59,16 @@
             <table id="bootstrap-table" data-mobile-responsive="true"></table>
         </div>
     </div>
+
+
 </div>
-<div th:include="include :: footer"></div>
-<th:block th:include="include :: select2-js"/>
+<th:block th:include="include :: footer"/>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('party:activityUser:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('party:activityUser:remove')}]];
-    var prefix = ctx + "party/activityUser";
+    var editFlag = [[${@permission.hasPermi('appExtend:permission:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('appExtend:permission:remove')}]];
+    var typeDatas = [[${@dict.getType('app_index_permission')}]];
+    var typeButtonDatas = [[${@dict.getType('app_index_button_type')}]];
+    var prefix = ctx + "appExtend/permission";
 
     $(function () {
         var options = {
@@ -68,44 +77,34 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            modalName: "",
-            showExport: true,
+            modalName: "权限分组",
             columns: [{
                 checkbox: true
-                // radio: true,
             },
                 {
                     field: 'id',
-                    title: '',
+                    title: 'id',
                     visible: false
                 },
                 {
-                    field: 'agency.name',
-                    title: '项目',
-                    sortable: true
-                },
-                {
-                    field: 'activity.name',
-                    title: '服务',
-                    sortable: true
-                },
-                {
-                    field: 'appUserId',
-                    title: '用户ID',
-                    sortable: true
-                },
-                {
-                    field: 'pics',
-                    title: '用户图片',
+                    field: 'type',
+                    title: '权限类型',
                     formatter: function (value, row, index) {
-                        return $.table.imageUrlView(value);
+                        return $.table.selectDictLabel(typeDatas, value);
                     }
                 },
                 {
-                    field: 'createdDate',
-                    title: '创建时间',
-                    sortable: true
+                    field: 'appIndexButton.type',
+                    title: '功能类型',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(typeButtonDatas, value);
+                    }
                 },
+                {
+                    field: 'appIndexButton.title',
+                    title: '功能名称'
+                },
+
                 {
                     title: '操作',
                     align: 'center',
@@ -121,14 +120,8 @@
     });
 
 
-    function selectList() {
-        $.modal.open("选择", ctx + "party/activity" + "/select");
-    }
 
-    function setSelectVals(ids, names) {
-        $('#activityId').val(ids);
-        $('#activityIdName').val(names);
-    }
+
 
 </script>
 </body>
