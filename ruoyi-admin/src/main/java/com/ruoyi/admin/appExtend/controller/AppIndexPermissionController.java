@@ -132,6 +132,7 @@ public class AppIndexPermissionController extends BaseController
 	{
 		AppIndexPermission appIndexPermission = appIndexPermissionService.selectAppIndexPermissionById(id);
 		mmap.put("appIndexPermission", appIndexPermission);
+		mmap.put("appIndexButton", iAppIndexButtonService.selectAppIndexButtonById(appIndexPermission.getButtonId()));
 		return prefix + "/edit";
 	}
 
