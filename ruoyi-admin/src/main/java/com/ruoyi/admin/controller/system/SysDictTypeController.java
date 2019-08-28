@@ -20,30 +20,27 @@ import java.util.List;
 
 /**
  * 数据字典信息
- * 
+ *
  * @author ruoyi
  */
 @Controller
 @RequestMapping("/system/dict")
-public class SysDictTypeController extends BaseController
-{
-    private String prefix = "system/dict/type";
+public class SysDictTypeController extends BaseController {
+    private String prefix = "system/dict/type" ;
 
     @Autowired
     private ISysDictTypeService dictTypeService;
 
     @RequiresPermissions("system:dict:view")
     @GetMapping()
-    public String dictType()
-    {
-        return prefix + "/type";
+    public String dictType() {
+        return prefix + "/type" ;
     }
 
     @PostMapping("/list")
     @RequiresPermissions("system:dict:list")
     @ResponseBody
-    public TableDataInfo list(SysDictType dictType)
-    {
+    public TableDataInfo list(SysDictType dictType) {
         startPage();
         List<SysDictType> list = dictTypeService.selectDictTypeList(dictType);
         return getDataTable(list);
@@ -53,8 +50,7 @@ public class SysDictTypeController extends BaseController
     @RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(SysDictType dictType)
-    {
+    public AjaxResult export(SysDictType dictType) {
 
         List<SysDictType> list = dictTypeService.selectDictTypeList(dictType);
         ExcelUtil<SysDictType> util = new ExcelUtil<SysDictType>(SysDictType.class);
@@ -65,9 +61,8 @@ public class SysDictTypeController extends BaseController
      * 新增字典类型
      */
     @GetMapping("/add")
-    public String add()
-    {
-        return prefix + "/add";
+    public String add() {
+        return prefix + "/add" ;
     }
 
     /**
@@ -77,8 +72,7 @@ public class SysDictTypeController extends BaseController
     @RequiresPermissions("system:dict:add")
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SysDictType dict)
-    {
+    public AjaxResult addSave(SysDictType dict) {
         dict.setCreateBy(ShiroUtils.getLoginName());
         return toAjax(dictTypeService.insertDictType(dict));
     }
@@ -87,10 +81,9 @@ public class SysDictTypeController extends BaseController
      * 修改字典类型
      */
     @GetMapping("/edit/{dictId}")
-    public String edit(@PathVariable("dictId") Long dictId, ModelMap mmap)
-    {
+    public String edit(@PathVariable("dictId") Long dictId, ModelMap mmap) {
         mmap.put("dict", dictTypeService.selectDictTypeById(dictId));
-        return prefix + "/edit";
+        return prefix + "/edit" ;
     }
 
     /**
@@ -100,8 +93,7 @@ public class SysDictTypeController extends BaseController
     @RequiresPermissions("system:dict:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(SysDictType dict)
-    {
+    public AjaxResult editSave(SysDictType dict) {
         dict.setUpdateBy(ShiroUtils.getLoginName());
         return toAjax(dictTypeService.updateDictType(dict));
     }
@@ -110,14 +102,10 @@ public class SysDictTypeController extends BaseController
     @RequiresPermissions("system:dict:remove")
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        try
-        {
+    public AjaxResult remove(String ids) {
+        try {
             return toAjax(dictTypeService.deleteDictTypeByIds(ids));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return error(e.getMessage());
         }
     }
@@ -127,11 +115,10 @@ public class SysDictTypeController extends BaseController
      */
     @RequiresPermissions("system:dict:list")
     @GetMapping("/detail/{dictId}")
-    public String detail(@PathVariable("dictId") Long dictId, ModelMap mmap)
-    {
+    public String detail(@PathVariable("dictId") Long dictId, ModelMap mmap) {
         mmap.put("dict", dictTypeService.selectDictTypeById(dictId));
         mmap.put("dictList", dictTypeService.selectDictTypeAll());
-        return "system/dict/data/data";
+        return "system/dict/data/data" ;
     }
 
     /**
@@ -139,23 +126,19 @@ public class SysDictTypeController extends BaseController
      */
     @PostMapping("/checkDictTypeUnique")
     @ResponseBody
-    public String checkDictTypeUnique(SysDictType dictType)
-    {
+    public String checkDictTypeUnique(SysDictType dictType) {
         return dictTypeService.checkDictTypeUnique(dictType);
     }
-
 
 
     /**
      * 选择字典树
      */
     @GetMapping("/selectDictTree/{columnId}/{dictType}")
-    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType,
-                                 ModelMap mmap)
-    {
+    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType, ModelMap mmap) {
         mmap.put("columnId", columnId);
         mmap.put("dict", dictTypeService.selectDictTypeByType(dictType));
-        return prefix + "/tree";
+        return prefix + "/tree" ;
     }
 
     /**
@@ -163,8 +146,7 @@ public class SysDictTypeController extends BaseController
      */
     @GetMapping("/treeData")
     @ResponseBody
-    public List<Ztree> treeData()
-    {
+    public List<Ztree> treeData() {
         List<Ztree> ztrees = dictTypeService.selectDictTree(new SysDictType());
         return ztrees;
     }
