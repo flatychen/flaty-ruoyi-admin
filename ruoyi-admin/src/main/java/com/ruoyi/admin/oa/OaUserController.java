@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/oa/user")
 public class OaUserController extends BaseController {
-    private String prefix = "oa/";
+    private String prefix = "oa";
 
 	@Autowired
 	OaService oaService;
