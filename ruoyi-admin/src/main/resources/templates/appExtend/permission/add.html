@@ -18,8 +18,8 @@
 		<div class="form-group">
             <label class="col-sm-3 control-label">权限按钮：</label>
             <div class="col-sm-8">
-                <input  id="buttonIdName" name="buttonIdName" th:field="点击选择" class="form-control"   onclick="selectList()" type="text">
-                <input id="buttonId" name="buttonId" th:field="*{buttonId}" class="form-control"   type="hidden">
+                <input  id="buttonIdName" name="buttonIdName" value="点击选择" class="form-control"   onclick="selectList()" type="text">
+                <input id="buttonId" name="buttonId"  class="form-control"   type="hidden">
             </div>
         </div>
 
@@ -39,14 +39,17 @@
         focusCleanup: true
     });
 
+
     function selectList(){
-        $.modal.open("选择",  ctx + "/appExtend/indexButton" + "/select");
+        $.modal.open("选择",  ctx + "appExtend/indexButton" + "/select");
     }
 
     function setSelectVals(ids,names){
-        $('#activityId').val(ids);
-        $('#activityIdName').val(names);
+        $('#buttonId').val(ids);
+        $('#buttonIdName').val(names);
     }
+
+
 
 
 
