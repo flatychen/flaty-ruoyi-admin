@@ -2,7 +2,6 @@ package com.ruoyi.admin.appExtend.controller;
 
 import com.ruoyi.admin.appExtend.domain.AppIndexButton;
 import com.ruoyi.admin.appExtend.service.IAppIndexButtonService;
-import com.ruoyi.admin.core.dept.DeptData;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -55,7 +54,7 @@ public class AppIndexButtonController extends BaseController
 	 */
 	@PostMapping("/select/list")
 	@ResponseBody
-	public TableDataInfo selectList(@DeptData SysDept sysDept,AppIndexButton appIndexButton)
+	public TableDataInfo selectList(SysDept sysDept,AppIndexButton appIndexButton)
 	{
 		startPage();
 		List<AppIndexButton> list = appIndexButtonService.selectAppIndexButtonList(appIndexButton);

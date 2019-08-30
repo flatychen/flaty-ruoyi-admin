@@ -18,7 +18,8 @@
 		<div class="form-group">
             <label class="col-sm-3 control-label">权限按钮：</label>
             <div class="col-sm-8">
-                <input name="buttonId" class="form-control" type="text">
+                <input  id="buttonIdName" name="buttonIdName" th:field="点击选择" class="form-control"   onclick="selectList()" type="text">
+                <input id="buttonId" name="buttonId" th:field="*{buttonId}" class="form-control"   type="hidden">
             </div>
         </div>
 
