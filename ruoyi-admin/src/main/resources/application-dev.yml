@@ -64,6 +64,6 @@ spring:
 user-center:
     url: http://admin-user-center-test.aylives.cn/
     rootId: 10098
-#logging:
-#    level:
-#        druid.sql.Statement: debug
+logging:
+    level:
+        druid.sql.Statement: debug

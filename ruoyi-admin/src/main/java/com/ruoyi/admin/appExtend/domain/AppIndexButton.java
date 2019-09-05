@@ -41,7 +41,6 @@ public class AppIndexButton extends BaseEntity {
      */
     @Column(name = "classify")
     @Excel(name = "区域按钮分类", prompt = "区域按钮分类")
-
     private String classify;
     /**
      * 标题

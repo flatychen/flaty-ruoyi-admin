@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectAppIndexButtonVo"/>
         <where>  
             <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="classify != null  and classify != ''"> and classify = #{classify}</if>
             <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
             <if test="createdDate != null "> and created_date = #{createdDate}</if>
         </where>
