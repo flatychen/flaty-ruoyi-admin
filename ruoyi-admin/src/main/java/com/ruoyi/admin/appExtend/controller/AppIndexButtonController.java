@@ -112,6 +112,7 @@ public class AppIndexButtonController extends BaseController
 	@ResponseBody
 	public AjaxResult addSave(AppIndexButton appIndexButton)
 	{
+		appIndexButton.setAndroidType(appIndexButton.getIosType());
 		return toAjax(appIndexButtonService.insertAppIndexButton(appIndexButton));
 	}
 
@@ -135,6 +136,7 @@ public class AppIndexButtonController extends BaseController
 	@ResponseBody
 	public AjaxResult editSave(AppIndexButton appIndexButton)
 	{
+		appIndexButton.setAndroidType(appIndexButton.getIosType());
 		return toAjax(appIndexButtonService.updateAppIndexButton(appIndexButton));
 	}
 	
