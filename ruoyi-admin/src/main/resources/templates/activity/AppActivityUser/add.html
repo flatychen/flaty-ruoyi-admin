@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('新增app活动用户列表')" />
+	<th:block th:include="include :: bootstrap-fileinput-css"/>
+																						</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+	<form class="form-horizontal m" id="form-AppActivityUser-add">
+																																						</form>
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: flaty-fileinput-js"/>
+																						<script type="text/javascript">
+	var prefix = ctx + "activity/AppActivityUser"
+	$("#form-AppActivityUser-add").validate({
+		focusCleanup: true
+	});
+
+	function submitHandler() {
+		if ($.validate.form()) {
+			$.operate.save(prefix + "/add", $('#form-AppActivityUser-add').serialize());
+		}
+	}
+																																							</script>
+</body>
+</html>

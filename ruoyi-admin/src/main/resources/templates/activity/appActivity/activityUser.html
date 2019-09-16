@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('列表')"/>
+    <th:block th:include="include :: select2-css"/>
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                       <!-- <li>
+                            <input type="hidden" id="activityId" name="activityId"/>
+                            服务：<input type="text" id="activityIdName" placeholder="请选择" onclick="selectList()"/>
+                        </li>-->
+                        <li class="select-time">
+                            <label>创建时间： </label>
+                            <input type="text" class="time-input" id="startCreatedDate" placeholder="开始"
+                                   name="params[beginCreatedDate]"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endCreatedDate" placeholder="结束"
+                                   name="params[endCreatedDate]"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="party:activityUser:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<th:block th:include="include :: select2-js"/>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('party:activityUser:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('party:activityUser:remove')}]];
+    var prefix = ctx + "party/activityUser";
+
+    $(function () {
+        var options = {
+            url: prefix + "/list",
+            exportUrl: prefix + "/export",
+            modalName: "",
+            showExport: true,
+            columns: [{
+                checkbox: true
+                // radio: true,
+            },
+                {
+                    field: 'id',
+                    title: '',
+                    visible: false
+                },
+                {
+                    field: 'agency.name',
+                    title: '项目',
+                    sortable: true
+                },
+                {
+                    field: 'activity.name',
+                    title: '服务',
+                    sortable: true
+                },
+                {
+                    field: 'appUserId',
+                    title: '用户ID',
+                    sortable: true
+                },
+                {
+                    field: 'pics',
+                    title: '用户图片',
+                    formatter: function (value, row, index) {
+                        return $.table.imageUrlView(value);
+                    }
+                },
+                {
+                    field: 'createdDate',
+                    title: '创建时间',
+                    sortable: true
+                }
+               ]
+        };
+        $.table.init(options);
+    });
+
+
+</script>
+</body>
+</html>

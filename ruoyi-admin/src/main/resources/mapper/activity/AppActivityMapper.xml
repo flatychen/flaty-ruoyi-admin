@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.activity.mapper.AppActivityMapper">
+    
+    <resultMap type="AppActivity" id="ActivityResult">
+        <result property="id"    column="id"    />
+        <result property="bgImg"    column="bg_img"    />
+        <result property="title"    column="title"    />
+        <result property="desp"    column="desp"    />
+        <result property="beginDate"    column="begin_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="createdDate"    column="created_date"    />
+        <result property="totalPeople"    column="total_people"    />
+        <result property="type"    column="type"    />
+        <result property="url"    column="url"    />
+    </resultMap>
+
+    <sql id="selectActivityVo">
+        select id, bg_img, title, desp, begin_date, end_date, created_date, total_people, type, url
+        from aoyuejia_h5.activity
+    </sql>
+
+    <select id="selectActivityList" parameterType="Activity" resultMap="ActivityResult">
+        <include refid="selectActivityVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="createdDate != null "> and created_date = #{createdDate}</if>
+            <if test="type != null "> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectActivityById" parameterType="Long" resultMap="ActivityResult">
+        <include refid="selectActivityVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertActivity" parameterType="Activity" useGeneratedKeys="true" keyProperty="id">
+        insert into aoyuejia_h5.activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bgImg != null  and bgImg != ''">bg_img,</if>
+            <if test="title != null  and title != ''">title,</if>
+            <if test="desp != null  and desp != ''">desp,</if>
+            <if test="beginDate != null ">begin_date,</if>
+            <if test="endDate != null ">end_date,</if>
+            <if test="createdDate != null ">created_date,</if>
+            <if test="totalPeople != null ">total_people,</if>
+            <if test="type != null ">type,</if>
+            <if test="url != null  and url != ''">url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bgImg != null  and bgImg != ''">#{bgImg},</if>
+            <if test="title != null  and title != ''">#{title},</if>
+            <if test="desp != null  and desp != ''">#{desp},</if>
+            <if test="beginDate != null ">#{beginDate},</if>
+            <if test="endDate != null ">#{endDate},</if>
+            <if test="createdDate != null ">#{createdDate},</if>
+            <if test="totalPeople != null ">#{totalPeople},</if>
+            <if test="type != null ">#{type},</if>
+            <if test="url != null  and url != ''">#{url},</if>
+         </trim>
+    </insert>
+
+    <update id="updateActivity" parameterType="Activity">
+        update aoyuejia_h5.activity
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bgImg != null  and bgImg != ''">bg_img = #{bgImg},</if>
+            <if test="title != null  and title != ''">title = #{title},</if>
+            <if test="desp != null  and desp != ''">desp = #{desp},</if>
+            <if test="beginDate != null ">begin_date = #{beginDate},</if>
+            <if test="endDate != null ">end_date = #{endDate},</if>
+            <if test="createdDate != null ">created_date = #{createdDate},</if>
+            <if test="totalPeople != null ">total_people = #{totalPeople},</if>
+            <if test="type != null ">type = #{type},</if>
+            <if test="url != null  and url != ''">url = #{url},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteActivityById" parameterType="Long">
+        delete from aoyuejia_h5.activity where id = #{id}
+    </delete>
+
+    <delete id="deleteActivityByIds" parameterType="String">
+        delete from aoyuejia_h5.activity where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
