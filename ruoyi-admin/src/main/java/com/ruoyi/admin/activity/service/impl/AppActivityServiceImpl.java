@@ -1,6 +1,7 @@
 package com.ruoyi.admin.activity.service.impl;
-
 import com.ruoyi.admin.activity.domain.AppActivity;
+import com.ruoyi.admin.activity.domain.AppActivityAgency;
+import com.ruoyi.admin.activity.mapper.AppActivityAgencyMapper;
 import com.ruoyi.admin.activity.mapper.AppActivityMapper;
 import com.ruoyi.admin.activity.service.IAppActivityService;
 import com.ruoyi.admin.core.impl.AbstractService;
@@ -22,6 +23,9 @@ public class AppActivityServiceImpl extends AbstractService<AppActivity> impleme
 
     @Autowired
     private AppActivityMapper activityMapper;
+
+    @Autowired
+    AppActivityAgencyMapper appActivityAgencyMapper;
 
     /**
      * 查询app活动
@@ -54,7 +58,18 @@ public class AppActivityServiceImpl extends AbstractService<AppActivity> impleme
     @Override
     public int insertActivity(AppActivity activity) {
         activity.setCreatedDate(new Date());
-        return activityMapper.insertActivity(activity);
+
+
+        int result = activityMapper.insertActivity(activity);
+
+
+        AppActivityAgency appActivityAgency = new AppActivityAgency();
+        appActivityAgency.setActivityId(activity.getId());
+        appActivityAgency.setAgencyId(0L);
+
+        appActivityAgencyMapper.insert(appActivityAgency);
+
+        return result;
     }
 
     /**
