@@ -12,6 +12,9 @@ import com.ruoyi.common.core.domain.BaseEntity;
  */
 public class SysRole extends BaseEntity
 {
+
+    public static String SUPER_ROOT = "root";
+
     private static final long serialVersionUID = 1L;
 
     /** 角色ID */

@@ -1,13 +1,15 @@
 package com.ruoyi.admin.party.service.impl;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.ruoyi.admin.core.impl.AbstractService;
-import com.ruoyi.admin.party.mapper.ActivityMapper;
 import com.ruoyi.admin.party.domain.Activity;
+import com.ruoyi.admin.party.mapper.ActivityMapper;
 import com.ruoyi.admin.party.service.IActivityService;
 import com.ruoyi.common.core.text.Convert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 党建服务 服务层实现
@@ -54,6 +56,7 @@ public class ActivityServiceImpl extends AbstractService<Activity> implements IA
 	@Override
 	public int insertActivity(Activity activity)
 	{
+		activity.setCreatedDate(new Date());
 	    return activityMapper.insertActivity(activity);
 	}
 	
