@@ -102,15 +102,15 @@ public class SysRoleServiceImpl implements ISysRoleService {
         return SpringUtils.getAopProxy(this).selectRoleList(new SysRole());
     }
 
-    @Override
-    public List<SysRole> selectRoleAllFilterAdmin(SysUser sysUser) {
-        List<SysRole> sysRoles = this.selectRoleAll();
+//    @Override
+//    public List<SysRole> selectRoleAllFilterAdmin(SysUser sysUser) {
+//        List<SysRole> sysRoles = this.selectRoleAll();
         // 非管理员，过滤超级管理权限
 //        if (!sysUser.isAdmin()) {
 //            return this.selectRoleAll().stream().filter(sysRole -> !sysRole.getRoleKey().equalsIgnoreCase(SysRole.SUPER_ROOT)).collect(Collectors.toList());
 //        }
-        return sysRoles;
-    }
+//        return sysRoles;
+//    }
 
     /**
      * 通过角色ID查询角色
