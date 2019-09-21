@@ -90,8 +90,10 @@ public class AppActivity extends BaseEntity {
      */
     @Column(name = "url")
     @Excel(name = "活动详情链接，一般用于重要活动", prompt = "活动详情链接，一般用于重要活动")
-
     private String url;
+
+
+    private String place;
 
 
 }

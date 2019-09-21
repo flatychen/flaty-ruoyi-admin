@@ -15,10 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="totalPeople"    column="total_people"    />
         <result property="type"    column="type"    />
         <result property="url"    column="url"    />
+        <result property="place"    column="place"    />
     </resultMap>
 
     <sql id="selectActivityVo">
-        select id, bg_img, title, desp, begin_date, end_date, created_date, total_people, type, url
+        select id, bg_img, title, desp, begin_date, end_date, created_date, total_people, type, url,place
         from aoyuejia_h5.activity
     </sql>
 
@@ -48,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="totalPeople != null ">total_people,</if>
             <if test="type != null ">type,</if>
             <if test="url != null  and url != ''">url,</if>
+            <if test="place != null  and place != ''">place,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="bgImg != null  and bgImg != ''">#{bgImg},</if>
@@ -59,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="totalPeople != null ">#{totalPeople},</if>
             <if test="type != null ">#{type},</if>
             <if test="url != null  and url != ''">#{url},</if>
+            <if test="place != null  and place != ''">#{place},</if>
          </trim>
     </insert>
 
@@ -74,6 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="totalPeople != null ">total_people = #{totalPeople},</if>
             <if test="type != null ">type = #{type},</if>
             <if test="url != null  and url != ''">url = #{url},</if>
+            <if test="place != null  and place != ''">place = #{place},</if>
         </trim>
         where id = #{id}
     </update>
