@@ -73,7 +73,7 @@ Temporary Items
 .idea
 *.iml
 out
-gen
+#gen
 ### TortoiseGit template
 # Project-level settings
 /.tgitconfig
