@@ -9,6 +9,7 @@
     <div class="row">
         <div class="col-sm-12 search-collapse">
             <form id="formId">
+                <input type="hidden" id="activityId" name="activityId" th:value="${activity.id}">
                 <div class="select-list">
                     <ul>
                         <li>
@@ -27,7 +28,7 @@
         </div>
 
         <div class="btn-group-sm" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="activity:AppActivityUser:add">
+           <!-- <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="activity:AppActivityUser:add">
                 <i class="fa fa-plus"></i> 添加
             </a>
             <a class="btn btn-primary single disabled" onclick="$.operate.edit()"
@@ -37,7 +38,7 @@
             <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
                shiro:hasPermission="activity:AppActivityUser:remove">
                 <i class="fa fa-remove"></i> 删除
-            </a>
+            </a>-->
             <a class="btn btn-warning" onclick="$.table.exportExcel()"
                shiro:hasPermission="activity:AppActivityUser:export">
                 <i class="fa fa-download"></i> 导出
@@ -84,10 +85,10 @@
                     field: 'phone',
                     title: '手机号'
                 },
-                {
+             /*   {
                     field: 'roomId',
                     title: '房屋id'
-                },
+                },*/
                 {
                     field: 'roomName',
                     title: '房屋地址'

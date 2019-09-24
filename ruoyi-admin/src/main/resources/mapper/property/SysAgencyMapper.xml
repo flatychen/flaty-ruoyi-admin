@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="dEPTH"    column="DEPTH"    />
         <result property="tYPE"    column="TYPE"    />
         <result property="isVerifi"    column="IS_VERIFI"    />
-        <result property="nAME"    column="NAME"    />
+        <result property="name"    column="NAME"    />
         <result property="aDDRESS"    column="ADDRESS"    />
         <result property="cONTACT"    column="CONTACT"    />
         <result property="workTime"    column="WORK_TIME"    />

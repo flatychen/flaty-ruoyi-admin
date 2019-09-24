@@ -3,15 +3,14 @@ package com.ruoyi.admin.core.join;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -24,7 +23,7 @@ import java.util.concurrent.ConcurrentMap;
 public class ServiceJoinHelper {
 
 
-    private static final int DEFAULT_LIST_SIZE = 32;
+    private static final int DEFAULT_LIST_SIZE = 128;
 
 
     /**
@@ -69,7 +68,6 @@ public class ServiceJoinHelper {
         }
 
         // 2. 查询源field ,与上述目标field保持顺序一致
-
         List<Field> sourceFields = reflectSourceFields(clazz, targetFields);
 
         // 3. 建立 target field 与 source field  映射
@@ -132,7 +130,7 @@ public class ServiceJoinHelper {
         Map<Field, List<Integer>> sourceValues = Maps.newHashMapWithExpectedSize(DEFAULT_LIST_SIZE);
         // 4. 获取源field字段值的列表
         for (Field sourceField : sourceFields) {
-            List<Integer> values = Lists.newArrayListWithCapacity(DEFAULT_LIST_SIZE);
+            Set<Integer> values = Sets.newHashSetWithExpectedSize(DEFAULT_LIST_SIZE);
             for (S bean : beans) {
                 Object sourceVal = null;
                 try {
@@ -143,7 +141,7 @@ public class ServiceJoinHelper {
                 values.add(new Integer(sourceVal.toString()));
                 sourceFieldValueMap.put(new BeanField<>(sourceField, bean), sourceVal);
             }
-            sourceValues.put(sourceField, values);
+            sourceValues.put(sourceField, new ArrayList<>(values));
         }
         return sourceValues;
     }
