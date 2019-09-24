@@ -28,7 +28,6 @@ public class AppActivityUser extends BaseEntity {
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Excel(name = "id", prompt = "id")
     private Integer id;
 
 
@@ -44,7 +43,6 @@ public class AppActivityUser extends BaseEntity {
 
 
     @Column(name = "activity_id")
-    @Excel(name = "活动id")
     private Integer activityId;
     /**
      * null

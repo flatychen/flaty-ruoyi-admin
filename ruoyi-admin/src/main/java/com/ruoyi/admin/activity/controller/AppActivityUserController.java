@@ -57,9 +57,6 @@ public class AppActivityUserController extends BaseController {
         startPage();
         List<AppActivityUser> list = appActivityUserService.selectAppActivityUserList(appActivityUser);
         ServiceJoinHelper.join(AppActivityUser.class,list,iSysAgencyService);
-
-        List<AppActivityUserExcle> target = orikaMapperFacade.mapAsList(list, AppActivityUserExcle.class);
-
         return getDataTable(list);
     }
 
@@ -73,9 +70,7 @@ public class AppActivityUserController extends BaseController {
     public AjaxResult export(AppActivityUser appActivityUser) {
         List<AppActivityUser> list = appActivityUserService.selectAppActivityUserList(appActivityUser);
         ServiceJoinHelper.join(AppActivityUser.class,list,iSysAgencyService);
-
         List<AppActivityUserExcle> target = orikaMapperFacade.mapAsList(list, AppActivityUserExcle.class);
-
         ExcelUtil<AppActivityUserExcle> util = new ExcelUtil<AppActivityUserExcle>(AppActivityUserExcle.class);
         return util.exportExcel(target, "AppActivityUser");
     }
