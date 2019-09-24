@@ -19,7 +19,7 @@ import java.util.Date;
  * @date 2019-09-23
  */
 @Data
-@Table(name = "aomygod.activity_extend")
+@Table(name = "aoyuejia_h5.activity_extend")
 public class ActivityExtend extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
