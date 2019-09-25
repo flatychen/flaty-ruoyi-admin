@@ -69,7 +69,7 @@
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('activity:activity:edit')}]];
     var removeFlag = [[${@permission.hasPermi('activity:activity:remove')}]];
-    var viewFlag = [[${@permission.hasPermi('activity:activity:view')}]];
+    var viewFlag = [[${@permission.hasPermi('activity:activity:list')}]];
     var typeDatas = [[${@dict.getType('h5_activity_type')}]];
     var prefix = ctx + "activity/activity";
 
