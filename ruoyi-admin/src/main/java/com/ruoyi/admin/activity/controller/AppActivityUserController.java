@@ -39,7 +39,7 @@ public class AppActivityUserController extends BaseController {
     @Autowired
     ISysAgencyService iSysAgencyService;
 
-    @RequiresPermissions("activity:AppActivityUser:view")
+    @RequiresPermissions("activity:activity:list")
     @GetMapping("/{activityId}")
     public String appActivityUser(@PathVariable Long activityId, ModelMap mmap) {
         mmap.put("activity", iAppActivityService.selectActivityById(activityId));
@@ -64,7 +64,7 @@ public class AppActivityUserController extends BaseController {
     /**
      * 导出app活动用户列表列表
      */
-    @RequiresPermissions("activity:AppActivityUser:export")
+//    @RequiresPermissions("activity:AppActivityUser:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(AppActivityUser appActivityUser) {
