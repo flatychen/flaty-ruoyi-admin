@@ -50,7 +50,7 @@ public class AppActivityUserController extends BaseController {
     /**
      * 查询app活动用户列表列表
      */
-    @RequiresPermissions("activity:AppActivityUser:list")
+    @RequiresPermissions("activity:activity:list")
     @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(AppActivityUser appActivityUser) {
