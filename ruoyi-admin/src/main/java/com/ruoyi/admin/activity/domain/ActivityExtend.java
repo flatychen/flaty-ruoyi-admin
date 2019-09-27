@@ -50,5 +50,10 @@ public class ActivityExtend extends BaseEntity {
 
     private String value;
 
+    /** $column.columnComment */
+    @Column(name = "order_num")
+    @Excel(name = "$column.columnComment", prompt = "$column.columnComment")
+
+    private Integer orderNum;
 
 }
