@@ -16,10 +16,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="agencyId"    column="agency_id"    />
         <result property="createdDate"    column="created_date"    />
         <result property="appUserId"    column="app_user_id"    />
+
+        <result property="addPartyDate"    column="add_party_date"    />
+        <result property="companyDuty"    column="company_duty"    />
+        <result property="formal"    column="formal"    />
+        <result property="status"    column="status"    />
+
+
     </resultMap>
 	
 	<sql id="selectCheckinVo">
-            select id, name, phone, sex, home_address, current_identity, current_party_branch, checkin_img, agency_id, created_date, app_user_id from aomygod.party_checkin
+            select id, name, phone, sex, home_address, current_identity, current_party_branch,
+                   checkin_img, agency_id, created_date, app_user_id ,add_party_date ,company_duty,formal,status
+                   from aomygod.party_checkin
     </sql>
 	
     <select id="selectCheckinList" parameterType="Checkin" resultMap="CheckinResult">

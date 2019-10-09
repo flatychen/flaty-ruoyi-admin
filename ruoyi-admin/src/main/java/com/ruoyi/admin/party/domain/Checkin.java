@@ -73,12 +73,23 @@ public class Checkin extends BaseEntity {
     @Column(name = "agency_id")
     @Excel(name = "", prompt = "")
     private Integer agencyId;
-    /**
-     *
-     */
+
     @Column(name = "app_user_id")
     @Excel(name = "", prompt = "")
     private Integer appUserId;
+
+
+    @Column(name = "add_party_date")
+    private String addPartyDate;
+
+    @Column(name = "company_duty")
+    private String companyDuty;
+
+    @Column(name = "formal")
+    private Integer formal;
+
+    @Column(name = "status")
+    private Integer status;
 
 
 }
