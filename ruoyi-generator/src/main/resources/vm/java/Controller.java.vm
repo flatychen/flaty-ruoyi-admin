@@ -20,7 +20,7 @@ import cn.aylives.ruoyi.common.core.page.TableDataInfo;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
 import cn.aylives.ruoyi.system.domain.SysDept;
-import cn.aylives.ruoyi.system.domain.DeptData;
+import cn.aylives.ruoyi.admin.core.dept.DeptData;
 /**
  * ${functionName}Controller
  *

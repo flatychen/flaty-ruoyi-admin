@@ -267,9 +267,9 @@ function navSelectDeptTree() {
 function navSelectDeptTreeDoSubmit(index, layero){
 
 	var tree = layero.find("iframe")[0].contentWindow.$._tree;
-	if ($.tree.notAllowParents(tree)) {
-		var body = layer.getChildFrame('body', index);
-		var treeId =body.find('#treeId').val();
+	var body = layer.getChildFrame('body', index)
+	var treeId =body.find('#treeId').val();
+	if ($.tree.notAllowParents(tree) || treeId==10098) {
 		var treeName =body.find('#treeName').val();
 		$.cookie('deptId', treeId||"0");
 		$.cookie('treeName', treeName||"0");
@@ -277,6 +277,7 @@ function navSelectDeptTreeDoSubmit(index, layero){
 		layer.close(index);
 		window.location.reload();
 	}
+
 
 }
 

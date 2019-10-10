@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="currentIdentity != null  and currentIdentity != '' "> and current_identity = #{currentIdentity}</if>
              <if test="currentPartyBranch != null  and currentPartyBranch != '' "> and current_party_branch = #{currentPartyBranch}</if>
              <if test="checkinImg != null  and checkinImg != '' "> and checkin_img = #{checkinImg}</if>
-             <if test="agencyId != null "> and agency_id = #{agencyId}</if>
+             <if test="agencyId != null and agencyId!= -1 "> and agency_id = #{agencyId}</if>
              <if test="createdDate != null "> and created_date = #{createdDate}</if>
              <if test="appUserId != null "> and app_user_id = #{appUserId}</if>
          </where>
