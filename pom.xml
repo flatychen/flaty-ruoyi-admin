@@ -241,16 +241,22 @@
         </plugins>
     </build>
 
-	<repositories>
+
+
+	<!-- maven上传插件 -->
+	<distributionManagement>
 		<repository>
-			<id>public</id>
-			<name>aliyun nexus</name>
-			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
+			<id>nexus-releases</id>
+			<name>NexusReleases</name>
+			<url>http://nexus.dev.aoyuancm.com/repository/maven-releases/</url>
 		</repository>
-	</repositories>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>NexusSnapshots</name>
+			<url>http://nexus.dev.aoyuancm.com/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 
 	<pluginRepositories>
 		<pluginRepository>
