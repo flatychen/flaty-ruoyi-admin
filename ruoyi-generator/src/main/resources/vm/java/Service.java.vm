@@ -2,8 +2,8 @@ package ${packageName}.service;
 
 import ${packageName}.domain.${ClassName};
 import java.util.List;
-import MyMapper;
-import IService;
+import cn.aylives.ruoyi.admin.core.MyMapper;
+import cn.aylives.ruoyi.admin.core.IService;
 
 /**
  * ${functionName}Service接口
