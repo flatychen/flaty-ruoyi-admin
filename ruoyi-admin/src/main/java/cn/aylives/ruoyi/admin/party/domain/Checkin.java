@@ -91,5 +91,8 @@ public class Checkin extends BaseEntity {
     @Column(name = "status")
     private Integer status;
 
+    @Column(name = "reason")
+    private String  reason;
+
 
 }

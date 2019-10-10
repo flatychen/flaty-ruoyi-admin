@@ -22,12 +22,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="formal"    column="formal"    />
         <result property="status"    column="status"    />
 
+        <result property="reason"    column="reason"    />
+
 
     </resultMap>
 	
 	<sql id="selectCheckinVo">
             select id, name, phone, sex, home_address, current_identity, current_party_branch,
-                   checkin_img, agency_id, created_date, app_user_id ,add_party_date ,company_duty,formal,status
+                   checkin_img, agency_id, created_date, app_user_id ,add_party_date ,company_duty,formal,status ,reason
                    from aomygod.party_checkin
     </sql>
 	
@@ -78,6 +80,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="agencyId != null  ">#{agencyId},</if>
 			<if test="createdDate != null  ">#{createdDate},</if>
 			<if test="appUserId != null  ">#{appUserId},</if>
+
+            <if test="status != null  ">#{status},</if>
+            <if test="reason != null  ">#{reason},</if>
+
          </trim>
     </insert>
 	 
@@ -94,6 +100,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="agencyId != null  ">agency_id = #{agencyId},</if>
             <if test="createdDate != null  ">created_date = #{createdDate},</if>
             <if test="appUserId != null  ">app_user_id = #{appUserId},</if>
+
+            <if test="status != null  ">status = #{status},</if>
+            <if test="reason != null  "> reason = #{reason},</if>
         </trim>
         where id = #{id}
     </update>
