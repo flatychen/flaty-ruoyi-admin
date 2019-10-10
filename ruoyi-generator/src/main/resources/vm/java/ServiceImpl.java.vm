@@ -3,11 +3,11 @@ package ${packageName}.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.admin.core.impl.AbstractService;
+import AbstractService;
 import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;
-import com.ruoyi.common.core.text.Convert;
+import cn.aylives.ruoyi.common.core.text.Convert;
 /**
  * ${functionName}Service业务层处理
  *

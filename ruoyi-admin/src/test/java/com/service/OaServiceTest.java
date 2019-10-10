@@ -2,9 +2,9 @@ package com.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.ruoyi.admin.RuoYiApplication;
-import com.ruoyi.admin.oa.model.OaResult;
-import com.ruoyi.admin.oa.service.impl.OaServiceImpl;
+import cn.aylives.ruoyi.admin.RuoYiApplication;
+import cn.aylives.ruoyi.admin.oa.model.OaResult;
+import cn.aylives.ruoyi.admin.oa.service.impl.OaServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

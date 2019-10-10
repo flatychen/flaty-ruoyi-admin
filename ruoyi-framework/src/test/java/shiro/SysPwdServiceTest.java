@@ -1,6 +1,6 @@
 package shiro;
 
-import com.ruoyi.framework.shiro.service.SysPasswordService;
+import cn.aylives.ruoyi.framework.shiro.service.SysPasswordService;
 import org.junit.Test;
 
 public class SysPwdServiceTest {

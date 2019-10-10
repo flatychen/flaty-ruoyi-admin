@@ -31,7 +31,7 @@ server:
 # 日志配置
 logging:
   level:
-    com.ruoyi: info
+    cn.aylives.ruoyi: info
     org.springframework: info
 
 
@@ -83,13 +83,13 @@ spring:
 # MyBatis
 mybatis:
     # 搜索指定包别名
-    typeAliasesPackage: com.ruoyi
+    typeAliasesPackage: cn.aylives.ruoyi
 
     # 配置mapper的扫描，找到所有的mapper.xml映射文件
     mapperLocations: classpath*:mapper/**/*Mapper.xml
 
 mapper:
-  mappers: com.ruoyi.admin.core.MyMapper
+  mappers: cn.aylives.ruoyi.admin.core.MyMapper
   not-empty: true
   identity: MYSQL
   wrap-keyword: '`{0}`'
