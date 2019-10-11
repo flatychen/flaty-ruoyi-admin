@@ -28,7 +28,7 @@ public class OaUserLoginController extends BaseController {
     @RequestMapping("/auth")
     public String login(@RequestParam("loginToken") String token) {
         QueryUserResult queryUserResult = oaService.authUser(token);
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(queryUserResult.getUsername(), queryUserResult.getPassword());
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(queryUserResult.getUsername(), "OaUserLoginController");
         try {
             Subject subject = SecurityUtils.getSubject();
             subject.login(usernamePasswordToken);

@@ -3,7 +3,7 @@ package cn.aylives.ruoyi.admin.controller.system;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.utils.ServletUtils;
-import cn.aylives.ruoyi.common.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
