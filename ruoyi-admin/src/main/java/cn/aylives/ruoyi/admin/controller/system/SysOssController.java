@@ -4,8 +4,9 @@ import cn.aylives.ruoyi.admin.controller.system.cloud.CloudConstant;
 import cn.aylives.ruoyi.admin.controller.system.cloud.CloudStorageConfig;
 import cn.aylives.ruoyi.admin.controller.system.cloud.CloudStorageService;
 import cn.aylives.ruoyi.admin.controller.system.cloud.OSSFactory;
-import com.alibaba.fastjson.JSON;
-import com.google.gson.Gson;
+import cn.aylives.ruoyi.admin.controller.system.cloud.valdator.AliyunGroup;
+import cn.aylives.ruoyi.admin.controller.system.cloud.valdator.QcloudGroup;
+import cn.aylives.ruoyi.admin.controller.system.cloud.valdator.QiniuGroup;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.core.page.TableDataInfo;
@@ -15,9 +16,7 @@ import cn.aylives.ruoyi.framework.web.exception.user.OssException;
 import cn.aylives.ruoyi.system.domain.SysOss;
 import cn.aylives.ruoyi.system.service.ISysConfigService;
 import cn.aylives.ruoyi.system.service.ISysOssService;
-import cn.aylives.ruoyi.admin.controller.system.cloud.valdator.AliyunGroup;
-import cn.aylives.ruoyi.admin.controller.system.cloud.valdator.QcloudGroup;
-import cn.aylives.ruoyi.admin.controller.system.cloud.valdator.QiniuGroup;
+import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -94,7 +93,7 @@ public class SysOssController extends BaseController {
             // 校验腾讯云数据
             ValidatorUtils.validateEntity(config, QcloudGroup.class);
         }
-        return toAjax(sysConfigService.updateValueByKey(KEY, new Gson().toJson(config)));
+        return toAjax(sysConfigService.updateValueByKey(KEY, JSON.toJSONString(config)));
     }
 
     /**
