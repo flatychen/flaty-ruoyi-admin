@@ -5,7 +5,7 @@ import cn.aylives.ruoyi.admin.core.MyMapper;
 /**
  * ${functionName}Mapper接口
  *
- * @author ${author}
+ * @author ${author}vm/java/mapper.java.vm
  * @date ${datetime}
  */
 public interface ${ClassName}Mapper extends MyMapper<${ClassName}>
