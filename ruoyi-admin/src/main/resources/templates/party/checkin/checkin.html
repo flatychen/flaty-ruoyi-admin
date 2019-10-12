@@ -14,11 +14,30 @@
 								<input type="hidden" id="activityId" name="activityId"   />
 								服务：<input type="text" id="activityIdName"  placeholder="请选择" onclick="selectList()" />
 							</li>-->
+							<li>
+								<label class="col-sm-3 control-label">审批类型:</label>
+
+								<div class="col-sm-8">
+									<select name="status"  id="status" class="form-control m-b" th:with="type=${@dict.getType('party_checkin_status')}"
+											required>
+										<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"
+										>
+
+										</option>
+									</select>
+								</div>
+
+							</li>
+							<li>
+
+								<label>姓名： </label>
+								<input type="text"  id="name"  name="name"/>
+							</li>
 							<li class="select-time">
 								<label>报到时间： </label>
-								<input type="text" class="time-input" id="startCreatedDate" placeholder="开始" name="params[beginCreatedDate]"/>
+								<input type="text" class="time-input" id="startCreatedDate" placeholder="开始" name="beginCreatedDate"/>
 								<span>-</span>
-								<input type="text" class="time-input" id="endCreatedDate" placeholder="结束" name="params[endCreatedDate]"/>
+								<input type="text" class="time-input" id="endCreatedDate" placeholder="结束" name="endCreatedDate"/>
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -52,6 +71,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('party:checkin:edit')}]];
         var removeFlag = [[${@permission.hasPermi('party:checkin:remove')}]];
+
+		var dicts = [[${@dict.getType('party_checkin_status')}]];
         var prefix = ctx + "party/checkin";
 
         $(function() {
@@ -111,6 +132,14 @@
 					field : 'createdDate', 
 					title : '报到时间',
 					sortable: true
+				},
+				{
+					field: 'status',
+					title: '审核状态',
+					class : 'warning' ,
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(dicts, value);
+					}
 				},
 		        {
 		            title: '操作',
