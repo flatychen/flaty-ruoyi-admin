@@ -56,6 +56,16 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label">创建时间：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input name="createdDate" th:value="${#dates.format(activity.createdDate, 'yyyy-MM-dd')}"
+                           class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-3 control-label">活动类型：</label>
             <div class="col-sm-8">
                 <select name="type" class="form-control m-b" th:with="type=${@dict.getType('h5_activity_type')}"
@@ -89,13 +99,18 @@
     }
 
     $("input[name='beginDate']").datetimepicker({
-        format: "yyyy-mm-dd hh:ii:ss",
+        format: "yyyy-mm-dd",
         minView: "hour",
         autoclose: true
     });
 
     $("input[name='endDate']").datetimepicker({
-        format: "yyyy-mm-dd hh:ii:ss",
+        format: "yyyy-mm-dd",
+        minView: "hour",
+        autoclose: true
+    });
+    $("input[name='createdDate']").datetimepicker({
+        format: "yyyy-mm-dd",
         minView: "hour",
         autoclose: true
     });
