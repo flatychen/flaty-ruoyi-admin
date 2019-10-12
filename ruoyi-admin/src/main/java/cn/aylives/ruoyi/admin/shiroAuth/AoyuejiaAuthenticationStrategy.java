@@ -31,7 +31,7 @@ public class AoyuejiaAuthenticationStrategy extends AbstractAuthenticationStrate
             throw new AuthenticationException(t.getMessage());
         }
 
-        return singleRealmInfo;
+        return super.merge(singleRealmInfo,aggregateInfo);
     }
 }
 
