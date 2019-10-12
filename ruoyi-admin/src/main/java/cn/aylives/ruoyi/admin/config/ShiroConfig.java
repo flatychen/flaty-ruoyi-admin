@@ -1,7 +1,8 @@
 package cn.aylives.ruoyi.admin.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import cn.aylives.ruoyi.admin.oa.shiro.AoyuanOaUserRealm;
+import cn.aylives.ruoyi.admin.shiroAuth.AoyuanOaUserRealm;
+import cn.aylives.ruoyi.admin.shiroAuth.AoyuejiaAuthenticationStrategy;
 import cn.aylives.ruoyi.common.utils.StringUtils;
 import cn.aylives.ruoyi.common.utils.spring.SpringUtils;
 import cn.aylives.ruoyi.framework.shiro.realm.UserRealm;
@@ -14,7 +15,6 @@ import cn.aylives.ruoyi.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
 import cn.aylives.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
 import cn.aylives.ruoyi.framework.shiro.web.session.SpringSessionValidationScheduler;
 import org.apache.commons.io.IOUtils;
-import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -187,7 +187,7 @@ public class ShiroConfig {
     @Bean
     public ModularRealmAuthenticator modularRealmAuthenticator() {
         ModularRealmAuthenticator modularRealmAuthenticator = new ModularRealmAuthenticator();
-        modularRealmAuthenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        modularRealmAuthenticator.setAuthenticationStrategy(new AoyuejiaAuthenticationStrategy());
         return modularRealmAuthenticator;
     }
 

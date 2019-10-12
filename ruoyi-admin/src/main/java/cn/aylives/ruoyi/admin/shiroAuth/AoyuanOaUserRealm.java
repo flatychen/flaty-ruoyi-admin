@@ -1,4 +1,4 @@
-package cn.aylives.ruoyi.admin.oa.shiro;
+package cn.aylives.ruoyi.admin.shiroAuth;
 
 import cn.hutool.core.text.StrFormatter;
 import cn.aylives.ruoyi.framework.shiro.realm.UserRealm;
