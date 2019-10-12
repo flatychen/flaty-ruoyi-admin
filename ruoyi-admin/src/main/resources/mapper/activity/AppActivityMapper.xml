@@ -30,6 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createdDate != null "> and created_date = #{createdDate}</if>
             <if test="type != null "> and type = #{type}</if>
         </where>
+        order by createdDate desc
     </select>
     
     <select id="selectActivityById" parameterType="Long" resultMap="ActivityResult">
