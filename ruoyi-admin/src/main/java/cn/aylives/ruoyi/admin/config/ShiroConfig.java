@@ -1,6 +1,7 @@
 package cn.aylives.ruoyi.admin.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import cn.aylives.ruoyi.admin.shiroAuth.AoyuanOaAuthToken;
 import cn.aylives.ruoyi.admin.shiroAuth.AoyuanOaUserRealm;
 import cn.aylives.ruoyi.admin.shiroAuth.AoyuejiaAuthenticationStrategy;
 import cn.aylives.ruoyi.common.utils.StringUtils;
@@ -135,9 +136,10 @@ public class ShiroConfig {
      */
     @Bean
     public AoyuanOaUserRealm aoyuanOaUserRealm(EhCacheManager cacheManager) {
-        AoyuanOaUserRealm userRealm = new AoyuanOaUserRealm();
-        userRealm.setCacheManager(cacheManager);
-        return userRealm;
+        AoyuanOaUserRealm aoyuanOaUserRealm = new AoyuanOaUserRealm();
+        aoyuanOaUserRealm.setAuthenticationTokenClass(AoyuanOaAuthToken.class);
+        aoyuanOaUserRealm.setCacheManager(cacheManager);
+        return aoyuanOaUserRealm;
     }
 
     /**

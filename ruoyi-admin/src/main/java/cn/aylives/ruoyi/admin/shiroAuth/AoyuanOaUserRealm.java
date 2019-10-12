@@ -31,20 +31,19 @@ public class AoyuanOaUserRealm extends UserRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        UsernamePasswordToken upToken = (UsernamePasswordToken) token;
-
+        String oaUserName = token.getPrincipal().toString();
         // 查询用户信息
-        SysUser user = userService.selectUserByLoginName(upToken.getUsername());
+        SysUser user = userService.selectUserByLoginName(oaUserName);
         if (user == null) {
-            log.warn(StrFormatter.format("用户名:{} 不存在",upToken.getUsername()));
-            throw new AuthenticationException(StrFormatter.format("用户名:{} 不存在",upToken.getUsername()));
+            log.warn(StrFormatter.format("用户名:{} 不存在",oaUserName));
+            throw new AuthenticationException(StrFormatter.format("用户名:{} 不存在",oaUserName));
         }
         if (CollectionUtils.isEmpty(iSysRoleService.selectRoleKeys(user.getUserId()))) {
-            log.warn(StrFormatter.format("用户名:{} 角色不存在 ",upToken.getUsername()));
-            throw new AuthenticationException(StrFormatter.format("用户名:{} 角色不存在 ",upToken.getUsername()));
+            log.warn(StrFormatter.format("用户名:{} 角色不存在 ",oaUserName));
+            throw new AuthenticationException(StrFormatter.format("用户名:{} 角色不存在 ",oaUserName));
         }
 
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, upToken.getPassword(), getName());
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, token.getCredentials(), getName());
         return info;
     }
 }
