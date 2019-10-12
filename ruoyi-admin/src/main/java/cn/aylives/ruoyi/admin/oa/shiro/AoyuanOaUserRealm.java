@@ -33,7 +33,8 @@ public class AoyuanOaUserRealm extends UserRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
 
-        if (!"OaUserLoginController".equals(upToken.getPassword())) {
+        if (!"OaUserLoginController".equalsIgnoreCase(new String(upToken.getPassword()))) {
+            log.warn("用户名:{} 非使用OA帐号登录",upToken.getUsername());
             throw new AuthenticationException("用户或密码错误");
         }
 
