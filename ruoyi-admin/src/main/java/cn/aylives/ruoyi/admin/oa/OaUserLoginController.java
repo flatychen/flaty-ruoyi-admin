@@ -28,13 +28,13 @@ public class OaUserLoginController extends BaseController {
     @RequestMapping("/auth")
     public String login(@RequestParam("loginToken") String token) {
         QueryUserResult queryUserResult = oaService.authUser(token);
-        AoyuanOaAuthToken usernamePasswordToken = new AoyuanOaAuthToken(queryUserResult.getUsername());
+        AoyuanOaAuthToken aoyuanOaAuthToken = new AoyuanOaAuthToken(queryUserResult.getUsername());
         try {
             Subject subject = SecurityUtils.getSubject();
-            subject.login(usernamePasswordToken);
+            subject.login(aoyuanOaAuthToken);
         } catch (AuthenticationException e) {
             logger.error("AuthenticationException {}", e.getMessage());
-            throw new BusinessException(StrFormatter.format("oa登录失败!请检查用户:{}是否在管理后台添加和是否分配角色！", usernamePasswordToken.getPrincipal()));
+            throw new BusinessException(StrFormatter.format("oa登录失败!请检查用户:{}是否在管理后台添加和是否分配角色！", aoyuanOaAuthToken.getPrincipal()));
         }
         return "redirect:/index";
     }
