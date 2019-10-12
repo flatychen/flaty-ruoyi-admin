@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCheckinVo"/>
         <where>  
             <if test="id != null "> and id = #{id}</if>
-             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="name != null  and name != '' "> and name like   CONCAT('%',#{ name} ,'%')     </if>
              <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
              <if test="sex != null "> and sex = #{sex}</if>
              <if test="homeAddress != null  and homeAddress != '' "> and home_address = #{homeAddress}</if>
@@ -47,6 +47,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="agencyId != null and agencyId!= -1 "> and agency_id = #{agencyId}</if>
              <if test="createdDate != null "> and created_date = #{createdDate}</if>
              <if test="appUserId != null "> and app_user_id = #{appUserId}</if>
+
+            <if test="status != null and status != ''  "> and status = #{status}</if>
+            <if test="reason != null  and name != ''  "> and reason = #{reason}</if>
          </where>
     </select>
     
@@ -101,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createdDate != null  ">created_date = #{createdDate},</if>
             <if test="appUserId != null  ">app_user_id = #{appUserId},</if>
 
-            <if test="status != null  ">status = #{status},</if>
+            <if test="status != null and status != ''  ">status = #{status},</if>
             <if test="reason != null  "> reason = #{reason},</if>
         </trim>
         where id = #{id}

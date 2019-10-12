@@ -67,6 +67,8 @@
     <script th:inline="javascript">
         var prefix = ctx + "party/checkin";
 
+		var dicts = [[${@dict.getType('party_checkin_status')}]];
+
         $(function() {
             var options = {
                 url: prefix + "/select/list",
@@ -133,6 +135,13 @@
 					field : 'appUserId', 
 					title : '',
 					sortable: true
+				},
+				{
+					field: 'status',
+					title: '审核状态',
+					formatter: function (value, row, index) {
+						return $.table.selectDictLabel(dicts, value);
+					}
 				},
 				]
             };
