@@ -5,13 +5,11 @@ import cn.aylives.ruoyi.admin.activity.domain.excle.AppActivityUserExcle;
 import cn.aylives.ruoyi.admin.activity.service.IAppActivityService;
 import cn.aylives.ruoyi.admin.activity.service.IAppActivityUserService;
 import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
-import cn.aylives.ruoyi.admin.property.service.ISysAgencyService;
 import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.core.page.TableDataInfo;
 import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
-import ma.glasnost.orika.MapperFacade;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,8 +38,6 @@ public class AppActivityUserController extends BaseController {
     @Autowired
     IAppActivityService iAppActivityService;
 
-    @Autowired
-    ISysAgencyService iSysAgencyService;
 
     @RequiresPermissions("activity:activity:list")
     @GetMapping("/{activityId}")
@@ -73,7 +69,7 @@ public class AppActivityUserController extends BaseController {
     @ResponseBody
     public AjaxResult export(AppActivityUser appActivityUser) {
         List<AppActivityUser> list = appActivityUserService.selectAppActivityUserList(appActivityUser);
-        ServiceJoinHelper.join(AppActivityUser.class,list,iSysAgencyService);
+        ServiceJoinHelper.join(AppActivityUser.class,list,agencyViewService);
         List<AppActivityUserExcle> target = orikaMapperFacade.mapAsList(list, AppActivityUserExcle.class);
         ExcelUtil<AppActivityUserExcle> util = new ExcelUtil<AppActivityUserExcle>(AppActivityUserExcle.class);
         return util.exportExcel(target, "AppActivityUser");
@@ -81,7 +77,5 @@ public class AppActivityUserController extends BaseController {
 
 
 
-    @Autowired
-    private MapperFacade orikaMapperFacade;
 
 }

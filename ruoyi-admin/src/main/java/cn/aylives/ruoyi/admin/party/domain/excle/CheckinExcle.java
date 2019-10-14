@@ -1,14 +1,15 @@
-package cn.aylives.ruoyi.admin.activity.domain.excle;
+package cn.aylives.ruoyi.admin.party.domain.excle;
 
-import cn.aylives.ruoyi.admin.activity.domain.AppActivityUser;
+import cn.aylives.ruoyi.admin.party.domain.Checkin;
 import cn.aylives.ruoyi.common.annotation.Excel;
 import lombok.Data;
 
 /**
- * @author flaty
+ * created by flaty
+ * on 2019-10-14
  */
 @Data
-public class AppActivityUserExcle extends AppActivityUser {
+public class CheckinExcle extends Checkin {
 
 
     @Excel(name = "小区名称")
@@ -20,7 +21,5 @@ public class AppActivityUserExcle extends AppActivityUser {
     private String cityName;
     @Excel(name = "区域")
     private String groupName;
-
-
 }
 

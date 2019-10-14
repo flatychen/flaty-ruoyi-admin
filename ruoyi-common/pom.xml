@@ -16,7 +16,14 @@
 	</description>
 
     <dependencies>
-		
+
+
+		<dependency>
+			<groupId>net.rakugakibox.spring.boot</groupId>
+			<artifactId>orika-spring-boot-starter</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+
 		<!-- Spring框架基本的核心工具 -->
 		<dependency>
 			<groupId>org.springframework</groupId>

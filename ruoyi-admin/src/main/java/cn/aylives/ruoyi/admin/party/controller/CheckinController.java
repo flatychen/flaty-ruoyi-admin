@@ -1,8 +1,11 @@
 package cn.aylives.ruoyi.admin.party.controller;
 
 import cn.aylives.ruoyi.admin.core.dept.DeptData;
+import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
 import cn.aylives.ruoyi.admin.party.domain.Checkin;
+import cn.aylives.ruoyi.admin.party.domain.excle.CheckinExcle;
 import cn.aylives.ruoyi.admin.party.service.ICheckinService;
+import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
 import cn.aylives.ruoyi.common.annotation.Log;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
@@ -31,7 +34,12 @@ public class CheckinController extends BaseController
 	
 	@Autowired
 	private ICheckinService checkinService;
-	
+
+
+
+	@Autowired
+	AgencyViewServiceImpl agencyViewService;
+
 	@RequiresPermissions("party:checkin:view")
 	@GetMapping()
 	public String checkin()
@@ -73,6 +81,7 @@ public class CheckinController extends BaseController
 		startPage();
 		checkin.setAgencyId(sysDept.getAgencyId());
         List<Checkin> list = checkinService.selectCheckinList(checkin);
+		ServiceJoinHelper.join(Checkin.class, list, agencyViewService);
 		return getDataTable(list);
 	}
 	
@@ -86,8 +95,10 @@ public class CheckinController extends BaseController
     public AjaxResult export(Checkin checkin)
     {
     	List<Checkin> list = checkinService.selectCheckinList(checkin);
-        ExcelUtil<Checkin> util = new ExcelUtil<Checkin>(Checkin.class);
-        return util.exportExcel(list, "checkin");
+		ServiceJoinHelper.join(Checkin.class, list, agencyViewService);
+        ExcelUtil<CheckinExcle> util = new ExcelUtil<CheckinExcle>(CheckinExcle.class);
+		List<CheckinExcle> target = orikaMapperFacade.mapAsList(list, CheckinExcle.class);
+        return util.exportExcel(target, "checkin");
     }
 	
 	/**

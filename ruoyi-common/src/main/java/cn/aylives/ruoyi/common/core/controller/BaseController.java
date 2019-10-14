@@ -4,14 +4,16 @@ import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.core.page.PageDomain;
 import cn.aylives.ruoyi.common.core.page.TableDataInfo;
 import cn.aylives.ruoyi.common.core.page.TableSupport;
+import cn.aylives.ruoyi.common.utils.DateUtils;
 import cn.aylives.ruoyi.common.utils.ServletUtils;
 import cn.aylives.ruoyi.common.utils.StringUtils;
 import cn.aylives.ruoyi.common.utils.sql.SqlUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import cn.aylives.ruoyi.common.utils.DateUtils;
+import ma.glasnost.orika.MapperFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
@@ -30,6 +32,11 @@ import java.util.List;
 public class BaseController
 {
     protected final Logger logger = LoggerFactory.getLogger(BaseController.class);
+
+
+
+    @Autowired
+    protected MapperFacade orikaMapperFacade;
 
     /**
      * 将前台传递过来的日期格式的字符串，自动转化为Date类型
