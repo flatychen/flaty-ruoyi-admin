@@ -16,12 +16,10 @@
                         </li>-->
                         <li>
                             审批类型:
-                            <select name="status" id="status" th:with="type=${@dict.getType('party_checkin_status')}"
-                                    required>
+                            <select name="status" id="status" th:with="type=${@dict.getType('party_checkin_status')}">
+								<option value="">所有</option>
                                 <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
-                                        th:value="${dict.dictValue}"
-                                >
-
+                                        th:value="${dict.dictValue}">
                                 </option>
                             </select>
 
@@ -92,7 +90,7 @@
             },
                 {
                     field: 'id',
-                    title: '',
+                    title: 'id',
                     visible: false
                 },
                 {
@@ -138,7 +136,6 @@
                 {
                     field: 'status',
                     title: '审核状态',
-                    class: 'warning',
                     formatter: function (value, row, index) {
                         return $.table.selectDictLabel(dicts, value);
                     }
