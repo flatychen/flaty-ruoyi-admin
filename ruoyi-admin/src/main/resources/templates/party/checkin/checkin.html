@@ -15,15 +15,22 @@
 								服务：<input type="text" id="activityIdName"  placeholder="请选择" onclick="selectList()" />
 							</li>-->
 							<li>
-								审批类型:
-									<select name="status"  id="status"  th:with="type=${@dict.getType('party_checkin_status')}"
+								<label class="col-sm-offset-3">审批类型:</label>
+
+								<div class="col-sm-8">
+									<select name="status"  id="status" class="form-control m-b" th:with="type=${@dict.getType('party_checkin_status')}"
 											required>
-										<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+										<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"
+										>
+
+										</option>
 									</select>
+								</div>
 
 							</li>
 							<li>
-								姓名：
+
+								<label>姓名： </label>
 								<input type="text"  id="name"  name="name"/>
 							</li>
 							<li class="select-time">
@@ -83,7 +90,7 @@
 		        },
 				{
 					field : 'id', 
-					title : 'id',
+					title : '',
 					visible: false
 				},
 				{
@@ -129,6 +136,7 @@
 				{
 					field: 'status',
 					title: '审核状态',
+					class : 'warning' ,
 					formatter: function (value, row, index) {
 						return $.table.selectDictLabel(dicts, value);
 					}
