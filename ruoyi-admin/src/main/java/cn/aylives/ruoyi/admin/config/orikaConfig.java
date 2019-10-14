@@ -13,7 +13,7 @@ public class orikaConfig implements OrikaMapperFactoryConfigurer {
 
     @Override
     public void configure(MapperFactory orikaMapperFactory) {
-        orikaMapperFactory.classMap(AppActivityUser.class, AppActivityUserExcle.class).field("agency.name", "agencyName")
+        orikaMapperFactory.classMap(AppActivityUser.class, AppActivityUserExcle.class).field("agencyView.agencyName", "agencyName")
         .byDefault().register();
     }
 }

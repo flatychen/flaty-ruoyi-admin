@@ -1,11 +1,12 @@
 package cn.aylives.ruoyi.admin.activity.controller;
 
 import cn.aylives.ruoyi.admin.activity.domain.AppActivityUser;
-import cn.aylives.ruoyi.admin.activity.service.IAppActivityUserService;
 import cn.aylives.ruoyi.admin.activity.domain.excle.AppActivityUserExcle;
 import cn.aylives.ruoyi.admin.activity.service.IAppActivityService;
+import cn.aylives.ruoyi.admin.activity.service.IAppActivityUserService;
 import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
 import cn.aylives.ruoyi.admin.property.service.ISysAgencyService;
+import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.core.page.TableDataInfo;
@@ -34,6 +35,9 @@ public class AppActivityUserController extends BaseController {
     private IAppActivityUserService appActivityUserService;
 
     @Autowired
+    AgencyViewServiceImpl agencyViewService;
+
+    @Autowired
     IAppActivityService iAppActivityService;
 
     @Autowired
@@ -56,7 +60,7 @@ public class AppActivityUserController extends BaseController {
     public TableDataInfo list(AppActivityUser appActivityUser) {
         startPage();
         List<AppActivityUser> list = appActivityUserService.selectAppActivityUserList(appActivityUser);
-        ServiceJoinHelper.join(AppActivityUser.class,list,iSysAgencyService);
+        ServiceJoinHelper.join(AppActivityUser.class,list,agencyViewService);
         return getDataTable(list);
     }
 

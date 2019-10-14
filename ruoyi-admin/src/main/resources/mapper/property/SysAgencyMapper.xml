@@ -84,7 +84,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectSysAgencyVo"/>
         where ID = #{iD}
     </select>
-        
+
+
+    <select id="selectViewByIds" resultType="cn.aylives.ruoyi.admin.property.domain.AgencyView">
+
+        select *   from aomygod.view_agency where distAgencyId in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+    </select>
+
     <insert id="insertSysAgency" parameterType="Agency" useGeneratedKeys="true" keyProperty="iD">
         insert into aomygod.sys_agency
 		<trim prefix="(" suffix=")" suffixOverrides=",">

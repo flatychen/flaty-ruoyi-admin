@@ -2,6 +2,7 @@ package cn.aylives.ruoyi.admin.property.mapper;
 
 import cn.aylives.ruoyi.admin.property.domain.Agency;
 import cn.aylives.ruoyi.admin.core.MyMapper;
+import cn.aylives.ruoyi.admin.property.domain.AgencyView;
 
 import java.util.List;
 
@@ -60,5 +61,12 @@ public interface SysAgencyMapper extends MyMapper<Agency>
      * @return 结果
      */
 	public int deleteSysAgencyByIds(String[] iDs);
-	
+
+	/**
+	 *
+	 * 查询视图
+	 * @param ids
+	 * @return
+	 */
+	public List<AgencyView> selectViewByIds(List<Integer> ids);
 }
