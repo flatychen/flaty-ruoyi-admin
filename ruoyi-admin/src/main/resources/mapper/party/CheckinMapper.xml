@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="createdDate != null "> and created_date = #{createdDate}</if>
              <if test="appUserId != null "> and app_user_id = #{appUserId}</if>
 
-            <if test="status != null and status != ''  "> and status = #{status}</if>
+            <if test="status != null  "> and status = #{status}</if>
             <if test="reason != null  and name != ''  "> and reason = #{reason}</if>
          </where>
     </select>
