@@ -72,7 +72,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">审批类型：</label>
             <div class="col-sm-8">
-                <select name="status" class="form-control m-b" th:with="type=${@dict.getType('party_checkin_status')}"
+                <select  id="status"  name="status" class="form-control m-b" th:with="type=${@dict.getType('party_checkin_status')}"
                         required>
                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"
                             th:field="*{status}"></option>
