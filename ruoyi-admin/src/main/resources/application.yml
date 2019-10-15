@@ -56,6 +56,7 @@ spring:
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion:
   profiles: 
     active: dev
   # 文件上传
@@ -165,3 +166,8 @@ orika:
   # Whether full field context should be captured (MapperFactoryBuilder#captureFieldContext(boolean)).
   # Follows Orika's behavior by default.
   captureFieldContext: false
+
+
+aoyuejia:
+  rootDepts:
+    - 10098

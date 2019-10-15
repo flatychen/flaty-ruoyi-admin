@@ -51,6 +51,10 @@ public class SysDept extends BaseEntity
     private Integer agencyId;
 
 
+    public boolean isRoot() {
+        return "0".equalsIgnoreCase(this.ancestors);
+    }
+
     public Integer getAgencyId() {
         return agencyId;
     }

@@ -1,5 +1,6 @@
 package cn.aylives.ruoyi.admin.party.controller;
 
+import cn.aylives.ruoyi.admin.config.AoyuejiaConfig;
 import cn.aylives.ruoyi.admin.core.dept.DeptData;
 import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
 import cn.aylives.ruoyi.admin.party.domain.Checkin;
@@ -11,7 +12,6 @@ import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.core.page.TableDataInfo;
 import cn.aylives.ruoyi.common.enums.BusinessType;
-import cn.aylives.ruoyi.common.utils.StringUtils;
 import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
 import cn.aylives.ruoyi.system.domain.SysDept;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -40,6 +40,7 @@ public class CheckinController extends BaseController
 
 	@Autowired
 	AgencyViewServiceImpl agencyViewService;
+
 
 	@RequiresPermissions("party:checkin:view")
 	@GetMapping()
@@ -79,6 +80,7 @@ public class CheckinController extends BaseController
 	@ResponseBody
 	public TableDataInfo list(@DeptData SysDept sysDept,Checkin checkin)
 	{
+
 		startPage();
 		checkin.setAgencyId(sysDept.getAgencyId());
         List<Checkin> list = checkinService.selectCheckinList(checkin);
