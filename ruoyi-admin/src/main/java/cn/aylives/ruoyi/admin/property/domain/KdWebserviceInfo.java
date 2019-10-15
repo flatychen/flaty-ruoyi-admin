@@ -1,4 +1,4 @@
-package cn.aylives.ruoyi.admin.houseauth.domain;
+package cn.aylives.ruoyi.admin.property.domain;
 
 import cn.aylives.ruoyi.common.annotation.Excel;
 

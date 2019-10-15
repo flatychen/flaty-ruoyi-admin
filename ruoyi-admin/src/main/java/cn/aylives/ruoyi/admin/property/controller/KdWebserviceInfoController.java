@@ -1,34 +1,24 @@
-package cn.aylives.ruoyi.admin.houseauth.controller;
+package cn.aylives.ruoyi.admin.property.controller;
 
-import java.util.List;
-
-import cn.aylives.ruoyi.admin.houseauth.domain.KdWebserviceInfoExtend;
-import cn.aylives.ruoyi.common.exception.BusinessException;
-import cn.aylives.ruoyi.common.utils.CookieUtil;
-import cn.aylives.ruoyi.common.utils.spring.SpringUtils;
-import cn.aylives.ruoyi.system.service.ISysDeptService;
+import cn.aylives.ruoyi.admin.core.dept.DeptData;
+import cn.aylives.ruoyi.admin.property.domain.KdWebserviceInfo;
+import cn.aylives.ruoyi.admin.property.domain.KdWebserviceInfoExtend;
+import cn.aylives.ruoyi.admin.property.service.IKdWebserviceInfoService;
+import cn.aylives.ruoyi.common.core.controller.BaseController;
+import cn.aylives.ruoyi.common.core.domain.AjaxResult;
+import cn.aylives.ruoyi.common.core.page.TableDataInfo;
+import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
+import cn.aylives.ruoyi.system.domain.SysDept;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import cn.aylives.ruoyi.common.annotation.Log;
-import cn.aylives.ruoyi.common.enums.BusinessType;
-import cn.aylives.ruoyi.common.utils.StringUtils;
-import cn.aylives.ruoyi.admin.houseauth.domain.KdWebserviceInfo;
-import cn.aylives.ruoyi.admin.houseauth.service.IKdWebserviceInfoService;
-import cn.aylives.ruoyi.common.core.controller.BaseController;
-import cn.aylives.ruoyi.common.core.page.TableDataInfo;
-import cn.aylives.ruoyi.common.core.domain.AjaxResult;
-import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
-import cn.aylives.ruoyi.system.domain.SysDept;
-import cn.aylives.ruoyi.admin.core.dept.DeptData;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 房屋认证结果Controller
@@ -43,7 +33,7 @@ public class KdWebserviceInfoController extends BaseController {
 	@Autowired
 	private HttpServletRequest request;
 
-    private String prefix = "house/auth";
+    private String prefix = "property/houseAuth/";
 
     @Autowired
     private IKdWebserviceInfoService kdWebserviceInfoService;

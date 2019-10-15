@@ -1,16 +1,20 @@
-package cn.aylives.ruoyi.admin.houseauth.mapper;
-import cn.aylives.ruoyi.admin.houseauth.domain.KdWebserviceInfo;
+package cn.aylives.ruoyi.admin.property.service;
+
+import cn.aylives.ruoyi.admin.core.IService;
+import cn.aylives.ruoyi.admin.property.domain.KdWebserviceInfo;
+import cn.aylives.ruoyi.admin.property.domain.KdWebserviceInfoExtend;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
-import cn.aylives.ruoyi.admin.core.MyMapper;
-import cn.aylives.ruoyi.admin.houseauth.domain.KdWebserviceInfoExtend;
 
 /**
- * 房屋认证结果Mapper接口
+ * 房屋认证结果Service接口
  *
- * @author flatyvm/java/mapper.java.vm
+ * @author flaty
  * @date 2019-10-14
  */
-public interface KdWebserviceInfoMapper extends MyMapper<KdWebserviceInfo>
+@Service
+public interface IKdWebserviceInfoService  extends IService<KdWebserviceInfo>
 {
 	/**
 	 * 查询房屋认证结果
@@ -45,18 +49,19 @@ public interface KdWebserviceInfoMapper extends MyMapper<KdWebserviceInfo>
 	public int updateKdWebserviceInfo(KdWebserviceInfo kdWebserviceInfo);
 
 	/**
-	 * 删除房屋认证结果
-	 *
-	 * @param id 房屋认证结果ID
-	 * @return 结果
-	 */
-	public int deleteKdWebserviceInfoById(Integer id);
-
-	/**
 	 * 批量删除房屋认证结果
 	 *
 	 * @param ids 需要删除的数据ID
 	 * @return 结果
 	 */
-	public int deleteKdWebserviceInfoByIds(String[] ids);
+	public int deleteKdWebserviceInfoByIds(String ids);
+
+	/**
+	 * 删除房屋认证结果信息
+	 *
+	 * @param id 房屋认证结果ID
+	 * @return 结果
+	 */
+	public int deleteKdWebserviceInfoById(Integer id);
+	
 }

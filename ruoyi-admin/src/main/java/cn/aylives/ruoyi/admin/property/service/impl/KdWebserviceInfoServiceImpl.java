@@ -1,15 +1,15 @@
-package cn.aylives.ruoyi.admin.houseauth.service.impl;
+package cn.aylives.ruoyi.admin.property.service.impl;
 
-import java.util.List;
-
-import cn.aylives.ruoyi.admin.houseauth.domain.KdWebserviceInfoExtend;
+import cn.aylives.ruoyi.admin.core.impl.AbstractService;
+import cn.aylives.ruoyi.admin.property.domain.KdWebserviceInfo;
+import cn.aylives.ruoyi.admin.property.domain.KdWebserviceInfoExtend;
+import cn.aylives.ruoyi.admin.property.mapper.KdWebserviceInfoMapper;
+import cn.aylives.ruoyi.admin.property.service.IKdWebserviceInfoService;
+import cn.aylives.ruoyi.common.core.text.Convert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import cn.aylives.ruoyi.admin.core.impl.AbstractService;
-import cn.aylives.ruoyi.admin.houseauth.mapper.KdWebserviceInfoMapper;
-import cn.aylives.ruoyi.admin.houseauth.domain.KdWebserviceInfo;
-import cn.aylives.ruoyi.admin.houseauth.service.IKdWebserviceInfoService;
-import cn.aylives.ruoyi.common.core.text.Convert;
+
+import java.util.List;
 /**
  * 房屋认证结果Service业务层处理
  *

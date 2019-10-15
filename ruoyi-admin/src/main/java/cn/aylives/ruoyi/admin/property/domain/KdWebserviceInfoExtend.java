@@ -1,11 +1,6 @@
-package cn.aylives.ruoyi.admin.houseauth.domain;
+package cn.aylives.ruoyi.admin.property.domain;
 
-import cn.aylives.ruoyi.common.annotation.Excel;
-import cn.aylives.ruoyi.common.core.domain.BaseEntity;
 import lombok.Data;
-
-import javax.persistence.*;
-import java.util.Date;
 
 
 /**
