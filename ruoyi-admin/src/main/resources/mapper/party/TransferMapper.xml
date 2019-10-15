@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="companyPartyPhone != null  and companyPartyPhone != '' "> and company_party_phone = #{companyPartyPhone}</if>
              <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
              <if test="others != null  and others != '' "> and others = #{others}</if>
-             <if test="agencyId != null "> and agency_id = #{agencyId}</if>
+             <if test="agencyId != null and agencyId!= -1"> and agency_id = #{agencyId}</if>
              <if test="createdDate != null "> and created_date = #{createdDate}</if>
              <if test="appUserId != null "> and app_user_id = #{appUserId}</if>
          </where>
