@@ -30,7 +30,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">性别：</label>
             <div class="col-sm-8">
-                <select  id="sex"   name="sex"  disabled="disabled"    class="form-control m-b" th:with="type=${@dict.getType('app_sex')}"
+                <select  id="sex"   name="sex"  disabled="disabled"    class="form-control m-b" th:with="type=${@dict.getType('party_app_sex')}"
                         required>
                     <option   th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"
                             th:field="*{sex}"></option>
