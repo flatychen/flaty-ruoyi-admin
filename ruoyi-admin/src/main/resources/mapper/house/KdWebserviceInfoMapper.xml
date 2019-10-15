@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.aylives.ruoyi.admin.houseauth.mapper.KdWebserviceInfoMapper">
+
+    <resultMap type="KdWebserviceInfoExtend" id="KdWebserviceInfoResult">
+        <result property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="idCardType" column="ID_CARD_TYPE"/>
+        <result property="idCardNo" column="ID_CARD_NO"/>
+        <result property="mobileNo" column="MOBILE_NO"/>
+        <result property="resultType" column="RESULT_TYPE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="rooms" column="rooms"/>
+        <result property="sendSmsCount" column="send_sms_count"/>
+        <result property="name" column="NAME"/>
+        <result property="appUserName" column="AppUserName"/>
+    </resultMap>
+
+    <sql id="selectKdWebserviceInfoVo">
+        select ID, USER_ID, ID_CARD_TYPE, ID_CARD_NO, MOBILE_NO, RESULT_TYPE, CREATE_TIME, rooms, send_sms_count from aomygod.kd_webservice_info
+    </sql>
+
+    <select id="selectKdWebserviceInfoList" parameterType="KdWebserviceInfo" resultMap="KdWebserviceInfoResult">
+        select
+        k.ID,
+        k.USER_ID,
+        k.ID_CARD_TYPE,
+        k.ID_CARD_NO,
+        k.MOBILE_NO,
+        k.RESULT_TYPE,
+        k.CREATE_TIME,
+        k.rooms,
+        k.send_sms_count,
+        sys_agency.NAME,
+        sys_app_user.NAME as AppUserName
+        from aomygod.kd_webservice_info k
+        inner JOIN aomygod.sys_app_user ON sys_app_user.USER_ID = k.USER_ID
+        inner JOIN aomygod.sys_agency ON sys_app_user.REG_AGENCY_ID = sys_agency.ID
+        <where>
+            <if test="agencyId !=null and agencyId!=''"> and aomygod.sys_agency.ID = #{agencyId} </if>
+            <if test="idCardNo != null  and idCardNo != ''">and ID_CARD_NO = #{idCardNo}</if>
+            <if test="mobileNo != null  and mobileNo != ''">and MOBILE_NO like concat('%', #{mobileNo}, '%')</if>
+            <if test="resultType != null  and resultType != ''">and RESULT_TYPE = #{resultType}</if>
+            <if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''">
+                and CREATE_TIME between #{params.beginCreateTime} and #{params.endCreateTime}
+            </if>
+        </where>
+        order by k.CREATE_TIME desc
+    </select>
+
+    <select id="selectKdWebserviceInfoById" parameterType="Integer" resultMap="KdWebserviceInfoResult">
+        <include refid="selectKdWebserviceInfoVo"/>
+        where ID = #{id}
+    </select>
+
+    <insert id="insertKdWebserviceInfo" parameterType="KdWebserviceInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into aomygod.kd_webservice_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">USER_ID,</if>
+            <if test="idCardType != null ">ID_CARD_TYPE,</if>
+            <if test="idCardNo != null  and idCardNo != ''">ID_CARD_NO,</if>
+            <if test="mobileNo != null  and mobileNo != ''">MOBILE_NO,</if>
+            <if test="resultType != null  and resultType != ''">RESULT_TYPE,</if>
+            <if test="createTime != null ">CREATE_TIME,</if>
+            <if test="rooms != null  and rooms != ''">rooms,</if>
+            <if test="sendSmsCount != null ">send_sms_count,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="idCardType != null ">#{idCardType},</if>
+            <if test="idCardNo != null  and idCardNo != ''">#{idCardNo},</if>
+            <if test="mobileNo != null  and mobileNo != ''">#{mobileNo},</if>
+            <if test="resultType != null  and resultType != ''">#{resultType},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="rooms != null  and rooms != ''">#{rooms},</if>
+            <if test="sendSmsCount != null ">#{sendSmsCount},</if>
+        </trim>
+    </insert>
+
+    <update id="updateKdWebserviceInfo" parameterType="KdWebserviceInfo">
+        update aomygod.kd_webservice_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">USER_ID = #{userId},</if>
+            <if test="idCardType != null ">ID_CARD_TYPE = #{idCardType},</if>
+            <if test="idCardNo != null  and idCardNo != ''">ID_CARD_NO = #{idCardNo},</if>
+            <if test="mobileNo != null  and mobileNo != ''">MOBILE_NO = #{mobileNo},</if>
+            <if test="resultType != null  and resultType != ''">RESULT_TYPE = #{resultType},</if>
+            <if test="createTime != null ">CREATE_TIME = #{createTime},</if>
+            <if test="rooms != null  and rooms != ''">rooms = #{rooms},</if>
+            <if test="sendSmsCount != null ">send_sms_count = #{sendSmsCount},</if>
+        </trim>
+        where ID = #{id}
+    </update>
+
+    <delete id="deleteKdWebserviceInfoById" parameterType="Integer">
+        delete from aomygod.kd_webservice_info where ID = #{id}
+    </delete>
+
+    <delete id="deleteKdWebserviceInfoByIds" parameterType="String">
+        delete from aomygod.kd_webservice_info where ID in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
