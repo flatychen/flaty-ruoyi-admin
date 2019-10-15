@@ -7,7 +7,7 @@
 <div class="container-div">
 
 	<div class="row">
-		<div class="col-sm-12 search-collapse">
+		<!--<div class="col-sm-12 search-collapse">
 			<form id="formId">
 				<div class="select-list">
 					<ul>
@@ -18,7 +18,7 @@
 					</ul>
 				</div>
 			</form>
-		</div>
+		</div>-->
 
 		<div class="btn-group-sm" id="toolbar" role="group">
 			<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="appExtend:Appversion:add">
@@ -47,7 +47,7 @@
 	var removeFlag = [[${@permission.hasPermi('appExtend:Appversion:remove')}]];
 																												var isForceUpdateDatas = [[${@dict.getType('app_is_force_update')}]];
 																															var typeDatas = [[${@dict.getType('app_type')}]];
-											var appTypeDatas = [[${@dict.getType('sys_app_type')}]];
+	var appTypeDatas = [[${@dict.getType('appversion_app_type')}]];
 						var prefix = ctx + "appExtend/Appversion";
 
 	$(function() {
