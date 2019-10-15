@@ -269,7 +269,7 @@ function navSelectDeptTreeDoSubmit(index, layero){
 	var tree = layero.find("iframe")[0].contentWindow.$._tree;
 	var body = layer.getChildFrame('body', index)
 	var treeId =body.find('#treeId').val();
-	if ($.tree.notAllowParents(tree) || treeId==10098) {
+	if (treeId==10098 || $.tree.notAllowParents(tree)) {
 		var treeName =body.find('#treeName').val();
 		$.cookie('deptId', treeId||"0");
 		$.cookie('treeName', treeName||"0");
