@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('修改房屋管理')" />
+	<th:block th:include="include :: bootstrap-fileinput-css"/>
+																																																						<th:block th:include="include :: datetimepicker-css" />
+			</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+	<form class="form-horizontal m" id="form-UserRoom-edit" th:object="${userRoom}">
+		<input name="id" th:field="*{id}" type="hidden">
+																											<div class="form-group">
+						<label class="col-sm-3 control-label">小区id：</label>
+						<div class="col-sm-8">
+							<input name="agId" th:field="*{agId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">区域id：</label>
+						<div class="col-sm-8">
+							<input name="reId" th:field="*{reId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">楼栋id：</label>
+						<div class="col-sm-8">
+							<input name="baId" th:field="*{baId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">楼层id：</label>
+						<div class="col-sm-8">
+							<input name="flId" th:field="*{flId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">房号：</label>
+						<div class="col-sm-8">
+							<input name="roomName" th:field="*{roomName}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">冗余信息：</label>
+						<div class="col-sm-8">
+							<input name="redundancyInfo" th:field="*{redundancyInfo}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">业主id：</label>
+						<div class="col-sm-8">
+							<input name="userId" th:field="*{userId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">朝向id：</label>
+						<div class="col-sm-8">
+							<input name="orId" th:field="*{orId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">房屋面积：</label>
+						<div class="col-sm-8">
+							<input name="acreage" th:field="*{acreage}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">房型id：</label>
+						<div class="col-sm-8">
+							<input name="htId" th:field="*{htId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">建筑类型，001房屋，002车子：</label>
+						<div class="col-sm-8">
+							<select name="buildingType" class="form-control m-b">
+								<option value="">所有</option>
+							</select>
+							<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">null：</label>
+						<div class="col-sm-8">
+							<input name="jdRoomId" th:field="*{jdRoomId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">客户内码：</label>
+						<div class="col-sm-8">
+							<input name="customerId" th:field="*{customerId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">客户房屋内码：</label>
+						<div class="col-sm-8">
+							<input name="cusroomId" th:field="*{cusroomId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">是否删除：</label>
+						<div class="col-sm-8">
+							<input name="isDel" th:field="*{isDel}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">null：</label>
+						<div class="col-sm-8">
+							<div class="input-group date">
+								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								<input name="createdTime" th:value="${#dates.format(userRoom.createdTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+							</div>
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">楼栋ID：</label>
+						<div class="col-sm-8">
+							<input name="twBuildingId" th:field="*{twBuildingId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">项目id：</label>
+						<div class="col-sm-8">
+							<input name="twCommId" th:field="*{twCommId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">客户id：</label>
+						<div class="col-sm-8">
+							<input name="twCustId" th:field="*{twCustId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">房屋id：</label>
+						<div class="col-sm-8">
+							<input name="twRoomId" th:field="*{twRoomId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">单元id：</label>
+						<div class="col-sm-8">
+							<input name="twUnitId" th:field="*{twUnitId}" class="form-control" type="text">
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">房屋类型业主权限：</label>
+						<div class="col-sm-8">
+							<select name="appUserType" class="form-control m-b" th:with="type=${@dict.getType('room_user_type')}">
+								<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{appUserType}"></option>
+							</select>
+						</div>
+					</div>
+																													<div class="form-group">
+						<label class="col-sm-3 control-label">原始房屋ID，用于租客分配等：</label>
+						<div class="col-sm-8">
+							<input name="sourceRoomId" th:field="*{sourceRoomId}" class="form-control" type="text">
+						</div>
+					</div>
+										</form>
+</div>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: flaty-fileinput-js"/>
+																																																					<th:block th:include="include :: datetimepicker-js" />
+			<script type="text/javascript">
+	var prefix = ctx + "property/UserRoom";
+	$("#form-UserRoom-edit").validate({
+		focusCleanup: true
+	});
+
+	function submitHandler() {
+		if ($.validate.form()) {
+			$.operate.save(prefix + "/edit", $('#form-UserRoom-edit').serialize());
+		}
+	}
+																																																																																					
+			$("input[name='createdTime']").datetimepicker({
+				format: "yyyy-mm-dd",
+				minView: "month",
+				autoclose: true
+			});
+						</script>
+</body>
+</html>

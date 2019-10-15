@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.aylives.ruoyi.admin.property.mapper.HousekeeperRelationshipMapper">
+    
+    <resultMap type="HousekeeperRelationship" id="HousekeeperRelationshipResult">
+        <result property="id"    column="id"    />
+        <result property="agencyId"    column="agency_id"    />
+        <result property="roomId"    column="room_id"    />
+        <result property="sysUserId"    column="sys_user_id"    />
+        <result property="appUserId"    column="app_user_id"    />
+        <result property="appUserPhone"    column="app_user_phone"    />
+        <result property="sysUserPhone"    column="sys_user_phone"    />
+        <result property="createdDate"    column="created_date"    />
+        <result property="updatedDate"    column="updated_date"    />
+    </resultMap>
+
+    <sql id="selectHousekeeperRelationshipVo">
+        select id, agency_id, room_id, sys_user_id, app_user_id, app_user_phone, sys_user_phone, created_date, updated_date from aomygod.housekeeper_relationship
+    </sql>
+
+    <select id="selectHousekeeperRelationshipList" parameterType="HousekeeperRelationship" resultMap="HousekeeperRelationshipResult">
+        <include refid="selectHousekeeperRelationshipVo"/>
+        <where>  
+            <if test="appUserPhone != null  and appUserPhone != ''"> and app_user_phone = #{appUserPhone}</if>
+            <if test="createdDate != null "> and created_date = #{createdDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectHousekeeperRelationshipById" parameterType="Integer" resultMap="HousekeeperRelationshipResult">
+        <include refid="selectHousekeeperRelationshipVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHousekeeperRelationship" parameterType="HousekeeperRelationship" useGeneratedKeys="true" keyProperty="id">
+        insert into aomygod.housekeeper_relationship
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="agencyId != null ">agency_id,</if>
+            <if test="roomId != null ">room_id,</if>
+            <if test="sysUserId != null ">sys_user_id,</if>
+            <if test="appUserId != null ">app_user_id,</if>
+            <if test="appUserPhone != null  and appUserPhone != ''">app_user_phone,</if>
+            <if test="sysUserPhone != null  and sysUserPhone != ''">sys_user_phone,</if>
+            <if test="createdDate != null ">created_date,</if>
+            <if test="updatedDate != null ">updated_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="agencyId != null ">#{agencyId},</if>
+            <if test="roomId != null ">#{roomId},</if>
+            <if test="sysUserId != null ">#{sysUserId},</if>
+            <if test="appUserId != null ">#{appUserId},</if>
+            <if test="appUserPhone != null  and appUserPhone != ''">#{appUserPhone},</if>
+            <if test="sysUserPhone != null  and sysUserPhone != ''">#{sysUserPhone},</if>
+            <if test="createdDate != null ">#{createdDate},</if>
+            <if test="updatedDate != null ">#{updatedDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHousekeeperRelationship" parameterType="HousekeeperRelationship">
+        update aomygod.housekeeper_relationship
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="agencyId != null ">agency_id = #{agencyId},</if>
+            <if test="roomId != null ">room_id = #{roomId},</if>
+            <if test="sysUserId != null ">sys_user_id = #{sysUserId},</if>
+            <if test="appUserId != null ">app_user_id = #{appUserId},</if>
+            <if test="appUserPhone != null  and appUserPhone != ''">app_user_phone = #{appUserPhone},</if>
+            <if test="sysUserPhone != null  and sysUserPhone != ''">sys_user_phone = #{sysUserPhone},</if>
+            <if test="createdDate != null ">created_date = #{createdDate},</if>
+            <if test="updatedDate != null ">updated_date = #{updatedDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHousekeeperRelationshipById" parameterType="Integer">
+        delete from aomygod.housekeeper_relationship where id = #{id}
+    </delete>
+
+    <delete id="deleteHousekeeperRelationshipByIds" parameterType="String">
+        delete from aomygod.housekeeper_relationship where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
