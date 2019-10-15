@@ -100,10 +100,6 @@
                     title: '用户名'
                 },
                 {
-                    field: 'idCardType',
-                    title: '证件类型'
-                },
-                {
                     field: 'idCardNo',
                     title: '身份证号码'
                 },
@@ -117,6 +113,10 @@
                     formatter: function (value, row, index) {
                         return $.table.selectDictLabel(resultTypeDatas, value);
                     }
+                },
+                {
+                    field: 'rooms',
+                    title: '房屋信息'
                 },
                 {
                     field: 'createTime',
