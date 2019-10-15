@@ -50,7 +50,7 @@ public class Checkin extends BaseEntity {
      *
      */
     @Column(name = "sex")
-    @Excel(name = "姓别", prompt = "")
+    @Excel(name = "姓别", prompt = "",readConverterExp ="0=女,1=男")
     private Integer sex;
     /**
      *

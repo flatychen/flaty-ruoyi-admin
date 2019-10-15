@@ -3,7 +3,9 @@ package cn.aylives.ruoyi.admin.config;
 import cn.aylives.ruoyi.admin.activity.domain.AppActivityUser;
 import cn.aylives.ruoyi.admin.activity.domain.excle.AppActivityUserExcle;
 import cn.aylives.ruoyi.admin.party.domain.Checkin;
+import cn.aylives.ruoyi.admin.party.domain.Transfer;
 import cn.aylives.ruoyi.admin.party.domain.excle.CheckinExcle;
+import cn.aylives.ruoyi.admin.party.domain.excle.TransferExcle;
 import ma.glasnost.orika.MapperFactory;
 import net.rakugakibox.spring.boot.orika.OrikaMapperFactoryConfigurer;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,7 @@ public class orikaConfig implements OrikaMapperFactoryConfigurer {
     public void configure(MapperFactory orikaMapperFactory) {
         this.buildAgencyMapper(orikaMapperFactory,AppActivityUser.class, AppActivityUserExcle.class);
         this.buildAgencyMapper(orikaMapperFactory,Checkin.class, CheckinExcle.class);
+        this.buildAgencyMapper(orikaMapperFactory, Transfer.class, TransferExcle.class);
     }
 
 

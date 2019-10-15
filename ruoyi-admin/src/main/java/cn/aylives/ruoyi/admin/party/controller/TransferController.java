@@ -1,8 +1,11 @@
 package cn.aylives.ruoyi.admin.party.controller;
 
 import cn.aylives.ruoyi.admin.core.dept.DeptData;
+import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
 import cn.aylives.ruoyi.admin.party.domain.Transfer;
+import cn.aylives.ruoyi.admin.party.domain.excle.TransferExcle;
 import cn.aylives.ruoyi.admin.party.service.ITransferService;
+import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
 import cn.aylives.ruoyi.common.annotation.Log;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
@@ -31,6 +34,12 @@ public class TransferController extends BaseController
 	
 	@Autowired
 	private ITransferService transferService;
+
+
+
+	@Autowired
+	AgencyViewServiceImpl agencyViewService;
+
 	
 	@RequiresPermissions("party:transfer:view")
 	@GetMapping()
@@ -39,28 +48,6 @@ public class TransferController extends BaseController
 	    return prefix + "/transfer";
 	}
 
-//	/**
-//	 * 选择列表
-//	 */
-//	@GetMapping("/select")
-//	public String transferSelect()
-//	{
-//		return prefix + "/select";
-//	}
-//
-//
-//	/**
-//	 * 选择列表数据
-//	 */
-//	@PostMapping("/select/list")
-//	@ResponseBody
-//	public TableDataInfo selectList(@DeptData SysDept sysDept,Transfer transfer)
-//	{
-//		startPage();
-//		transfer.setAgencyId(sysDept.getAgencyId());
-//		List<Transfer> list = transferService.selectTransferList(transfer);
-//		return getDataTable(list);
-//	}
 
 
 	/**
@@ -74,6 +61,7 @@ public class TransferController extends BaseController
 		startPage();
 		transfer.setAgencyId(sysDept.getAgencyId());
         List<Transfer> list = transferService.selectTransferList(transfer);
+		ServiceJoinHelper.join(Transfer.class, list, agencyViewService);
 		return getDataTable(list);
 	}
 	
@@ -87,8 +75,10 @@ public class TransferController extends BaseController
     public AjaxResult export(Transfer transfer)
     {
     	List<Transfer> list = transferService.selectTransferList(transfer);
-        ExcelUtil<Transfer> util = new ExcelUtil<Transfer>(Transfer.class);
-        return util.exportExcel(list, "transfer");
+		ServiceJoinHelper.join(Transfer.class, list, agencyViewService);
+        ExcelUtil<TransferExcle> util = new ExcelUtil<TransferExcle>(TransferExcle.class);
+		List<TransferExcle> target = orikaMapperFacade.mapAsList(list, TransferExcle.class);
+        return util.exportExcel(target, "transfer");
     }
 	
 	/**
