@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.aylives.ruoyi.admin.property.mapper.HousekeeperCommentTagMapper">
+    
+    <resultMap type="HousekeeperCommentTag" id="HousekeeperCommentTagResult">
+        <result property="id"    column="id"    />
+        <result property="agencyId"    column="agency_id"    />
+        <result property="tagName"    column="tag_name"    />
+        <result property="likeType"    column="like_type"    />
+        <result property="createdDate"    column="created_date"    />
+    </resultMap>
+
+    <sql id="selectHousekeeperCommentTagVo">
+        select id, agency_id, tag_name, like_type, created_date from aomygod.housekeeper_comment_tag
+    </sql>
+
+    <select id="selectHousekeeperCommentTagList" parameterType="HousekeeperCommentTag" resultMap="HousekeeperCommentTagResult">
+        <include refid="selectHousekeeperCommentTagVo"/>
+        <where>  
+            <if test="agencyId != null "> and agency_id = #{agencyId}</if>
+            <if test="tagName != null  and tagName != ''"> and tag_name = #{tagName}</if>
+            <if test="likeType != null "> and like_type = #{likeType}</if>
+            <if test="createdDate != null "> and created_date = #{createdDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectHousekeeperCommentTagById" parameterType="Long" resultMap="HousekeeperCommentTagResult">
+        <include refid="selectHousekeeperCommentTagVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertHousekeeperCommentTag" parameterType="HousekeeperCommentTag" useGeneratedKeys="true" keyProperty="id">
+        insert into aomygod.housekeeper_comment_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="agencyId != null ">agency_id,</if>
+            <if test="tagName != null  and tagName != ''">tag_name,</if>
+            <if test="likeType != null ">like_type,</if>
+            <if test="createdDate != null ">created_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="agencyId != null ">#{agencyId},</if>
+            <if test="tagName != null  and tagName != ''">#{tagName},</if>
+            <if test="likeType != null ">#{likeType},</if>
+            <if test="createdDate != null ">#{createdDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHousekeeperCommentTag" parameterType="HousekeeperCommentTag">
+        update aomygod.housekeeper_comment_tag
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="agencyId != null ">agency_id = #{agencyId},</if>
+            <if test="tagName != null  and tagName != ''">tag_name = #{tagName},</if>
+            <if test="likeType != null ">like_type = #{likeType},</if>
+            <if test="createdDate != null ">created_date = #{createdDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteHousekeeperCommentTagById" parameterType="Long">
+        delete from aomygod.housekeeper_comment_tag where id = #{id}
+    </delete>
+
+    <delete id="deleteHousekeeperCommentTagByIds" parameterType="String">
+        delete from aomygod.housekeeper_comment_tag where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
