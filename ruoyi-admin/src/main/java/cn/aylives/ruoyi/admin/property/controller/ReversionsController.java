@@ -1,5 +1,6 @@
 package cn.aylives.ruoyi.admin.property.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
@@ -127,8 +128,7 @@ public class ReversionsController extends BaseController
 	public AjaxResult addSave(Reversions reversions, @DeptData  SysDept sysDept)
 	{
 
-
-
+        reversions.setCreatedTime(new Date());
 		return toAjax(reversionsService.insertReversions(reversions , sysDept ));
 	}
 
@@ -138,6 +138,8 @@ public class ReversionsController extends BaseController
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, ModelMap mmap)
 	{
+
+
 		Reversions reversions = reversionsService.selectReversionsById(id);
 		mmap.put("reversions", reversions);
 		return prefix + "/edit";
@@ -152,6 +154,7 @@ public class ReversionsController extends BaseController
 	@ResponseBody
 	public AjaxResult editSave(  @DeptData  SysDept sysDept,  Reversions reversions)
 	{
+        reversions.setUpdatedTime(new Date());
 		return toAjax(reversionsService.updateReversions(reversions ,sysDept));
 	}
 	

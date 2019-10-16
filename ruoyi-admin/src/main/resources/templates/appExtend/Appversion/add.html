@@ -10,26 +10,26 @@
 																											<div class="form-group">
 						<label class="col-sm-3 control-label">版本号：</label>
 						<div class="col-sm-8">
-							<input name="version" class="form-control" type="text">
+							<input  required  name="version" class="form-control" type="text">
 						</div>
 					</div>
 																													<div class="form-group">
 						<label class="col-sm-3 control-label">安装包地址：</label>
 						<div class="col-sm-8">
-							<input id="packageLink" name="packageLink"   type="hidden" >
-							<input class="flatyUpload" name="img" type="file"   data-max-file-count="1" id="fileinput" >
+							<input id="packageLink"  required  name="packageLink"   type="hidden" >
+							<input class="flatyUpload"  name="img" type="file"   data-max-file-count="1" id="fileinput" >
+						</div>
+					</div>
+				<div class="form-group">
+				<label class="col-sm-3 control-label">市场地址：</label>
+						<div class="col-sm-8">
+							<input name="storeLink"   class="form-control" type="text">
 						</div>
 					</div>
 																													<div class="form-group">
-						<label class="col-sm-3 control-label">市场地址：</label>
+						<label class="col-sm-3 control-label">是否强制更新 ：</label>
 						<div class="col-sm-8">
-							<input name="storeLink" class="form-control" type="text">
-						</div>
-					</div>
-																													<div class="form-group">
-						<label class="col-sm-3 control-label">是否强制更新。1是：</label>
-						<div class="col-sm-8">
-							<select name="isForceUpdate" class="form-control m-b" th:with="type=${@dict.getType('app_is_force_update')}">
+							<select  required  name="isForceUpdate" class="form-control m-b" th:with="type=${@dict.getType('app_is_force_update')}">
 								<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 							</select>
 						</div>
@@ -39,7 +39,7 @@
 						<label class="col-sm-3 control-label">是否选择更新：</label>
 						<div class="col-sm-8">
 							<div class="radio-box" th:each="dict : ${@dict.getType('app_is_update')}">
-								<input type="radio" th:id="${dict.dictCode}" name="isUpdate" th:value="${dict.dictValue}" >
+								<input  required  type="radio" th:id="${dict.dictCode}" name="isUpdate" th:value="${dict.dictValue}" >
 								<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
 							</div>
 						</div>
@@ -53,13 +53,13 @@
 																													<div class="form-group">
 						<label class="col-sm-3 control-label">更新内容：</label>
 						<div class="col-sm-8">
-							<textarea name="updateContent" class="form-control"></textarea>
+							<textarea  required name="updateContent" class="form-control"></textarea>
 						</div>
 					</div>
 																																		<div class="form-group">
 						<label class="col-sm-3 control-label">系统：</label>
 						<div class="col-sm-8">
-							<select name="type" class="form-control m-b" th:with="type=${@dict.getType('app_type')}">
+							<select  required name="type" class="form-control m-b" th:with="type=${@dict.getType('app_type')}">
 								<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 							</select>
 						</div>
@@ -67,7 +67,7 @@
 																													<div class="form-group">
 						<label class="col-sm-3 control-label">app类型：</label>
 						<div class="col-sm-8">
-							<select name="appType" class="form-control m-b" th:with="type=${@dict.getType('appversion_app_type')}">
+							<select  required name="appType" class="form-control m-b" th:with="type=${@dict.getType('appversion_app_type')}">
 								<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 							</select>
 						</div>
@@ -84,6 +84,11 @@
 
 	function submitHandler() {
 		if ($.validate.form()) {
+
+			if( ! $("#packageLink").val()){
+				alert("安装包地址为空");
+				return;
+			}
 			$.operate.save(prefix + "/add", $('#form-Appversion-add').serialize());
 		}
 	}
