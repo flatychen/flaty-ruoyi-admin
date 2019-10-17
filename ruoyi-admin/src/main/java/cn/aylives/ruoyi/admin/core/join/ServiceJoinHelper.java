@@ -139,7 +139,8 @@ public class ServiceJoinHelper {
                     throw new IllegalArgumentException(e);
                 }
                 values.add(new Integer(sourceVal.toString()));
-                sourceFieldValueMap.put(new BeanField<>(sourceField, bean), sourceVal);
+                sourceFieldValueMap.put(new BeanField<>(sourceField, bean
+                ), sourceVal);
             }
             sourceValues.put(sourceField, new ArrayList<>(values));
         }

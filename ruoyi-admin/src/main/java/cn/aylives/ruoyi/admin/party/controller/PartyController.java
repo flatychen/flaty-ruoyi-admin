@@ -1,10 +1,11 @@
 package cn.aylives.ruoyi.admin.party.controller;
 
+import cn.aylives.ruoyi.admin.core.dept.DeptData;
 import cn.aylives.ruoyi.admin.property.domain.Agency;
 import cn.aylives.ruoyi.admin.property.service.ISysAgencyService;
-import cn.aylives.ruoyi.admin.core.dept.DeptData;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
+import cn.aylives.ruoyi.common.exception.BusinessException;
 import cn.aylives.ruoyi.system.domain.SysDept;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,10 @@ public class PartyController extends BaseController {
     @RequiresPermissions("party:edit")
     public String edit(@DeptData SysDept sysDept, ModelMap mmap) {
         Agency agency = agencyService.selectSysAgencyById(sysDept.getAgencyId());
+        if (agency == null) {
+            throw new BusinessException(("请先在右上角【选择项目】选择有效的项目"));
+        }
         mmap.put("agency", agency);
-        System.out.println("xx");
         return prefix + "/edit";
     }
 

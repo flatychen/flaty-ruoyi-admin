@@ -26,8 +26,7 @@ public class AppUser extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Excel(name = "id", prompt = "id")
-
-    private Long userId;
+    private Integer userId;
     /**
      * null
      */

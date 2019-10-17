@@ -53,7 +53,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectAppUserVo"/>
         where USER_ID = #{userId}
     </select>
-        
+
+    <select id="selectAppUserByUserIds" resultMap="AppUserResult" >
+        <include refid="selectAppUserVo"/>    where USER_ID in
+        <foreach item="userId" collection="list" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </select>
+
     <insert id="insertAppUser" parameterType="AppUser" useGeneratedKeys="true" keyProperty="userId">
         insert into aomygod.sys_app_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -163,5 +170,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{userId}
         </foreach>
     </delete>
-    
+
+
+
 </mapper>

@@ -1,8 +1,11 @@
 package cn.aylives.ruoyi.admin.property.controller;
 
 import cn.aylives.ruoyi.admin.core.dept.DeptData;
+import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
 import cn.aylives.ruoyi.admin.property.domain.UserRoom;
+import cn.aylives.ruoyi.admin.property.service.IAppUserService;
 import cn.aylives.ruoyi.admin.property.service.IUserRoomService;
+import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
 import cn.aylives.ruoyi.common.annotation.Log;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
@@ -32,6 +35,13 @@ public class UserRoomController extends BaseController
 
 	@Autowired
 	private IUserRoomService userRoomService;
+
+	@Autowired
+	IAppUserService iAppUserService;
+
+
+	@Autowired
+	AgencyViewServiceImpl agencyViewService;
 
 	@RequiresPermissions("property:UserRoom:view")
 	@GetMapping()
@@ -73,6 +83,8 @@ public class UserRoomController extends BaseController
 	{
 		startPage();
 		List<UserRoom> list = userRoomService.selectUserRoomList(userRoom);
+		ServiceJoinHelper.join(UserRoom.class, list, agencyViewService,iAppUserService);
+//		ServiceJoinHelper.join(UserRoom.class, list,iAppUserService);
 		return getDataTable(list);
 	}
 
