@@ -12,35 +12,11 @@
 				<div class="select-list">
 					<ul>
 																																																											<li>
-										名称：
-										<input type="text" name="name"/>
-									</li>
-																																																													<li>
-										链接内容：
-										<input type="text" name="link"/>
-									</li>
-																																																													<li>
 										类型：
 										<select name="type" th:with="type=${@dict.getType('adver_type')}">
 											<option value="">所有</option>
 											<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 										</select>
-									</li>
-																																																													<li>
-										排序：
-										<input type="text" name="sort"/>
-									</li>
-																																																													<li class="select-time">
-										<label>开始时间：</label>
-										<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginBeginTime]"/>
-										<span>-</span>
-										<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endBeginTime]"/>
-									</li>
-																																																													<li class="select-time">
-										<label>结束时间：</label>
-										<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginEndTime]"/>
-										<span>-</span>
-										<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endEndTime]"/>
 									</li>
 																																																													<li class="select-time">
 										<label>创建时间：</label>
@@ -114,10 +90,6 @@
 							title : '名称'
 						},
 																														{
-							field : 'link',
-							title : '链接内容'
-						},
-																														{
 							field : 'type',
 							title : '类型',
 							formatter: function(value, row, index) {
@@ -135,10 +107,6 @@
 																														{
 							field : 'endTime',
 							title : '结束时间'
-						},
-																														{
-							field : 'createdDate',
-							title : '创建时间'
 						},
 																														{
 							field : 'imgUrl',
