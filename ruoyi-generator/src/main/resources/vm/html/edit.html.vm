@@ -91,7 +91,7 @@
 						<div class="col-sm-8">
 							<div class="input-group date">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-								<input name="${field}" th:value="${#dates.format(${className}.${field}, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text"#if($column.required) required#end>
+								<input name="${field}" th:value="${#dates.format(${className}.${field}, 'yyyy-MM-dd HH:mm:ss')}" class="form-control" placeholder="yyyy-MM-dd HH:mm:ss" type="text"#if($column.required) required#end>
 							</div>
 						</div>
 					</div>
@@ -126,37 +126,35 @@
 			$.operate.save(prefix + "/edit", $('#form-${businessName}-edit').serialize());
 		}
 	}
-		#foreach($column in $columns)
-			#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
+#foreach($column in $columns)
+	#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
+		$("input[name='$column.javaField']").datetimepicker({
+			format: "yyyy-mm-dd hh:ii:ss",
+			minView: "hour",
+			autoclose: true
+		});
+	#end
+#end
+#if($table.tree)
 
-			$("input[name='$column.javaField']").datetimepicker({
-				format: "yyyy-mm-dd",
-				minView: "month",
-				autoclose: true
-			});
-				#break
-			#end
-		#end
-		#if($table.tree)
+/*${functionName}-新增-选择父部门树*/
+function select${BusinessName}Tree() {
+	var options = {
+		title: '${functionName}选择',
+		width: "380",
+		url: prefix + "/select${BusinessName}Tree/" + $("#treeId").val(),
+		callBack: doSubmit
+	};
+	$.modal.openOptions(options);
+}
 
-		/*${functionName}-新增-选择父部门树*/
-		function select${BusinessName}Tree() {
-			var options = {
-				title: '${functionName}选择',
-				width: "380",
-				url: prefix + "/select${BusinessName}Tree/" + $("#treeId").val(),
-				callBack: doSubmit
-			};
-			$.modal.openOptions(options);
-		}
-
-		function doSubmit(index, layero){
-			var body = layer.getChildFrame('body', index);
-			$("#treeId").val(body.find('#treeId').val());
-			$("#treeName").val(body.find('#treeName').val());
-			layer.close(index);
-		}
-		#end
+function doSubmit(index, layero){
+	var body = layer.getChildFrame('body', index);
+	$("#treeId").val(body.find('#treeId').val());
+	$("#treeName").val(body.find('#treeName').val());
+	layer.close(index);
+}
+#end
 </script>
 </body>
 </html>

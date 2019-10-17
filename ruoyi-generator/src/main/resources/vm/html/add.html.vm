@@ -90,7 +90,7 @@
 						<div class="col-sm-8">
 							<div class="input-group date">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-								<input name="${field}" class="form-control" placeholder="yyyy-MM-dd" type="text"#if($column.required) required#end>
+								<input name="${field}" class="form-control" placeholder="yyyy-MM-dd HH:mm:ss" type="text"#if($column.required) required#end>
 							</div>
 						</div>
 					</div>
@@ -137,8 +137,8 @@
 			#if($column.insert && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
 
 			$("input[name='$column.javaField']").datetimepicker({
-				format: "yyyy-mm-dd",
-				minView: "month",
+				format: "yyyy-mm-dd hh:ii:ss",
+				minView: "hour",
 				autoclose: true
 			});
 				#break
