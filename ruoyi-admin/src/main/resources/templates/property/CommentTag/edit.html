@@ -9,22 +9,25 @@
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
 	<form class="form-horizontal m" id="form-CommentTag-edit" th:object="${housekeeperCommentTag}">
 		<input name="id" th:field="*{id}" type="hidden">
-																											<div class="form-group">
+
+					<!--<div class="form-group">
 						<label class="col-sm-3 control-label">小区编号：</label>
 						<div class="col-sm-8">
 							<input name="agencyId" th:field="*{agencyId}" class="form-control" type="text">
 						</div>
-					</div>
+					</div>-->
+					<input name="agencyId"  readonly="readonly" th:field="*{agencyId}" class="form-control" type="hidden">
+
 																													<div class="form-group">
 						<label class="col-sm-3 control-label">标签名称：</label>
 						<div class="col-sm-8">
-							<input name="tagName" th:field="*{tagName}" class="form-control" type="text">
+							<input  required  name="tagName" th:field="*{tagName}" class="form-control" type="text">
 						</div>
 					</div>
 																													<div class="form-group">
 						<label class="col-sm-3 control-label">评价类型：</label>
 						<div class="col-sm-8">
-							<select name="likeType" class="form-control m-b" th:with="type=${@dict.getType('housekeeper_like_type')}">
+							<select   required  name="likeType" class="form-control m-b" th:with="type=${@dict.getType('housekeeper_like_type')}">
 								<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{likeType}"></option>
 							</select>
 						</div>

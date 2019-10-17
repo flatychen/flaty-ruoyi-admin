@@ -1,7 +1,8 @@
 package cn.aylives.ruoyi.admin.property.mapper;
-import cn.aylives.ruoyi.admin.property.domain.AppUser;
-import java.util.List;
 import cn.aylives.ruoyi.admin.core.MyMapper;
+import cn.aylives.ruoyi.admin.property.domain.AppUser;
+
+import java.util.List;
 /**
  * AppUserMapper接口
  *
@@ -10,6 +11,15 @@ import cn.aylives.ruoyi.admin.core.MyMapper;
  */
 public interface AppUserMapper extends MyMapper<AppUser>
 {
+
+
+	/**
+	 * @param userIds
+	 * @return
+	 */
+	public List<AppUser> selectAppUserByUserIds(List<Integer> userIds);
+
+
 	/**
 	 * 查询AppUser
 	 *

@@ -1,10 +1,11 @@
 package cn.aylives.ruoyi.admin.property.domain;
 
+import cn.aylives.ruoyi.admin.core.join.JoinField;
 import cn.aylives.ruoyi.common.annotation.Excel;
-import javax.persistence.*;
-
 import cn.aylives.ruoyi.common.core.domain.BaseEntity;
 import lombok.Data;
+
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -50,7 +51,13 @@ public class HousekeeperCommentTag extends BaseEntity
 				@Excel(name = "创建时间", prompt = "创建时间")
 		
 	private Date createdDate;
-	
+
+
+	@Transient
+	@JoinField(sourceField = "agencyId")
+	private Agency agency;
+
+
 
 
 

@@ -1,7 +1,11 @@
 package cn.aylives.ruoyi.admin.property.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
+import cn.aylives.ruoyi.admin.property.domain.Reversions;
+import cn.aylives.ruoyi.admin.property.service.ISysAgencyService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +40,11 @@ public class HousekeeperCommentTagController extends BaseController
 
 	@Autowired
 	private IHousekeeperCommentTagService housekeeperCommentTagService;
+
+
+	@Autowired
+	private ISysAgencyService iSysAgencyService;
+
 
 	@RequiresPermissions("property:CommentTag:view")
 	@GetMapping()
@@ -77,6 +86,8 @@ public class HousekeeperCommentTagController extends BaseController
 	{
 		startPage();
 		List<HousekeeperCommentTag> list = housekeeperCommentTagService.selectHousekeeperCommentTagList(housekeeperCommentTag);
+		ServiceJoinHelper.join(HousekeeperCommentTag.class, list, iSysAgencyService);
+
 		return getDataTable(list);
 	}
 
@@ -117,6 +128,8 @@ public class HousekeeperCommentTagController extends BaseController
 	@ResponseBody
 	public AjaxResult addSave(HousekeeperCommentTag housekeeperCommentTag)
 	{
+
+		housekeeperCommentTag.setCreatedDate( new Date());
 		return toAjax(housekeeperCommentTagService.insertHousekeeperCommentTag(housekeeperCommentTag));
 	}
 

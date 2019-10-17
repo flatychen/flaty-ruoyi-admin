@@ -24,6 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="likeType != null "> and like_type = #{likeType}</if>
             <if test="createdDate != null "> and created_date = #{createdDate}</if>
         </where>
+
+        order by  created_date desc
     </select>
     
     <select id="selectHousekeeperCommentTagById" parameterType="Long" resultMap="HousekeeperCommentTagResult">

@@ -1,13 +1,14 @@
 package cn.aylives.ruoyi.admin.property.service.impl;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import cn.aylives.ruoyi.admin.core.impl.AbstractService;
-import cn.aylives.ruoyi.admin.property.mapper.AppUserMapper;
 import cn.aylives.ruoyi.admin.property.domain.AppUser;
+import cn.aylives.ruoyi.admin.property.mapper.AppUserMapper;
 import cn.aylives.ruoyi.admin.property.service.IAppUserService;
 import cn.aylives.ruoyi.common.core.text.Convert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 /**
  * AppUserService业务层处理
  *
@@ -20,6 +21,13 @@ public class AppUserServiceImpl extends AbstractService<AppUser> implements IApp
 
 	@Autowired
 	private AppUserMapper appUserMapper;
+
+	@Override
+	public List<AppUser> findByIds(List<Integer> ids){
+		List<AppUser> appUsers = appUserMapper.selectAppUserByUserIds(ids);
+		return appUsers;
+	}
+
 
 	/**
 	 * 查询AppUser

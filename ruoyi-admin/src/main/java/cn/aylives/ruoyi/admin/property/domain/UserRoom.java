@@ -1,5 +1,6 @@
 package cn.aylives.ruoyi.admin.property.domain;
 
+import cn.aylives.ruoyi.admin.core.join.JoinField;
 import cn.aylives.ruoyi.common.annotation.Excel;
 import cn.aylives.ruoyi.common.core.domain.BaseEntity;
 import lombok.Data;
@@ -20,6 +21,15 @@ public class UserRoom extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
 
+    @JoinField(sourceField = "agId", customOuterField = "distAgencyId", order = 1)
+    @Transient
+    private transient AgencyView agencyView;
+
+    @JoinField(sourceField = "userId", customOuterField = "userId", order = 2)
+    @Transient
+    private transient AppUser appUser;
+
+
     /**
      * 主键id
      */
@@ -27,7 +37,6 @@ public class UserRoom extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Excel(name = "id", prompt = "id")
-
     private Integer id;
     /**
      * 小区id
@@ -76,7 +85,6 @@ public class UserRoom extends BaseEntity {
      */
     @Column(name = "USER_ID")
     @Excel(name = "业主id", prompt = "业主id")
-
     private Integer userId;
     /**
      * 朝向id
