@@ -88,7 +88,8 @@
 						},
 																														{
 							field : 'agency.name',
-							title : '项目'
+							title : '项目', visible: false
+
 						},
 																														{
 							field : 'tagName',
@@ -101,9 +102,10 @@
 								return $.table.selectDictLabel(likeTypeDatas, value);
 							}
 						},
-																														{
+						{
 							field : 'createdDate',
-							title : '创建时间'
+							title : '创建时间',
+                            visible: false
 						},
 													{
 					title: '操作',

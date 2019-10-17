@@ -11,10 +11,10 @@
 			<form id="formId">
 				<div class="select-list">
 					<ul>
-																																																											<li>
+									<!--<li>
 										小区id：
 										<input type="text" name="agencyId"/>
-									</li>
+									</li>-->
 																																																													<li>
 										回复语类型：
 										<select name="replyType" th:with="type=${@dict.getType('reversions_reply_type')}">
@@ -26,29 +26,31 @@
 										分类：
 										<input type="text" name="classify"/>
 									</li>
-																																																													<li>
+
+									<!--<li>
 										关键字：
 										<input type="text" name="keyword"/>
-									</li>
-																																																																																																									<li>
+									</li>-->
+									<li>
 										启用状态：
 										<select name="status" th:with="type=${@dict.getType('reversions_status')}">
 											<option value="">所有</option>
 											<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 										</select>
 									</li>
-																																																													<li class="select-time">
+
+									<!--<li class="select-time">
 										<label>创建时间：</label>
 										<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCreatedTime]"/>
 										<span>-</span>
 										<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCreatedTime]"/>
 									</li>
-																																																													<li class="select-time">
+									<li class="select-time">
 										<label>更新时间：</label>
 										<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginUpdatedTime]"/>
 										<span>-</span>
 										<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endUpdatedTime]"/>
-									</li>
+									</li>-->
 																											<li>
 							<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 							<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -135,11 +137,13 @@
 						},
 																														{
 							field : 'createdTime',
-							title : '创建时间'
+							title : '创建时间',
+							visible: false
 						},
 																														{
 							field : 'updatedTime',
-							title : '更新时间'
+							title : '更新时间',
+							visible: false
 						},
 													{
 					title: '操作',
