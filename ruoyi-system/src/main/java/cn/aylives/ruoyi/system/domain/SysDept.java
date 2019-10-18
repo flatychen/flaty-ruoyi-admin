@@ -13,6 +13,13 @@ public class SysDept extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+
+    public static class AgencyId {
+        public static Integer ROOT = -1;
+        public static Integer NOVALID = -1;
+
+    }
+
     /** 部门ID */
     private Long deptId;
 
@@ -52,7 +59,7 @@ public class SysDept extends BaseEntity
 
 
     public boolean isRoot() {
-        return "0".equalsIgnoreCase(this.ancestors);
+        return AgencyId.ROOT.toString().equalsIgnoreCase(this.ancestors);
     }
 
     public Integer getAgencyId() {
