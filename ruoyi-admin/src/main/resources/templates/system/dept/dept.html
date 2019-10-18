@@ -29,7 +29,7 @@
 			</div>
                 
             <div class="btn-group-sm" id="toolbar" role="group">
-		        <a class="btn btn-success" onclick="$.operate.add(10098)" shiro:hasPermission="system:dept:add">
+		        <a class="btn btn-success" onclick="addDept()" shiro:hasPermission="system:dept:add">
                     <i class="fa fa-plus"></i> 新增
                 </a>
                 <a class="btn btn-primary" onclick="$.operate.edit()" shiro:hasPermission="system:dept:edit">
@@ -51,7 +51,6 @@
 		var removeFlag = [[${@permission.hasPermi('system:dept:remove')}]];
 		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/dept"
-
 		$(function() {
 		    var options = {
 		        code: "deptId",
@@ -116,6 +115,11 @@
 		    };
 		    $.treeTable.init(options);
 		});
+
+
+		function addDept() {
+			$.operate.add([[${@aoyuejiaConfig.rootDept}]])
+		}
 	</script>
 </body>
 </html>

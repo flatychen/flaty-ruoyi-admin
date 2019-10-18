@@ -77,7 +77,7 @@
         /*角色管理-新增-选择部门树*/
         function selectDeptTree() {
             var treeId = $("#treeId").val();
-            var deptId = $.common.isEmpty(treeId) ? "10098" : $("#treeId").val();
+            var deptId = $.common.isEmpty(treeId) ? "[[${@aoyuejiaConfig.rootDept}]]" : $("#treeId").val();
             var url = ctx + "system/dept/selectDeptTree/" + deptId;
             var options = {
                 title: '选择部门',

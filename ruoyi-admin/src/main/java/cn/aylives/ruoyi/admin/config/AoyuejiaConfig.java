@@ -3,12 +3,10 @@ package cn.aylives.ruoyi.admin.config;
 import cn.aylives.ruoyi.system.domain.SysDept;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-
-import java.util.List;
 
 
 @Configuration
@@ -18,14 +16,18 @@ import java.util.List;
 @Data
 public class AoyuejiaConfig {
 
-    private List<Integer> rootDepts;
+    @Value("${ruoyi.rootDept:0}")
+    private Integer rootDept;
 
+    public Integer getRootDepts() {
+        return rootDept;
+    }
 
     public boolean isRootDept(SysDept dept) {
-        if (dept == null || CollectionUtils.isEmpty(rootDepts)) {
+        if (dept == null || rootDept == null) {
             return false;
         } else {
-            return rootDepts.contains(dept.getAgencyId());
+            return rootDept.intValue() == dept.getAgencyId();
         }
     }
 

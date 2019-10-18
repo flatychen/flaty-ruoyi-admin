@@ -11,7 +11,8 @@ ruoyi:
   # 文件路径
   profile: D:/profile/
   # 获取ip地址开关
-  addressEnabled: true
+  addressEnabled: false
+  rootDept: 10098
 
 # 开发环境配置
 server:
@@ -49,6 +50,7 @@ spring:
     encoding: utf-8
     # 禁用缓存
     cache: false
+    enable-spring-el-compiler: true
   # 资源信息
   messages:
     # 国际化资源文件路径
@@ -168,6 +170,4 @@ orika:
   captureFieldContext: false
 
 
-aoyuejia:
-  rootDepts:
-    - 10098
+

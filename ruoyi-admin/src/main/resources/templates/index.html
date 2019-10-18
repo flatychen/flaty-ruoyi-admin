@@ -253,7 +253,7 @@ function resetPwd() {
 
 /*导航栏选择部门树*/
 function navSelectDeptTree() {
-	var deptId = $.common.isEmpty($("#treeId").val()) ? "10098" : $("#treeId").val();
+	var deptId = $.common.isEmpty($("#treeId").val()) ? "[[${@aoyuejiaConfig.rootDept}]]" : $("#treeId").val();
 	var url = ctx + "system/dept/selectDeptTree/" + deptId;
 	var options = {
 		title: '选择项目',
@@ -269,7 +269,7 @@ function navSelectDeptTreeDoSubmit(index, layero){
 	var tree = layero.find("iframe")[0].contentWindow.$._tree;
 	var body = layer.getChildFrame('body', index)
 	var treeId =body.find('#treeId').val();
-	// if (treeId==10098 || $.tree.notAllowParents(tree)) {
+	// if (treeId==[[${@aoyuejiaConfig.rootDept}]] || $.tree.notAllowParents(tree)) {
 		var treeName =body.find('#treeName').val();
 		$.cookie('deptId', treeId||"0");
 		$.cookie('treeName', treeName||"0");
