@@ -73,7 +73,7 @@
 						</li>
 					</ul>
                 </li>
-                <li th:classappend="${demoEnabled==false} ? 'hidden'">
+                <li   th:classappend="${demoEnabled}=='false' ? 'hidden':''">
                     <a href="#"><i class="fa fa-desktop"></i><span class="nav-label">实例演示</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li> <a>表单<span class="fa arrow"></span></a>
@@ -269,14 +269,14 @@ function navSelectDeptTreeDoSubmit(index, layero){
 	var tree = layero.find("iframe")[0].contentWindow.$._tree;
 	var body = layer.getChildFrame('body', index)
 	var treeId =body.find('#treeId').val();
-	if (treeId==10098 || $.tree.notAllowParents(tree)) {
+	// if (treeId==10098 || $.tree.notAllowParents(tree)) {
 		var treeName =body.find('#treeName').val();
 		$.cookie('deptId', treeId||"0");
 		$.cookie('treeName', treeName||"0");
 		// var treeName = body.find('#treeName').val();
 		layer.close(index);
 		window.location.reload();
-	}
+	// }
 
 
 }
