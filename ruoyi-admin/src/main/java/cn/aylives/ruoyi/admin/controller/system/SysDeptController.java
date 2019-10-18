@@ -78,7 +78,7 @@ public class SysDeptController extends BaseController
     public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap)
     {
         SysDept dept = deptService.selectDeptById(deptId);
-        if (StringUtils.isNotNull(dept) && 100L == deptId)
+        if (StringUtils.isNotNull(dept))
         {
             dept.setParentName("无");
         }
