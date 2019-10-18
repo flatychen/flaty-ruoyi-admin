@@ -159,6 +159,7 @@
 			var roleId = $("input[name='roleId']").val();
 			var roleName = $("input[name='roleName']").val();
 			var roleKey = $("input[name='roleKey']").val();
+			var deptId = $("input[name='deptId']").val();
 			var roleSort = $("input[name='roleSort']").val();
 			var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
 			var remark = $("input[name='remark']").val();
@@ -172,6 +173,7 @@
 					"roleName": roleName,
 					"roleKey": roleKey,
 					"roleSort": roleSort,
+					"deptId": deptId,
 					"status": status,
 					"remark": remark,
 					"menuIds": menuIds

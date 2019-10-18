@@ -8,9 +8,8 @@
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-role-add">
             <input name="deptId" type="hidden" id="treeId"/>
-
             <div class="form-group">
-                <label class="col-sm-4 control-label">归属部门：</label>
+                <label class="col-sm-3 control-label">归属部门：</label>
                 <div class="col-sm-8">
                     <div class="input-group">
                         <input class="form-control" type="text" name="deptName" onclick="selectDeptTree()" id="treeName" required>
@@ -159,6 +158,7 @@
 			var roleName = $("input[name='roleName']").val();
 			var roleKey = $("input[name='roleKey']").val();
 			var roleSort = $("input[name='roleSort']").val();
+			var deptId = $("input[name='deptId']").val();
 			var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
 			var remark = $("input[name='remark']").val();
 			var menuIds = $.tree.getCheckedNodes();
@@ -170,6 +170,7 @@
 					"roleName": roleName,
 					"roleKey": roleKey,
 					"roleSort": roleSort,
+					"deptId": deptId,
 					"status": status,
 					"remark": remark,
 					"menuIds": menuIds
