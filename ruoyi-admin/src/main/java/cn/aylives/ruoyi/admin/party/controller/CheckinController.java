@@ -92,7 +92,7 @@ public class CheckinController extends BaseController
 	/**
 	 * 导出列表
 	 */
-	@RequiresPermissions("party:checkin:export")
+	@RequiresPermissions("party:checkin:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Checkin checkin)

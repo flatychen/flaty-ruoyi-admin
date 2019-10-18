@@ -80,7 +80,7 @@ public class AppIndexButtonController extends BaseController
 	/**
 	 * 导出首页按钮列表
 	 */
-	@RequiresPermissions("appExtend:indexButton:export")
+	@RequiresPermissions("appExtend:indexButton:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(AppIndexButton appIndexButton)

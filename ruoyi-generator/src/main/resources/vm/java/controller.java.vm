@@ -84,7 +84,7 @@ public class ${ClassName}Controller extends BaseController
 	/**
 	 * 导出${functionName}列表
 	 */
-	@RequiresPermissions("${permissionPrefix}:export")
+	@RequiresPermissions("${permissionPrefix}:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(${ClassName} ${className})

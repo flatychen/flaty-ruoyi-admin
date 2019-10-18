@@ -55,7 +55,7 @@ public class SysConfigController extends BaseController
     }
 
     @Log(title = "参数管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:config:export")
+    @RequiresPermissions("system:config:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SysConfig config)

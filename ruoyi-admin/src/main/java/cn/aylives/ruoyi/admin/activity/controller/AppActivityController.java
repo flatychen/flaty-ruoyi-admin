@@ -76,7 +76,7 @@ public class AppActivityController extends BaseController {
     /**
      * 导出app活动列表
      */
-    @RequiresPermissions("activity:activity:export")
+    @RequiresPermissions("activity:activity:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(AppActivity activity) {

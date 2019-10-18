@@ -49,7 +49,7 @@ public class SysLogininforController extends BaseController
     }
 
     @Log(title = "登陆日志", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("monitor:logininfor:export")
+    @RequiresPermissions("monitor:logininfor:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SysLogininfor logininfor)

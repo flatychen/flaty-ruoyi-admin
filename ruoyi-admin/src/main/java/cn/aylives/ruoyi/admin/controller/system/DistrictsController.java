@@ -64,7 +64,7 @@ public class DistrictsController extends BaseController
 	/**
 	 * 导出地区列表
 	 */
-	@RequiresPermissions("system:districts:export")
+	@RequiresPermissions("system:districts:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Districts districts)

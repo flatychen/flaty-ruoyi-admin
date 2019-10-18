@@ -62,7 +62,7 @@ public class KdWebserviceInfoController extends BaseController {
     /**
      * 导出房屋认证结果列表
      */
-    @RequiresPermissions("house:auth:export")
+    @RequiresPermissions("house:auth:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(KdWebserviceInfo kdWebserviceInfo) {

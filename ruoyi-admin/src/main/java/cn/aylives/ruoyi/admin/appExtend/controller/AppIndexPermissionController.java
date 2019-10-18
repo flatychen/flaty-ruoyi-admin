@@ -89,7 +89,7 @@ public class AppIndexPermissionController extends BaseController
 	/**
 	 * 导出权限分组列表
 	 */
-	@RequiresPermissions("appExtend:permission:export")
+	@RequiresPermissions("appExtend:permission:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(AppIndexPermission appIndexPermission)

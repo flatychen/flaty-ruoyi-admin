@@ -82,7 +82,7 @@ public class ActivityUserController extends BaseBusinessController {
     /**
      * 导出列表
      */
-    @RequiresPermissions("party:activityUser:export" )
+    @RequiresPermissions("party:activityUser:list" )
     @PostMapping("/export" )
     @ResponseBody
     public AjaxResult export(ActivityUser activityUser) {

@@ -61,7 +61,7 @@ public class SysUserController extends BaseController {
     }
 
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:user:export")
+    @RequiresPermissions("system:user:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SysUser user) {

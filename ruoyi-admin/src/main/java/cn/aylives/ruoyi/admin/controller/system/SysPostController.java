@@ -52,7 +52,7 @@ public class SysPostController extends BaseController
     }
 
     @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:post:export")
+    @RequiresPermissions("system:post:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SysPost post)

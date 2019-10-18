@@ -96,7 +96,7 @@ public class HousekeeperCommentTagController extends BaseController
 	/**
 	 * 导出CommentTag列表
 	 */
-	@RequiresPermissions("property:CommentTag:export")
+	@RequiresPermissions("property:CommentTag:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(HousekeeperCommentTag housekeeperCommentTag)

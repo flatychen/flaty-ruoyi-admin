@@ -91,7 +91,7 @@ public class ActivityExtendController extends BaseController
 	/**
 	 * 导出${functionName}列表
 	 */
-	@RequiresPermissions("activity:extend:export")
+	@RequiresPermissions("activity:extend:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(ActivityExtend activityExtend)

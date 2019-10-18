@@ -83,7 +83,7 @@ public class ActivityController extends BaseController {
     /**
      * 导出党建服务列表
      */
-    @RequiresPermissions("party:activity:export")
+    @RequiresPermissions("party:activity:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Activity activity) {

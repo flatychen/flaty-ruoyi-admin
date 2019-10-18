@@ -64,7 +64,7 @@ public class AppActivityUserController extends BaseController {
     /**
      * 导出app活动用户列表列表
      */
-//    @RequiresPermissions("activity:AppActivityUser:export")
+//    @RequiresPermissions("activity:AppActivityUser:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(AppActivityUser appActivityUser) {

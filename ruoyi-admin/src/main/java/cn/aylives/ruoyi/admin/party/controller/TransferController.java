@@ -69,7 +69,7 @@ public class TransferController extends BaseController
 	/**
 	 * 导出列表
 	 */
-	@RequiresPermissions("party:transfer:export")
+	@RequiresPermissions("party:transfer:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Transfer transfer)

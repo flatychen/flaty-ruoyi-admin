@@ -85,7 +85,7 @@ public class AppAdverController extends BaseController
 	/**
 	 * 导出app广告列表
 	 */
-	@RequiresPermissions("property:adver:export")
+	@RequiresPermissions("property:adver:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(AppAdver appAdver)

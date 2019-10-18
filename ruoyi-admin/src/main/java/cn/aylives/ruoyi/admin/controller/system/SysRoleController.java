@@ -59,7 +59,7 @@ public class SysRoleController extends BaseController
     }
 
     @Log(title = "角色管理", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:role:export")
+    @RequiresPermissions("system:role:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SysRole role)

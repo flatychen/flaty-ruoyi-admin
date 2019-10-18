@@ -95,7 +95,7 @@ public class ReversionsController extends BaseController
 	/**
 	 * 导出Reversions列表
 	 */
-	@RequiresPermissions("property:Reversions:export")
+	@RequiresPermissions("property:Reversions:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(Reversions reversions)

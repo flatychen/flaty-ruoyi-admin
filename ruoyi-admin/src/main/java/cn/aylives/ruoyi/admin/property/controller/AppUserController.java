@@ -81,7 +81,7 @@ public class AppUserController extends BaseController
 	/**
 	 * 导出AppUser列表
 	 */
-	@RequiresPermissions("property:AppUser:export")
+	@RequiresPermissions("property:AppUser:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(AppUser appUser)

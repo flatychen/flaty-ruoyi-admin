@@ -93,7 +93,7 @@ public class UserRoomController extends BaseController
 	/**
 	 * 导出房屋管理列表
 	 */
-	@RequiresPermissions("property:UserRoom:export")
+	@RequiresPermissions("property:UserRoom:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(UserRoom userRoom)

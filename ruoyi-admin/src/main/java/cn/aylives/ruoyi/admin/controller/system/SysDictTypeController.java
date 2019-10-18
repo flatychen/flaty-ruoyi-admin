@@ -47,7 +47,7 @@ public class SysDictTypeController extends BaseController {
     }
 
     @Log(title = "字典类型", businessType = BusinessType.EXPORT)
-    @RequiresPermissions("system:dict:export")
+    @RequiresPermissions("system:dict:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(SysDictType dictType) {

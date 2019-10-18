@@ -81,7 +81,7 @@ public class HousekeeperRelationshipController extends BaseController
 	/**
 	 * 导出管家绑定列表
 	 */
-	@RequiresPermissions("property:HouseKeeperBind:export")
+	@RequiresPermissions("property:HouseKeeperBind:list")
 	@PostMapping("/export")
 	@ResponseBody
 	public AjaxResult export(HousekeeperRelationship housekeeperRelationship)

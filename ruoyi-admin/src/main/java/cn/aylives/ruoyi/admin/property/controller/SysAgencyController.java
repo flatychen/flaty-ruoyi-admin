@@ -55,7 +55,7 @@ public class SysAgencyController extends BaseController
 	/**
 	 * 导出项目列表
 	 */
-	@RequiresPermissions("property:sysAgency:export")
+	@RequiresPermissions("property:sysAgency:list")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Agency sysAgency)
