@@ -99,7 +99,7 @@ public class Checkin extends BaseEntity {
     private Integer formal;
 
     @Column(name = "status")
-    @Excel(name = "入党时间", prompt = "入党时间",readConverterExp="0=未审核,1=已审核,2=未通过")
+    @Excel(name = "审核状态", prompt = "入党时间",readConverterExp="0=未审核,1=已审核,2=未通过")
     private Integer status;
 
     @Column(name = "reason")

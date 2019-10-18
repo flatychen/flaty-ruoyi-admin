@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateBy"     column="update_by"      />
 		<result property="updatedDate"   column="updated_date"    />
 		<result property="remark"       column="remark"         />
+		<result property="deptId"       column="dept_id"         />
 	</resultMap>
 	
 	<sql id="selectRoleContactVo">
@@ -29,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
     
     <sql id="selectRoleVo">
-		select r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status, r.del_flag, r.created_date, r.remark
+		select  r.dept_id, r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status, r.del_flag, r.created_date, r.remark
         from sys_role r
 	</sql>
 	
@@ -93,6 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update sys_role
  		<set>
  			<if test="roleName != null and roleName != ''">role_name = #{roleName},</if>
+ 			<if test="deptId != null and deptId != ''">dept_id = #{deptId},</if>
  			<if test="roleKey != null and roleKey != ''">role_key = #{roleKey},</if>
  			<if test="roleSort != null and roleSort != ''">role_sort = #{roleSort},</if>
  			<if test="dataScope != null and dataScope != ''">data_scope = #{dataScope},</if>

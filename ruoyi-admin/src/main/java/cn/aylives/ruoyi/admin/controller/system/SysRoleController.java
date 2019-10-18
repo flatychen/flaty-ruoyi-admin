@@ -1,15 +1,5 @@
 package cn.aylives.ruoyi.admin.controller.system;
 
-import java.util.List;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import cn.aylives.ruoyi.common.annotation.Log;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
@@ -20,8 +10,16 @@ import cn.aylives.ruoyi.framework.util.ShiroUtils;
 import cn.aylives.ruoyi.system.domain.SysRole;
 import cn.aylives.ruoyi.system.domain.SysUser;
 import cn.aylives.ruoyi.system.domain.SysUserRole;
+import cn.aylives.ruoyi.system.service.ISysDeptService;
 import cn.aylives.ruoyi.system.service.ISysRoleService;
 import cn.aylives.ruoyi.system.service.ISysUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 角色信息
@@ -39,6 +37,9 @@ public class SysRoleController extends BaseController
 
     @Autowired
     private ISysUserService userService;
+
+    @Autowired
+    ISysDeptService iSysDeptService;
 
     @RequiresPermissions("system:role:view")
     @GetMapping()
@@ -98,7 +99,10 @@ public class SysRoleController extends BaseController
     @GetMapping("/edit/{roleId}")
     public String edit(@PathVariable("roleId") Long roleId, ModelMap mmap)
     {
-        mmap.put("role", roleService.selectRoleById(roleId));
+
+        SysRole sysRole =  roleService.selectRoleById(roleId);
+        mmap.put("role",sysRole);
+        mmap.put("dept",iSysDeptService.selectDeptById(sysRole.getDeptId()));
         return prefix + "/edit";
     }
 

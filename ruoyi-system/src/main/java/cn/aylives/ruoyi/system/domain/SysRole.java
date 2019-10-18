@@ -1,9 +1,9 @@
 package cn.aylives.ruoyi.system.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import cn.aylives.ruoyi.common.annotation.Excel;
 import cn.aylives.ruoyi.common.core.domain.BaseEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 角色表 sys_role
@@ -13,9 +13,24 @@ import cn.aylives.ruoyi.common.core.domain.BaseEntity;
 public class SysRole extends BaseEntity
 {
 
+
     public static String SUPER_ROOT = "root";
 
+
     private static final long serialVersionUID = 1L;
+
+
+    /** 部门ID */
+    @Excel(name = "部门编号", type = Excel.Type.IMPORT)
+    private Long deptId;
+
+    public Long getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
+    }
 
     /** 角色ID */
     @Excel(name = "角色序号")
