@@ -43,6 +43,9 @@ public class DeptArgumentResolver implements HandlerMethodArgumentResolver {
         if (sysDept == null) {
             throw new BusinessException(StringUtils.format("deptId:[%s]不存在",deptId));
         }
+        if (!sysDept.isValidDept()) {
+            throw new BusinessException(("请先在右上角【选择项目】选择真实有效的项目"));
+        }
         return sysDept;
 
     }

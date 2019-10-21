@@ -108,7 +108,7 @@ public class OaServiceImpl implements OaService {
             }
 
             SysDept sysDept = new SysDept();
-            sysDept.setAgencyId(SysDept.AgencyId.NOVALID);
+            sysDept.setAgencyId(SysDept.AgencyId.NOT_VALID);
             sysDept.setDeptId(Long.valueOf(dept.getDeptId()));
             sysDept.setParentId(Long.valueOf(dept.getParentId()));
             List<String> ancestors = Lists.newArrayList();
