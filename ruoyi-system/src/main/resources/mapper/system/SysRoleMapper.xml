@@ -18,8 +18,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updatedDate"   column="updated_date"    />
 		<result property="remark"       column="remark"         />
 		<result property="deptId"       column="dept_id"         />
+		<association property="dept"    column="dept_id" javaType="SysDept" resultMap="deptResult" />
 	</resultMap>
-	
+
+
+
+	<resultMap id="deptResult" type="SysDept">
+		<id     property="deptId"   column="dept_id"     />
+		<result property="parentId" column="parent_id"   />
+		<result property="deptName" column="dept_name"   />
+		<result property="orderNum" column="order_num"   />
+	</resultMap>
+
 	<sql id="selectRoleContactVo">
         select distinct r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope,
             r.status, r.del_flag, r.created_date, r.remark
@@ -37,9 +47,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectRoleList" parameterType="SysRole" resultMap="SysRoleResult">
 
 		select distinct r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope,
-		r.status, r.del_flag, r.created_date, r.remark
-		from sys_role r
-		where r.del_flag = '0'
+		r.status, r.del_flag, r.created_date, r.remark,
+
+		d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
+
+		from sys_role r , sys_dept d
+		where r.dept_id = d.dept_id AND  r.del_flag = '0' and d.status = '0' and d.del_flag = '0'
 		<if test="roleName != null and roleName != ''">
 			AND r.role_name like concat('%', #{roleName}, '%')
 		</if>

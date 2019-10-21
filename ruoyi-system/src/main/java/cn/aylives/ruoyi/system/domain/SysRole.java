@@ -24,6 +24,17 @@ public class SysRole extends BaseEntity
     @Excel(name = "部门编号", type = Excel.Type.IMPORT)
     private Long deptId;
 
+    private SysDept dept;
+
+
+    public SysDept getDept() {
+        return dept;
+    }
+
+    public void setDept(SysDept dept) {
+        this.dept = dept;
+    }
+
     public Long getDeptId() {
         return deptId;
     }
