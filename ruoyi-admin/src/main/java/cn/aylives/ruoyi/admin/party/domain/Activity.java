@@ -1,7 +1,7 @@
 package cn.aylives.ruoyi.admin.party.domain;
 
-import cn.aylives.ruoyi.admin.property.domain.Agency;
 import cn.aylives.ruoyi.admin.core.join.JoinField;
+import cn.aylives.ruoyi.admin.property.domain.AgencyView;
 import cn.aylives.ruoyi.common.annotation.Excel;
 import cn.aylives.ruoyi.common.core.domain.BaseEntity;
 import lombok.Data;
@@ -30,7 +30,7 @@ public class Activity extends BaseEntity {
 
     @Transient
     @JoinField(sourceField = "agencyId")
-    private Agency agency;
+    private AgencyView agency;
 
     /**
      * 标题

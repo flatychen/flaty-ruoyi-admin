@@ -55,7 +55,7 @@ public class HousekeeperCommentTag extends BaseEntity
 
 	@Transient
 	@JoinField(sourceField = "agencyId")
-	private Agency agency;
+	private AgencyView agency;
 
 
 

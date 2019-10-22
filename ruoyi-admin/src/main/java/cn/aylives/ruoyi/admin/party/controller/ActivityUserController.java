@@ -6,6 +6,7 @@ import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
 import cn.aylives.ruoyi.admin.party.domain.ActivityUser;
 import cn.aylives.ruoyi.admin.party.service.IActivityService;
 import cn.aylives.ruoyi.admin.party.service.IActivityUserService;
+import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
 import cn.aylives.ruoyi.common.annotation.Log;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.core.page.TableDataInfo;
@@ -36,6 +37,11 @@ public class ActivityUserController extends BaseBusinessController {
 
     @Autowired
     IActivityService iActivityService;
+
+
+
+    @Autowired
+    AgencyViewServiceImpl agencyViewService;
 
     @RequiresPermissions("party:activityUser:view" )
     @GetMapping()
@@ -74,7 +80,7 @@ public class ActivityUserController extends BaseBusinessController {
         startPage();
         activityUser.setAgencyId(sysDept.getAgencyId());
         List<ActivityUser> list = activityUserService.selectActivityUserList(activityUser);
-        ServiceJoinHelper.join(ActivityUser.class, list, iSysAgencyService, iActivityService);
+        ServiceJoinHelper.join(ActivityUser.class, list, agencyViewService, iActivityService);
         return getDataTable(list);
     }
 
