@@ -3,6 +3,7 @@ package cn.aylives.ruoyi.admin.party.controller;
 import cn.aylives.ruoyi.admin.core.dept.DeptData;
 import cn.aylives.ruoyi.admin.property.domain.Agency;
 import cn.aylives.ruoyi.admin.property.service.ISysAgencyService;
+import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.exception.BusinessException;
@@ -30,6 +31,9 @@ public class PartyController extends BaseController {
     @Autowired
     private ISysAgencyService agencyService;
 
+
+    @Autowired
+    AgencyViewServiceImpl agencyViewService;
 
     /**
      * 修改项目

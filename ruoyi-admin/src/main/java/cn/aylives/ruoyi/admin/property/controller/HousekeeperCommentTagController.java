@@ -1,31 +1,26 @@
 package cn.aylives.ruoyi.admin.property.controller;
 
-import java.util.Date;
-import java.util.List;
-
+import cn.aylives.ruoyi.admin.core.dept.DeptData;
 import cn.aylives.ruoyi.admin.core.join.ServiceJoinHelper;
-import cn.aylives.ruoyi.admin.property.domain.Reversions;
-import cn.aylives.ruoyi.admin.property.service.ISysAgencyService;
+import cn.aylives.ruoyi.admin.property.domain.HousekeeperCommentTag;
+import cn.aylives.ruoyi.admin.property.service.IHousekeeperCommentTagService;
+import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
+import cn.aylives.ruoyi.common.annotation.Log;
+import cn.aylives.ruoyi.common.core.controller.BaseController;
+import cn.aylives.ruoyi.common.core.domain.AjaxResult;
+import cn.aylives.ruoyi.common.core.page.TableDataInfo;
+import cn.aylives.ruoyi.common.enums.BusinessType;
+import cn.aylives.ruoyi.common.utils.StringUtils;
+import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
+import cn.aylives.ruoyi.system.domain.SysDept;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import cn.aylives.ruoyi.common.annotation.Log;
-import cn.aylives.ruoyi.common.enums.BusinessType;
-import cn.aylives.ruoyi.common.utils.StringUtils;
-import cn.aylives.ruoyi.admin.property.domain.HousekeeperCommentTag;
-import cn.aylives.ruoyi.admin.property.service.IHousekeeperCommentTagService;
-import cn.aylives.ruoyi.common.core.controller.BaseController;
-import cn.aylives.ruoyi.common.core.page.TableDataInfo;
-import cn.aylives.ruoyi.common.core.domain.AjaxResult;
-import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
-import cn.aylives.ruoyi.system.domain.SysDept;
-import cn.aylives.ruoyi.admin.core.dept.DeptData;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 /**
  * CommentTagController
  *
@@ -43,7 +38,9 @@ public class HousekeeperCommentTagController extends BaseController
 
 
 	@Autowired
-	private ISysAgencyService iSysAgencyService;
+	AgencyViewServiceImpl agencyViewService;
+
+
 
 
 	@RequiresPermissions("property:CommentTag:view")
@@ -86,7 +83,7 @@ public class HousekeeperCommentTagController extends BaseController
 	{
 		startPage();
 		List<HousekeeperCommentTag> list = housekeeperCommentTagService.selectHousekeeperCommentTagList(housekeeperCommentTag);
-		ServiceJoinHelper.join(HousekeeperCommentTag.class, list, iSysAgencyService);
+		ServiceJoinHelper.join(HousekeeperCommentTag.class, list, agencyViewService);
 
 		return getDataTable(list);
 	}
