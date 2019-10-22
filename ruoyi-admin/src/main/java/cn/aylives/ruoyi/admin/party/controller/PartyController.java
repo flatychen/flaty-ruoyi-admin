@@ -2,6 +2,7 @@ package cn.aylives.ruoyi.admin.party.controller;
 
 import cn.aylives.ruoyi.admin.core.dept.DeptData;
 import cn.aylives.ruoyi.admin.property.domain.Agency;
+import cn.aylives.ruoyi.admin.property.domain.SysAgency;
 import cn.aylives.ruoyi.admin.property.service.ISysAgencyService;
 import cn.aylives.ruoyi.admin.property.service.impl.AgencyViewServiceImpl;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
@@ -41,7 +42,7 @@ public class PartyController extends BaseController {
     @GetMapping("/edit")
     @RequiresPermissions("party:edit")
     public String edit(@DeptData SysDept sysDept, ModelMap mmap) {
-        Agency agency = agencyService.selectSysAgencyById(sysDept.getAgencyId());
+        SysAgency agency = agencyService.selectSysAgencyById(sysDept.getAgencyId());
         if (agency == null) {
             throw new BusinessException(("请先在右上角【选择项目】选择有效的项目"));
         }
@@ -55,7 +56,7 @@ public class PartyController extends BaseController {
     @RequiresPermissions("party:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Agency agency) {
+    public AjaxResult editSave(SysAgency agency) {
         return toAjax(agencyService.updateSysAgency(agency));
     }
 

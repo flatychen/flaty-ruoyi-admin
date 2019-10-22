@@ -1,216 +1,93 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<th:block th:include="include :: header('新增项目')" />
-	<th:block th:include="include :: bootstrap-fileinput-css"/>
+    <th:block th:include="include :: header('新增项目')"/>
+    <th:block th:include="include :: bootstrap-fileinput-css"/>
 </head>
 <body class="white-bg">
-    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-sysAgency-add">
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
-				<div class="col-sm-8">
-					<input id="agencyCode" name="agencyCode" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">组织主图：</label>
-				<div class="col-sm-8">
-					<input id="imgUrl" name="imgUrl"   type="hidden" >
-					<input class="flatyUpload" name="img" type="file"   data-max-file-count="1" id="fileinput" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">层次：</label>
-				<div class="col-sm-8">
-					<input id="dEPTH" name="dEPTH" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">类型 0:小区 1：商场：</label>
-				<div class="col-sm-8">
-					<input id="tYPE" name="tYPE" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">是否有效 0:有效 1:无效：</label>
-				<div class="col-sm-8">
-					<input id="isVerifi" name="isVerifi" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">名称：</label>
-				<div class="col-sm-8">
-					<input id="nAME" name="nAME" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">地址：</label>
-				<div class="col-sm-8">
-					<input id="aDDRESS" name="aDDRESS" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">联系方式：</label>
-				<div class="col-sm-8">
-					<input id="cONTACT" name="cONTACT" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">营业时间：</label>
-				<div class="col-sm-8">
-					<input id="workTime" name="workTime" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">简介：</label>
-				<div class="col-sm-8">
-					<input id="iNTRODUCTION" name="iNTRODUCTION" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
-				<div class="col-sm-8">
-					<input id="pID" name="pID" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">路径：</label>
-				<div class="col-sm-8">
-					<input id="pATH" name="pATH" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">纬度：</label>
-				<div class="col-sm-8">
-					<input id="lATITUDE" name="lATITUDE" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">经度：</label>
-				<div class="col-sm-8">
-					<input id="lONGITUDE" name="lONGITUDE" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">城市：</label>
-				<div class="col-sm-8">
-					<input id="cITY" name="cITY" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">省份：</label>
-				<div class="col-sm-8">
-					<input id="pROVINCE" name="pROVINCE" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">是否删除：0 ：正常 1：删除：</label>
-				<div class="col-sm-8">
-					<input id="isDeleted" name="isDeleted" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">创建人：</label>
-				<div class="col-sm-8">
-					<input id="createdBy" name="createdBy" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">创建时间：</label>
-				<div class="col-sm-8">
-					<input id="createdDate" name="createdDate" class="form-control time-input" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">最后更新人：</label>
-				<div class="col-sm-8">
-					<input id="lastUpdatedBy" name="lastUpdatedBy" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">最后更新时间：</label>
-				<div class="col-sm-8">
-					<input id="lastUpdatedDate" name="lastUpdatedDate" class="form-control time-input" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">公司：</label>
-				<div class="col-sm-8">
-					<input id="cOMPANY" name="cOMPANY" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">是否开业，0：待开业，1：已开业：</label>
-				<div class="col-sm-8">
-					<input id="isOpened" name="isOpened" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">：</label>
-				<div class="col-sm-8">
-					<input id="managerHouse" name="managerHouse" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">监控中心电话：</label>
-				<div class="col-sm-8">
-					<input id="monitorPhone" name="monitorPhone" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">房屋数库项目ID：</label>
-				<div class="col-sm-8">
-					<input id="houseCommId" name="houseCommId" class="form-control" type="text" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">党建-发展党员URL：</label>
-				<div class="col-sm-8">
-					<input id="partyDevUrl" name="partyDevUrl"   type="hidden" >
-					<input class="flatyUpload" name="img" type="file"   data-max-file-count="1" id="fileinput" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">社区图标：</label>
-				<div class="col-sm-8">
-					<input id="partyIconUrl" name="partyIconUrl"   type="hidden" >
-					<input class="flatyUpload" name="img" type="file"   data-max-file-count="1" id="fileinput" required>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">项目H5 URL：</label>
-				<div class="col-sm-8">
-					<input id="partyAgencyUrl" name="partyAgencyUrl"   type="hidden" >
-					<input class="flatyUpload" name="img" type="file"   data-max-file-count="1" id="fileinput" required>
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">1开，0关：</label>
-				<div class="col-sm-8">
-					<input id="partyEnable" name="partyEnable" class="form-control" type="text" required>
-				</div>
-			</div>
-		</form>
-	</div>
-    <div th:include="include::footer"></div>
-	<th:block th:include="include :: flaty-fileinput-js"/>
-    <script type="text/javascript">
-		var prefix = ctx + "property/sysAgency"
-		$("#form-sysAgency-add").validate({
-			rules:{
-				xxxx:{
-					required:true,
-				},
-			},
-			focusCleanup: true
-		});
-		
-		function submitHandler() {
-	        if ($.validate.form()) {
-	            $.operate.save(prefix + "/add", $('#form-sysAgency-add').serialize());
-	        }
-	    }
-	</script>
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-sysAgency-add">
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span style="color: red; ">*</span>项目编码：</label>
+            <div class="col-sm-8">
+                <input name="agencyCode" required class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span style="color: red; ">*</span>天问编码：</label>
+            <div class="col-sm-8">
+                <input name="houseCommId" required class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">组织主图：</label>
+            <div class="col-sm-8">
+                <input id="imgUrl" name="imgUrl" type="hidden">
+                <input class="flatyUpload" name="img" type="file" data-max-file-count="1" id="fileinput">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span style="color: red; ">*</span>类型：</label>
+            <div class="col-sm-8">
+                <select name="type" class="form-control m-b" th:with="type=${@dict.getType('agency_type')}" required>
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span style="color: red; ">*</span>是否有效：</label>
+            <div class="col-sm-8">
+                <select name="isVerifi" class="form-control m-b" th:with="type=${@dict.getType('agency_state')}"
+                        required>
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span style="color: red; ">*</span>名称：</label>
+            <div class="col-sm-8">
+                <input name="name" required class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span style="color: red; ">*</span>地址：</label>
+            <div class="col-sm-8">
+                <input name="address" required class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span style="color: red; ">*</span>联系方式：</label>
+            <div class="col-sm-8">
+                <input name="contact" required class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">营业时间：</label>
+            <div class="col-sm-8">
+                <input name="workTime" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label"><span style="color: red; ">*</span>监控中心电话：</label>
+            <div class="col-sm-8">
+                <input name="monitorPhone" required class="form-control" type="text">
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: flaty-fileinput-js"/>
+<script type="text/javascript">
+    var prefix = ctx + "property/sysAgency"
+    $("#form-sysAgency-add").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/add", $('#form-sysAgency-add').serialize());
+        }
+    }
+</script>
 </body>
 </html>
