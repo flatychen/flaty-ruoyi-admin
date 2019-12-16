@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.aylives.ruoyi.admin.modules.activity.mapper.ActivityExtendMapper">
+    
+    <resultMap type="ActivityExtend" id="ActivityExtendResult">
+        <result property="id"    column="id"    />
+        <result property="activityId"    column="activity_id"    />
+        <result property="key"    column="key"    />
+        <result property="value"    column="value"    />
+        <result property="orderNum"    column="order_num"    />
+    </resultMap>
+
+    <sql id="selectActivityExtendVo">
+        select id, activity_id, `key`, `value` , order_num from aoyuejia_h5.activity_extend
+    </sql>
+
+    <select id="selectActivityExtendList" parameterType="ActivityExtend" resultMap="ActivityExtendResult">
+        <include refid="selectActivityExtendVo"/>
+        <where>
+
+            <if test="activityId != null "> and  activity_id =  #{activityId}</if>
+        </where>
+    </select>
+    
+    <select id="selectActivityExtendById" parameterType="Long" resultMap="ActivityExtendResult">
+        <include refid="selectActivityExtendVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertActivityExtend" parameterType="ActivityExtend" useGeneratedKeys="true" keyProperty="id">
+        insert into aoyuejia_h5.activity_extend
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityId != null ">activity_id,</if>
+            <if test="key != null  and key != ''">`key`,</if>
+            <if test="value != null  and value != ''">`value`,</if>
+            <if test="orderNum != null ">order_num,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="activityId != null ">#{activityId},</if>
+            <if test="key != null  and key != ''">#{key},</if>
+            <if test="value != null  and value != ''">#{value},</if>
+            <if test="orderNum != null ">#{orderNum},</if>
+        </trim>
+    </insert>
+
+    <update id="updateActivityExtend" parameterType="ActivityExtend">
+        update aoyuejia_h5.activity_extend
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="activityId != null ">activity_id = #{activityId},</if>
+            <if test="key != null  and key != ''">`key` = #{key},</if>
+            <if test="value != null  and value != ''">`value` = #{value},</if>
+            <if test="orderNum != null ">order_num = #{orderNum},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteActivityExtendById" parameterType="Long">
+        delete from aoyuejia_h5.activity_extend where id = #{id}
+    </delete>
+
+    <delete id="deleteActivityExtendByIds" parameterType="String">
+        delete from aoyuejia_h5.activity_extend where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
