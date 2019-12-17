@@ -79,6 +79,9 @@ public class SysDept extends BaseEntity {
 
 
     public boolean isValidDept() {
+        if (this.agencyId == null) {
+            return false;
+        }
         return AgencyId.NOT_VALID.intValue() == this.agencyId;
     }
 

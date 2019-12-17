@@ -26,9 +26,10 @@ public class AppActivityUser extends BaseEntity {
     private Integer id;
 
 
-    @Column(name = "agency_id")
+/*    @Column(name = "agency_id")
     @Excel(name = "项目id", prompt = "id")
-    private Integer agencyId;
+    private Integer agencyId;*/
+
     /**
      * null
      */
