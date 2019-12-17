@@ -1,17 +1,17 @@
-package cn.aylives.ruoyi.admin.modules.activity.service;
+package cn.aylives.ruoyi.admin.activity.mapper;
 
-import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivity;
-import cn.aylives.ruoyi.admin.core.IService;
+import cn.aylives.ruoyi.admin.activity.domain.AppActivity;
+import cn.aylives.ruoyi.admin.core.MyMapper;
 
 import java.util.List;
 
 /**
- * app活动Service接口
+ * app活动Mapper接口
  *
  * @author flaty
  * @date 2019-09-06
  */
-public interface IAppActivityService extends IService<AppActivity> {
+public interface AppActivityMapper extends MyMapper<AppActivity> {
     /**
      * 查询app活动
      *
@@ -45,19 +45,18 @@ public interface IAppActivityService extends IService<AppActivity> {
     public int updateActivity(AppActivity activity);
 
     /**
-     * 批量删除app活动
-     *
-     * @param ids 需要删除的数据ID
-     * @return 结果
-     */
-    public int deleteActivityByIds(String ids);
-
-    /**
-     * 删除app活动信息
+     * 删除app活动
      *
      * @param id app活动ID
      * @return 结果
      */
     public int deleteActivityById(Long id);
 
+    /**
+     * 批量删除app活动
+     *
+     * @param ids 需要删除的数据ID
+     * @return 结果
+     */
+    public int deleteActivityByIds(String[] ids);
 }

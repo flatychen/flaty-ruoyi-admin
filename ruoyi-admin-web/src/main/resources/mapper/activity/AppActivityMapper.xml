@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.aylives.ruoyi.admin.modules.activity.mapper.AppActivityMapper">
+<mapper namespace="cn.aylives.ruoyi.admin.activity.mapper.AppActivityMapper">
     
     <resultMap type="AppActivity" id="ActivityResult">
         <result property="id"    column="id"    />
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from aoyuejia_h5.activity
     </sql>
 
-    <select id="selectActivityList" parameterType="Activity" resultMap="ActivityResult">
+    <select id="selectActivityList" parameterType="AppActivity" resultMap="ActivityResult">
         <include refid="selectActivityVo"/>
         <where>  
             <if test="title != null  and title != ''"> and title = #{title}</if>
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertActivity" parameterType="Activity" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertActivity" parameterType="AppActivity" useGeneratedKeys="true" keyProperty="id">
         insert into aoyuejia_h5.activity
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="bgImg != null  and bgImg != ''">bg_img,</if>
@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateActivity" parameterType="Activity">
+    <update id="updateActivity" parameterType="AppActivity">
         update aoyuejia_h5.activity
         <trim prefix="SET" suffixOverrides=",">
             <if test="bgImg != null  and bgImg != ''">bg_img = #{bgImg},</if>

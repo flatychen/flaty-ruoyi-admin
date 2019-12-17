@@ -1,15 +1,17 @@
-package cn.aylives.ruoyi.admin.modules.activity.mapper;
+package cn.aylives.ruoyi.admin.activity.service;
+
 import java.util.List;
 
-import cn.aylives.ruoyi.admin.modules.activity.domain.ActivityExtend;
-import cn.aylives.ruoyi.admin.core.MyMapper;
+import cn.aylives.ruoyi.admin.activity.domain.ActivityExtend;
+import cn.aylives.ruoyi.admin.core.IService;
+
 /**
- * ${functionName}Mapper接口
+ * ${functionName}Service接口
  *
  * @author flaty
  * @date 2019-09-23
  */
-public interface ActivityExtendMapper extends MyMapper<ActivityExtend>
+public interface IActivityExtendService  extends IService<ActivityExtend>
 {
 	/**
 	 * 查询${functionName}
@@ -44,18 +46,19 @@ public interface ActivityExtendMapper extends MyMapper<ActivityExtend>
 	public int updateActivityExtend(ActivityExtend activityExtend);
 
 	/**
-	 * 删除${functionName}
-	 *
-	 * @param id ${functionName}ID
-	 * @return 结果
-	 */
-	public int deleteActivityExtendById(Long id);
-
-	/**
 	 * 批量删除${functionName}
 	 *
 	 * @param ids 需要删除的数据ID
 	 * @return 结果
 	 */
-	public int deleteActivityExtendByIds(String[] ids);
+	public int deleteActivityExtendByIds(String ids);
+
+	/**
+	 * 删除${functionName}信息
+	 *
+	 * @param id ${functionName}ID
+	 * @return 结果
+	 */
+	public int deleteActivityExtendById(Long id);
+	
 }

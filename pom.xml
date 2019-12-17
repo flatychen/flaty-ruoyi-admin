@@ -211,7 +211,7 @@
     </dependencyManagement>
 
     <modules>
-	    <module>ruoyi-admin</module>
+	    <module>ruoyi-admin-web</module>
 		<module>ruoyi-framework</module>
 		<module>ruoyi-system</module>
 		<module>ruoyi-generator</module>

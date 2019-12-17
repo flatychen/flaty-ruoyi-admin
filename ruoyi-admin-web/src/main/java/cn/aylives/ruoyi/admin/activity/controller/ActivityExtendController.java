@@ -1,10 +1,10 @@
-package cn.aylives.ruoyi.admin.modules.activity.controller;
+package cn.aylives.ruoyi.admin.activity.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.aylives.ruoyi.admin.modules.activity.service.IActivityExtendService;
-import cn.aylives.ruoyi.admin.modules.activity.domain.ActivityExtend;
+import cn.aylives.ruoyi.admin.activity.service.IActivityExtendService;
+import cn.aylives.ruoyi.admin.activity.domain.ActivityExtend;
 import org.springframework.stereotype.Controller;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

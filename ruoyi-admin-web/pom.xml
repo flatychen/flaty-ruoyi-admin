@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
-    <artifactId>aoyuejia-admin-web</artifactId>
+    <artifactId>ruoyi-admin-web</artifactId>
 
     <description>
         web服务入口

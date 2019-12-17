@@ -1,7 +1,7 @@
-package cn.aylives.ruoyi.admin.modules.activity.controller;
+package cn.aylives.ruoyi.admin.activity.controller;
 
-import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivity;
-import cn.aylives.ruoyi.admin.modules.activity.service.IAppActivityService;
+import cn.aylives.ruoyi.admin.activity.domain.AppActivity;
+import cn.aylives.ruoyi.admin.activity.service.IAppActivityService;
 import cn.aylives.ruoyi.admin.core.dept.DeptData;
 import cn.aylives.ruoyi.common.annotation.Log;
 import cn.aylives.ruoyi.common.core.controller.BaseController;

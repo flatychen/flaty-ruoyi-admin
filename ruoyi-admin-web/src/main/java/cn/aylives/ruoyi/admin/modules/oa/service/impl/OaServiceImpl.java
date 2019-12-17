@@ -1,18 +1,17 @@
 package cn.aylives.ruoyi.admin.modules.oa.service.impl;
 
 import cn.aylives.ruoyi.admin.modules.oa.model.LoginUserResult;
-import cn.aylives.ruoyi.admin.modules.oa.model.OaResult;
 import cn.aylives.ruoyi.admin.modules.oa.model.QueryUserResult;
 import cn.aylives.ruoyi.admin.modules.oa.service.OaService;
-import cn.hutool.core.text.StrFormatter;
-import com.alibaba.fastjson.JSON;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import cn.aylives.ruoyi.common.constant.UserConstants;
 import cn.aylives.ruoyi.system.domain.SysDept;
 import cn.aylives.ruoyi.system.domain.SysUser;
 import cn.aylives.ruoyi.system.service.ISysDeptService;
 import cn.aylives.ruoyi.system.service.ISysUserService;
+import cn.hutool.core.text.StrFormatter;
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -148,12 +147,12 @@ public class OaServiceImpl implements OaService {
     private List<QueryUserResult> fetchOaUser(String userName) {
         String url = adminUserCenterPrefix + "/user/getUserInfoByUserName?userName={userName}&rootId={rootId}";
         Map<String, String> params = ImmutableMap.of("userName", userName, "rootId", adminUserCenterRootId);
-        ResponseEntity<OaResult<List<QueryUserResult>>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<OaResult<List<QueryUserResult>>>() {
+        ResponseEntity<cn.aylives.ruoyi.admin.oa.model.OaResult<List<QueryUserResult>>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<cn.aylives.ruoyi.admin.oa.model.OaResult<List<QueryUserResult>>>() {
         }, params);
         log.info("fetchOaUser url:{} , params:{},response:{}", url, params, JSON.toJSONString(response.getBody()));
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            OaResult<List<QueryUserResult>> oaUserResponse = response.getBody();
+            cn.aylives.ruoyi.admin.oa.model.OaResult<List<QueryUserResult>> oaUserResponse = response.getBody();
             if (oaUserResponse.success()) {
                 return oaUserResponse.getData();
             }
@@ -165,11 +164,11 @@ public class OaServiceImpl implements OaService {
         String url = adminUserCenterPrefix + "/user/getUserInfoByToken?loginToken={token}";
         Map<String, String> params = ImmutableMap.of("token", token);
 
-        ResponseEntity<OaResult<LoginUserResult>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<OaResult<LoginUserResult>>() {
+        ResponseEntity<cn.aylives.ruoyi.admin.oa.model.OaResult<LoginUserResult>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<cn.aylives.ruoyi.admin.oa.model.OaResult<LoginUserResult>>() {
         }, params);
         log.info("fetchOaUser url:{} , params:{},response:{}", url, params, JSON.toJSONString(response.getBody()));
         if (response.getStatusCode().is2xxSuccessful()) {
-            OaResult<LoginUserResult> oaUserResponse = response.getBody();
+            cn.aylives.ruoyi.admin.oa.model.OaResult<LoginUserResult> oaUserResponse = response.getBody();
             if (oaUserResponse.success()) {
                 return oaUserResponse.getData().getUserInfo();
             }else if(oaUserResponse.tokenNotValid()){

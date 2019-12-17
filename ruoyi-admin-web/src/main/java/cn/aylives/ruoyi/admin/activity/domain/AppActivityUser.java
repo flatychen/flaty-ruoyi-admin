@@ -1,7 +1,5 @@
-package cn.aylives.ruoyi.admin.modules.activity.domain;
+package cn.aylives.ruoyi.admin.activity.domain;
 
-import cn.aylives.ruoyi.admin.core.join.JoinField;
-import cn.aylives.ruoyi.admin.modules.property.domain.AgencyView;
 import cn.aylives.ruoyi.common.annotation.Excel;
 import cn.aylives.ruoyi.common.core.domain.BaseEntity;
 import lombok.Data;
@@ -21,9 +19,6 @@ import java.util.Date;
 public class AppActivityUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    @JoinField(sourceField = "agencyId",customOuterField = "distAgencyId")
-    @Transient
-    private AgencyView agencyView;
 
     @Column(name = "id")
     @Id

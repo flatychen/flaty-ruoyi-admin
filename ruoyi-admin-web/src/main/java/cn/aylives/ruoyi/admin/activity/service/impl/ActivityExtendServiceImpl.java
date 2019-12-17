@@ -1,10 +1,10 @@
-package cn.aylives.ruoyi.admin.modules.activity.service.impl;
+package cn.aylives.ruoyi.admin.activity.service.impl;
 
 import java.util.List;
 
-import cn.aylives.ruoyi.admin.modules.activity.mapper.ActivityExtendMapper;
-import cn.aylives.ruoyi.admin.modules.activity.service.IActivityExtendService;
-import cn.aylives.ruoyi.admin.modules.activity.domain.ActivityExtend;
+import cn.aylives.ruoyi.admin.activity.mapper.ActivityExtendMapper;
+import cn.aylives.ruoyi.admin.activity.service.IActivityExtendService;
+import cn.aylives.ruoyi.admin.activity.domain.ActivityExtend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.aylives.ruoyi.admin.core.impl.AbstractService;

@@ -13,7 +13,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @author ruoyi
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class},scanBasePackages = "cn.aylives.ruoyi")
-@MapperScan(value = { "cn.aylives.ruoyi.admin...mapper"})
+@MapperScan(value = { "cn.aylives.**.mapper"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

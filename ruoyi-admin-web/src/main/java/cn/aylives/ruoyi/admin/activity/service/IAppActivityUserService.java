@@ -1,6 +1,6 @@
-package cn.aylives.ruoyi.admin.modules.activity.service;
+package cn.aylives.ruoyi.admin.activity.service;
 
-import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivityUser;
+import cn.aylives.ruoyi.admin.activity.domain.AppActivityUser;
 import cn.aylives.ruoyi.admin.core.IService;
 
 import java.util.List;
