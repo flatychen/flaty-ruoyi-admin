@@ -1,5 +1,5 @@
-package cn.aylives.ruoyi.admin.activity.mapper;
-import cn.aylives.ruoyi.admin.activity.domain.AppActivityUser;
+package cn.aylives.ruoyi.admin.modules.activity.mapper;
+import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivityUser;
 import cn.aylives.ruoyi.admin.core.MyMapper;
 
 import java.util.List;

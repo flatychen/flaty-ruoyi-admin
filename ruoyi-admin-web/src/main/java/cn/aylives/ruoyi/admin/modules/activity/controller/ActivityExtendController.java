@@ -1,25 +1,24 @@
-package cn.aylives.ruoyi.admin.activity.controller;
+package cn.aylives.ruoyi.admin.modules.activity.controller;
+
+import cn.aylives.ruoyi.admin.core.dept.DeptData;
+import cn.aylives.ruoyi.admin.modules.activity.domain.ActivityExtend;
+import cn.aylives.ruoyi.admin.modules.activity.service.IActivityExtendService;
+import cn.aylives.ruoyi.common.annotation.Log;
+import cn.aylives.ruoyi.common.core.controller.BaseController;
+import cn.aylives.ruoyi.common.core.domain.AjaxResult;
+import cn.aylives.ruoyi.common.core.page.TableDataInfo;
+import cn.aylives.ruoyi.common.enums.BusinessType;
+import cn.aylives.ruoyi.common.utils.StringUtils;
+import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
+import cn.aylives.ruoyi.system.domain.SysDept;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.aylives.ruoyi.admin.activity.service.IActivityExtendService;
-import cn.aylives.ruoyi.admin.activity.domain.ActivityExtend;
-import org.springframework.stereotype.Controller;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import cn.aylives.ruoyi.common.annotation.Log;
-import cn.aylives.ruoyi.common.enums.BusinessType;
-import cn.aylives.ruoyi.common.utils.StringUtils;
-
-import cn.aylives.ruoyi.common.core.controller.BaseController;
-import cn.aylives.ruoyi.common.core.page.TableDataInfo;
-import cn.aylives.ruoyi.common.core.domain.AjaxResult;
-import cn.aylives.ruoyi.common.utils.poi.ExcelUtil;
-import cn.aylives.ruoyi.system.domain.SysDept;
-import cn.aylives.ruoyi.admin.core.dept.DeptData;
 /**
  * ${functionName}Controller
  *

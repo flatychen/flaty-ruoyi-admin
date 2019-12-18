@@ -1,8 +1,8 @@
-package cn.aylives.ruoyi.admin.activity.service.impl;
+package cn.aylives.ruoyi.admin.modules.activity.service.impl;
 
-import cn.aylives.ruoyi.admin.activity.domain.AppActivityUser;
-import cn.aylives.ruoyi.admin.activity.mapper.AppActivityUserMapper;
-import cn.aylives.ruoyi.admin.activity.service.IAppActivityUserService;
+import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivityUser;
+import cn.aylives.ruoyi.admin.modules.activity.mapper.AppActivityUserMapper;
+import cn.aylives.ruoyi.admin.modules.activity.service.IAppActivityUserService;
 import cn.aylives.ruoyi.admin.core.impl.AbstractService;
 import cn.aylives.ruoyi.common.core.text.Convert;
 import org.springframework.beans.factory.annotation.Autowired;

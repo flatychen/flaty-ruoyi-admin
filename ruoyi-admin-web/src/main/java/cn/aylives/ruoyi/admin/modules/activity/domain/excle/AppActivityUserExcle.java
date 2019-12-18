@@ -1,6 +1,6 @@
-package cn.aylives.ruoyi.admin.activity.domain.excle;
+package cn.aylives.ruoyi.admin.modules.activity.domain.excle;
 
-import cn.aylives.ruoyi.admin.activity.domain.AppActivityUser;
+import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivityUser;
 import cn.aylives.ruoyi.common.annotation.Excel;
 import lombok.Data;
 

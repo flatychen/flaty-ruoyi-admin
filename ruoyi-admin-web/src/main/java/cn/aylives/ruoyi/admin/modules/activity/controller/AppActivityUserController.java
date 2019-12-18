@@ -1,9 +1,9 @@
-package cn.aylives.ruoyi.admin.activity.controller;
+package cn.aylives.ruoyi.admin.modules.activity.controller;
 
-import cn.aylives.ruoyi.admin.activity.domain.AppActivityUser;
-import cn.aylives.ruoyi.admin.activity.domain.excle.AppActivityUserExcle;
-import cn.aylives.ruoyi.admin.activity.service.IAppActivityService;
-import cn.aylives.ruoyi.admin.activity.service.IAppActivityUserService;
+import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivityUser;
+import cn.aylives.ruoyi.admin.modules.activity.domain.excle.AppActivityUserExcle;
+import cn.aylives.ruoyi.admin.modules.activity.service.IAppActivityService;
+import cn.aylives.ruoyi.admin.modules.activity.service.IAppActivityUserService;
 import cn.aylives.ruoyi.common.core.controller.BaseController;
 import cn.aylives.ruoyi.common.core.domain.AjaxResult;
 import cn.aylives.ruoyi.common.core.page.TableDataInfo;

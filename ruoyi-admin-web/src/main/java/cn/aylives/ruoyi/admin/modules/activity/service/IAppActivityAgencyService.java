@@ -1,6 +1,6 @@
-package cn.aylives.ruoyi.admin.activity.service;
+package cn.aylives.ruoyi.admin.modules.activity.service;
 
-import cn.aylives.ruoyi.admin.activity.domain.AppActivityAgency;
+import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivityAgency;
 import cn.aylives.ruoyi.admin.core.IService;
 
 /**

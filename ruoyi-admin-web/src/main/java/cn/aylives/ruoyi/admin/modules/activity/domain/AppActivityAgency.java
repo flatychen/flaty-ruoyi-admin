@@ -1,4 +1,4 @@
-package cn.aylives.ruoyi.admin.activity.domain;
+package cn.aylives.ruoyi.admin.modules.activity.domain;
 
 import lombok.Data;
 

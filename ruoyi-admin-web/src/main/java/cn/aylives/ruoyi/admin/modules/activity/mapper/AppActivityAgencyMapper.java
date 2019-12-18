@@ -1,6 +1,6 @@
-package cn.aylives.ruoyi.admin.activity.mapper;
+package cn.aylives.ruoyi.admin.modules.activity.mapper;
 
-import cn.aylives.ruoyi.admin.activity.domain.AppActivityAgency;
+import cn.aylives.ruoyi.admin.modules.activity.domain.AppActivityAgency;
 import cn.aylives.ruoyi.admin.core.MyMapper;
 
 /**
