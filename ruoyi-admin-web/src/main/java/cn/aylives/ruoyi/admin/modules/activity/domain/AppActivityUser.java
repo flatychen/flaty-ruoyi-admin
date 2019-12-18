@@ -15,7 +15,7 @@ import java.util.Date;
  * @date 2019-09-06
  */
 @Data
-@Table(name = "aoyuejia_h5.activity_user")
+@Table(name = "activity_user")
 public class AppActivityUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

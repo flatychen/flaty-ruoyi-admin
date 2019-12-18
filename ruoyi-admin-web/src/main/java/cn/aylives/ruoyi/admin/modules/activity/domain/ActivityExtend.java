@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @date 2019-09-23
  */
 @Data
-@Table(name = "aoyuejia_h5.activity_extend")
+@Table(name = "activity_extend")
 public class ActivityExtend extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @date 2019-09-06
  */
 @Data
-@Table(name = "aoyuejia_h5.activity_agency")
+@Table(name = "activity_agency")
 public class AppActivityAgency  {
     private static final long serialVersionUID = 1L;
 

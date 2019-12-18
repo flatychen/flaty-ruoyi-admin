@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectActivityExtendVo">
-        select id, activity_id, `key`, `value` , order_num from aoyuejia_h5.activity_extend
+        select id, activity_id, `key`, `value` , order_num from activity_extend
     </sql>
 
     <select id="selectActivityExtendList" parameterType="ActivityExtend" resultMap="ActivityExtendResult">
@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <insert id="insertActivityExtend" parameterType="ActivityExtend" useGeneratedKeys="true" keyProperty="id">
-        insert into aoyuejia_h5.activity_extend
+        insert into activity_extend
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="activityId != null ">activity_id,</if>
             <if test="key != null  and key != ''">`key`,</if>
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateActivityExtend" parameterType="ActivityExtend">
-        update aoyuejia_h5.activity_extend
+        update activity_extend
         <trim prefix="SET" suffixOverrides=",">
             <if test="activityId != null ">activity_id = #{activityId},</if>
             <if test="key != null  and key != ''">`key` = #{key},</if>
@@ -57,11 +57,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteActivityExtendById" parameterType="Long">
-        delete from aoyuejia_h5.activity_extend where id = #{id}
+        delete from activity_extend where id = #{id}
     </delete>
 
     <delete id="deleteActivityExtendByIds" parameterType="String">
-        delete from aoyuejia_h5.activity_extend where id in
+        delete from activity_extend where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

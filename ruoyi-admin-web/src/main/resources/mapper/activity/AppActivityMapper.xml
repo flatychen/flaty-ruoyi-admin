@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <sql id="selectActivityVo">
         select id, bg_img, title, desp, begin_date, end_date, created_date, total_people, type, url,place
-        from aoyuejia_h5.activity
+        from activity
     </sql>
 
     <select id="selectActivityList" parameterType="AppActivity" resultMap="ActivityResult">
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insertActivity" parameterType="AppActivity" useGeneratedKeys="true" keyProperty="id">
-        insert into aoyuejia_h5.activity
+        insert into activity
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="bgImg != null  and bgImg != ''">bg_img,</if>
             <if test="title != null  and title != ''">title,</if>
@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 
     <update id="updateActivity" parameterType="AppActivity">
-        update aoyuejia_h5.activity
+        update activity
         <trim prefix="SET" suffixOverrides=",">
             <if test="bgImg != null  and bgImg != ''">bg_img = #{bgImg},</if>
             <if test="title != null  and title != ''">title = #{title},</if>
@@ -84,11 +84,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteActivityById" parameterType="Long">
-        delete from aoyuejia_h5.activity where id = #{id}
+        delete from activity where id = #{id}
     </delete>
 
     <delete id="deleteActivityByIds" parameterType="String">
-        delete from aoyuejia_h5.activity where id in
+        delete from activity where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
